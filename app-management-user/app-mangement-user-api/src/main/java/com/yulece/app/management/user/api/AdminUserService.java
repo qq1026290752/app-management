@@ -14,25 +14,18 @@ public interface AdminUserService {
     /**
      * 查询用户
      *
-     * @param id
-     * @return
+     * @param id 用户id
+     * @return {@AdminUserVo}
      */
     @GetMapping("/user/{id}")
     AdminUserVo getById(@PathVariable("id") Integer id);
 
     /**
-     * 查询公司全部用户
-     *
-     * @param params
-     * @param pageable
-     * @return
-     */
-    //@GetMapping("/user/list")
-    //page select(AdminUserVo params, Pageable pageable);
-
-    /**
-     * 更新某个职员资料
-     *
+     * 更新数据
+     * 可以更新的内容为 头像 状态 备注
+     * 不可以更新 用户名 手机号 邮箱
+     * 更新成功返回:<code>true</code>
+     * 更新失败返回:<code>false</code>
      * @param param
      * @return
      */
