@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yulece.app.management.user.provide.repositories.AdminUserRepository">
+    <resultMap id="AdminUserResult" type="com.yulece.app.management.user.provide.pojo.AdminUser">
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="pass_word" property="passWord"/>
+        <result column="nike_name" property="nikeName"/>
+        <result column="telephone" property="telephone"/>
+        <result column="mail" property="mail"/>
+        <result column="header_url" property="headerUrl"/>
+        <result column="status" property="status"/>
+        <result column="user_remark" property="userRemark"/>
+        <result column="operator" property="operator"/>
+        <result column="operate_ip" property="operateIp"/>
+        <result column="user_dept" property="userDept"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="base_column_list">
+        user_id,user_name,pass_word,nike_name,telephone,mail,header_url,status,user_remark,operator,operate_ip,user_dept,create_time,update_time
+    </sql>
+
+    <select id="findOne" parameterType="integer" resultMap="AdminUserResult" >
+      select <include refid="base_column_list"/> from admin_user where user_id = #{value}
+    </select>
+</mapper>

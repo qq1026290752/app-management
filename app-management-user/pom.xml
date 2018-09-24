@@ -16,6 +16,13 @@
         <module>app-mangement-user-provider</module>
         <module>app-mangement-user-consumer</module>
     </modules>
+    <dependencies>
+        <dependency>
+            <groupId>com.yulece.app.management</groupId>
+            <artifactId>app-management-comments</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 
 
 </project>

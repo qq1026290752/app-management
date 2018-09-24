@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="cacheEnabled" value="false"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="useGeneratedKeys" value="true"/>
+        <setting name="defaultExecutorType" value="REUSE"/>
+        <setting name="lazyLoadingEnabled" value="false"/>
+        <setting name="jdbcTypeForNull" value="NULL"/>
+        <!--事物超时时间  -->
+        <setting name="defaultStatementTimeout" value="600"/>
+        <!--打印日志-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <typeAliases>
+        <!-- 所有用到的实体类无需填写 -->
+    </typeAliases>
+</configuration>

@@ -11,9 +11,6 @@
 
     <artifactId>app-mangement-user-api</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>app-mangement-user-provider</module>
-    </modules>
 
     <dependencies>
         <dependency>
