@@ -1,6 +1,5 @@
 package com.yulece.app.management.user.entity;
 
-import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
@@ -11,7 +10,6 @@ import javax.validation.constraints.Pattern;
 /**
  * 用户注册信息服务
  */
-@Data
 public class AdminUserParam {
 
 
@@ -40,4 +38,67 @@ public class AdminUserParam {
     @NotNull(message = "请上传您喜欢的头像")
     private String headerUrl;
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getNikeName() {
+        return nikeName;
+    }
+
+    public void setNikeName(String nikeName) {
+        this.nikeName = nikeName;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getUserRemark() {
+        return userRemark;
+    }
+
+    public void setUserRemark(String userRemark) {
+        this.userRemark = userRemark;
+    }
+
+    public Integer getUserDept() {
+        return userDept;
+    }
+
+    public void setUserDept(Integer userDept) {
+        this.userDept = userDept;
+    }
+
+    public String getHeaderUrl() {
+        return headerUrl;
+    }
+
+    public void setHeaderUrl(String headerUrl) {
+        this.headerUrl = headerUrl;
+    }
 }

@@ -37,6 +37,7 @@
         <spring.mybatis.version>1.3.2</spring.mybatis.version>
         <mapper.spring.version>2.0.4</mapper.spring.version>
         <pagehelper.spring.version>1.2.7</pagehelper.spring.version>
+        <jwt.verson>0.9.0</jwt.verson>
     </properties>
 
     <dependencyManagement>
