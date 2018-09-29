@@ -1,6 +1,7 @@
 package com.yulece.app.management.user.consumer.controller;
 
 import com.yulece.app.management.commons.utils.ResultVo;
+import com.yulece.app.management.commons.utils.exception.AppException;
 import com.yulece.app.management.user.api.AdminUserService;
 import com.yulece.app.management.user.dto.AdminUserVo;
 import com.yulece.app.management.user.entity.AdminUserParam;
@@ -27,13 +28,11 @@ public class AdminUserController {
     }
     @PostMapping("/user/save")
     public ResultVo create(@RequestBody AdminUserParam param) {
-        adminUserService.create(param);
-        return ResultVo.createSuccessResult();
-    }
-
-    @PutMapping("/active")
-    public ResultVo active(@RequestParam("key") String key) {
-        adminUserService.active(key);
-        return ResultVo.createSuccessResult();
+        boolean isSuccess = adminUserService.create(param);
+        if (isSuccess){
+            return ResultVo.createSuccessResult();
+        } else {
+            return ResultVo.createErrorResult("保存失败,稍后重试");
+        }
     }
 }

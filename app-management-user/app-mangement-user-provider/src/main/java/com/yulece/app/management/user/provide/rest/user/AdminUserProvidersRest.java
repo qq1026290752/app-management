@@ -4,17 +4,14 @@ import com.yulece.app.management.user.api.AdminUserService;
 import com.yulece.app.management.user.dto.AdminUserVo;
 import com.yulece.app.management.user.entity.AdminUserParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class AdminUserProvidersRest implements AdminUserService {
+public class AdminUserProvidersRest{
 
     @Autowired
     private AdminUserService adminUserService;
 
-    @Override
     @GetMapping("/user/{id}")
     public AdminUserVo getById(@PathVariable("id") Integer id) {
         AdminUserVo userVo = adminUserService.getById(id);
@@ -22,18 +19,18 @@ public class AdminUserProvidersRest implements AdminUserService {
     }
 
 
-    @Override
+    @PutMapping("/user/update")
     public boolean update(AdminUserParam param) {
         return false;
     }
 
-    @Override
-    public boolean create(AdminUserParam param) {
-        return false;
+    @PostMapping("/user/save")
+    public boolean create(@RequestBody AdminUserParam param) {
+        return adminUserService.create(param);
     }
 
-    @Override
-    public void active(String key) {
-
+    @GetMapping("/user/active")
+    public boolean active(@RequestParam("key") String key) {
+      return adminUserService.active(key);
     }
 }

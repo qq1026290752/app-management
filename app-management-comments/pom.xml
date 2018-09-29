@@ -10,6 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>app-management-comments</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>app-mangagement-comments-utlis</module>
+        <module>app-mangagement-comments-api</module>
+        <module>app-mangagement-comments-provider</module>
+    </modules>
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -18,6 +24,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
     </dependencies>
 </project>

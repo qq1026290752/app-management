@@ -45,7 +45,6 @@
             <artifactId>mapper-spring-boot-starter</artifactId>
             <version>${mapper.spring.version}</version>
         </dependency>
-        <!--pagehelper-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -55,6 +54,21 @@
             <groupId>com.yulece.app.management</groupId>
             <artifactId>app-mangement-user-api</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yulece.app.management</groupId>
+            <artifactId>app-mangagement-comments-api</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

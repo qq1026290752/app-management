@@ -10,6 +10,7 @@ import com.yulece.app.management.zuul.constant.ZuulAppConstant;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.codec.Base64;
@@ -35,18 +36,22 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 	private ObjectMapper objectMapper;
 	@Autowired
 	private ClientDetailsService clientDetailsService;
-/*
+
+/*	private final AuthorizationServerTokenServices authorizationServerTokenServices;
+
 	@Autowired
-	private AuthorizationServerTokenServices defaultAuthorizationServerTokenServices;
-*/
+	public AppAuthenticationSuccessHandler(AuthorizationServerTokenServices authorizationServerTokenServices) {
+		this.authorizationServerTokenServices = authorizationServerTokenServices;
+	}*/
 
 
 	@Override
+	@Order
 	public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
 					HttpServletResponse httpServletResponse, Authentication authentication)
 			throws IOException, ServletException {
 		log.info("登陆成功");
-		/*String header = httpServletRequest.getHeader("Authorization");
+	/*	String header = httpServletRequest.getHeader("Authorization");
 		//请求头包含Authorization 并且以"Basic "开始
 		if (header == null || !header.startsWith("Basic ")) {
 			throw new UnapprovedClientAuthenticationException("请求头中无Authorization信息");
@@ -71,7 +76,7 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 
 			OAuth2Authentication auth2Authentication = new OAuth2Authentication(auth2Request, authentication);
 
-	OAuth2AccessToken createAccessToken = defaultAuthorizationServerTokenServices.createAccessToken(auth2Authentication);
+	        OAuth2AccessToken createAccessToken = authorizationServerTokenServices.createAccessToken(auth2Authentication);
 			// 判断需要的返回类型
 			httpServletResponse.setContentType(ZuulAppConstant.CONTENT_TYPE_JSON);
 			httpServletResponse.getWriter().write(objectMapper.writeValueAsString(createAccessToken));

@@ -73,11 +73,6 @@
             <version>${spring.druid.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.yulece.app.management</groupId>
-            <artifactId>app-management-comments</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>${jwt.verson}</version>

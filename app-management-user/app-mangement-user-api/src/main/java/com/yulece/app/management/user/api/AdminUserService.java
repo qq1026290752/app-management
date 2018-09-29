@@ -3,10 +3,7 @@ package com.yulece.app.management.user.api;
 import com.yulece.app.management.user.dto.AdminUserVo;
 import com.yulece.app.management.user.entity.AdminUserParam;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient("app-management-user-provider")
 public interface AdminUserService {
@@ -46,7 +43,7 @@ public interface AdminUserService {
      *
      * @param key
      */
-    @PutMapping("/user/active")
-    void active(String key);
+    @GetMapping("/user/active")
+    boolean active(@RequestParam("key")String  key);
 
 }

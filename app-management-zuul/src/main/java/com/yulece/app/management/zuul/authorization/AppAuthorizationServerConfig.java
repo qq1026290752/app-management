@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
@@ -22,27 +23,27 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 
-//实现认证服务器
 @Configuration
+@EnableAuthorizationServer
 public class AppAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-	@Autowired
 	private final AuthenticationManager authenticationManager;
-	@Autowired
-	private UserDetailsService userDetailsService;
-	@Autowired
-	private ZuulProperties zuulProperties;
- 	@Autowired
-	private TokenStore tokenStore ;
+	private final UserDetailsService userDetailsService;
+	private final ZuulProperties zuulProperties;
+	private final TokenStore tokenStore ;
 	@Autowired(required = false)
 	private JwtAccessTokenConverter jwtAccessTokenConverter;
 	@Autowired(required = false)
 	private TokenEnhancer jwtTokenEnhancer;
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private final PasswordEncoder passwordEncoder;
 
-	public AppAuthorizationServerConfig(AuthenticationManager authenticationManager) {
+	@Autowired
+	public AppAuthorizationServerConfig(AuthenticationManager authenticationManager, UserDetailsService userDetailsService, ZuulProperties zuulProperties, TokenStore tokenStore, PasswordEncoder passwordEncoder) {
 		this.authenticationManager = authenticationManager;
+		this.userDetailsService = userDetailsService;
+		this.zuulProperties = zuulProperties;
+		this.tokenStore = tokenStore;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 

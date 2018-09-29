@@ -1,10 +1,9 @@
 package com.yulece.app.management.zuul.properties;
 
-import com.yulece.app.management.commons.properties.AppConfigurationProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "app.zuul")
-public class ZuulProperties extends AppConfigurationProperties {
+public class ZuulProperties{
 
     private AuthProperties auth = new AuthProperties();
 

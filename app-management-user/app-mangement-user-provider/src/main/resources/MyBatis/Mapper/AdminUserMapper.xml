@@ -27,4 +27,38 @@
     <select id="findOne" parameterType="integer" resultMap="AdminUserResult" >
       select <include refid="base_column_list"/> from admin_user where user_id = #{value}
     </select>
+    <!--查询-->
+    <select id="countEmailByUserIdAndMail" parameterType="hashmap" resultType="integer">
+        select count(user_id) from admin_user
+        <where>
+            <if test="userId!=null and userId > 0">
+                user_id = #{userId}
+            </if>
+            <if test="mail!=null and mail!=''">
+                mail = #{mail}
+            </if>
+        </where>
+    </select>
+    <!--查询-->
+    <select id="countUserByUserParam" parameterType="com.yulece.app.management.user.entity.AdminUserParam" resultType="integer">
+        select count(user_id) from admin_user
+        <where>
+            <if test="userId!=null and userId > 0">
+                user_id = #{userId}
+            </if>
+            <if test="mail!=null and mail!=''">
+               AND mail = #{mail}
+            </if>
+            <if test="userName!=null and userName!=''">
+                AND user_name = #{userName}
+            </if>
+            <if test="telephone!=null and telephone!=''">
+                AND telephone = #{telephone}
+            </if>
+
+        </where>
+    </select>
+    <select id="findAdminUserByMail" parameterType="string" resultMap="AdminUserResult" >
+        SELECT <include refid="base_column_list"/> FROM admin_user WHERE mail = #{value}
+    </select>
 </mapper>

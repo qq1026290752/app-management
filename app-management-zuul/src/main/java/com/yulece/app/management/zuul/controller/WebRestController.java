@@ -1,7 +1,6 @@
 package com.yulece.app.management.zuul.controller;
 
 import com.yulece.app.management.zuul.properties.ZuulProperties;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
