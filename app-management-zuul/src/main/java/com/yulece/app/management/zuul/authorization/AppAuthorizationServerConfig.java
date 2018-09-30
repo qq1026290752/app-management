@@ -85,6 +85,7 @@ public class AppAuthorizationServerConfig extends AuthorizationServerConfigurerA
 					.tokenEnhancer(enhancerChain)
 					.accessTokenConverter(jwtAccessTokenConverter);
 		}
+
 	}
 
 

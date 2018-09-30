@@ -120,6 +120,11 @@ public class ResultVo<T> {
 		return new ResultVo(ResultEnum.ERROR.getCode(), message, null,500);
 	}
 
+	@SuppressWarnings({"unchecked",})
+	public static <T> ResultVo createErrorResult(String message,Integer code) {
+		return new ResultVo(ResultEnum.ERROR.getCode(), message, null,code);
+	}
+
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public static <T> ResultVo<T> createSuccessResult(T data) {
 		return new ResultVo(ResultEnum.SUCCESS.getCode(), ResultEnum.SUCCESS.getMessage(), data,200);
@@ -135,9 +140,6 @@ public class ResultVo<T> {
 		return new ResultVo(ResultEnum.ERROR.getCode(), ResultEnum.ERROR.getMessage(), data,200);
 	}
 
-	public static <T> ResultVo<T> createErrorResult(String excptingMsg,Integer status) {
-		return new ResultVo(ResultEnum.ERROR.getCode(), excptingMsg, null,status);
-	}
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public static <T> ResultVo<T> createErrorResult(Integer code) {

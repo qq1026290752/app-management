@@ -130,6 +130,11 @@
             <artifactId>app-mangagement-comments-utlis</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jwt.verson}</version>
+        </dependency>
     </dependencies>
 
     <repositories>

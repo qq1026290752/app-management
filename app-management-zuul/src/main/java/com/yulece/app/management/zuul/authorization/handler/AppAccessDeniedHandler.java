@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.yulece.app.management.commons.utils.ResultVo;
 import com.yulece.app.management.zuul.constant.ZuulAppConstant;
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -25,8 +26,8 @@ public class AppAccessDeniedHandler implements AccessDeniedHandler{
 	public void handle(HttpServletRequest request, HttpServletResponse response,
 			AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		response.setContentType(ZuulAppConstant.CONTENT_TYPE_JSON);
-		response.getWriter().write(objectMapper.writeValueAsString(ResultVo.createSuccessResult("当前用户访问权限不够,请联系管理员增加对应权限")));
-		
+        response.setStatus(HttpStatus.SC_FORBIDDEN);
+        response.getWriter().write(objectMapper.writeValueAsString(ResultVo.createErrorResult("当前用户访问权限不够,请联系管理员增加对应权限",403)));
 	}
 
 }
