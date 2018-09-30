@@ -1,22 +1,23 @@
 package com.yulece.app.management.zuul.authorization;
 
+import com.yulece.app.management.zuul.constant.ZuulAppConstant;
 import com.yulece.app.management.zuul.properties.ZuulProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableResourceServer
-public class AppWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
+public class AppWebSecurityConfigurerAdapter extends ResourceServerConfigurerAdapter {
 
 	private final ZuulProperties zuulProperties;
 	private final AuthenticationSuccessHandler appAuthenticationSuccessHandler;
@@ -30,37 +31,35 @@ public class AppWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapte
 		this.appAccessDeniedHandler = appAccessDeniedHandler;
 	}
 
-	@Bean
+
 	@Override
-	@Order(Ordered.LOWEST_PRECEDENCE-3)
-	public AuthenticationManager authenticationManagerBean() throws Exception {
-		AuthenticationManager manager = super.authenticationManagerBean();
-		return manager;
+	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+		super.configure(resources);
 	}
 
-
-
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+	public void configure(HttpSecurity http) throws Exception {
 		http
-			.formLogin()
-			.failureHandler(appAuthenticationFailureHandler)
-			.successHandler(appAuthenticationSuccessHandler)
-			.and()
+				.formLogin()
+				.failureHandler(appAuthenticationFailureHandler)
+				.successHandler(appAuthenticationSuccessHandler)
+				.loginPage(ZuulAppConstant.LOGIN_URL)
+				.loginProcessingUrl(ZuulAppConstant.LOGIN_JUMP_CONTROLLER)
+				.and()
 				.authorizeRequests()
 				.antMatchers(HttpMethod.GET,zuulProperties.getAuth().toGetAdapter())
 				.permitAll()
-			.and()
+				.and()
 				.authorizeRequests()
 				.antMatchers(HttpMethod.POST,zuulProperties.getAuth().toPostAdapter())
 				.permitAll()
-			.and()
+				.and()
 				.authorizeRequests()
 				.anyRequest()
 				.authenticated()
-			.and()
+				.and()
 				.exceptionHandling().accessDeniedHandler(appAccessDeniedHandler)
-			.and()
+				.and()
 				.csrf().disable();
 	}
 
