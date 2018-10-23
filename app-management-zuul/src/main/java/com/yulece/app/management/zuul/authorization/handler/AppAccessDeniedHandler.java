@@ -22,12 +22,12 @@ public class AppAccessDeniedHandler implements AccessDeniedHandler{
 	@Autowired
 	private ObjectMapper objectMapper;
 	
-	@Override
-	public void handle(HttpServletRequest request, HttpServletResponse response,
-			AccessDeniedException accessDeniedException) throws IOException, ServletException {
-		response.setContentType(ZuulAppConstant.CONTENT_TYPE_JSON);
-        response.setStatus(HttpStatus.SC_FORBIDDEN);
-        response.getWriter().write(objectMapper.writeValueAsString(ResultVo.createErrorResult("当前用户访问权限不够,请联系管理员增加对应权限",403)));
-	}
+		@Override
+		public void handle(HttpServletRequest request, HttpServletResponse response,
+				AccessDeniedException accessDeniedException) throws IOException, ServletException {
+			response.setContentType(ZuulAppConstant.CONTENT_TYPE_JSON);
+			response.setStatus(HttpStatus.SC_FORBIDDEN);
+			response.getWriter().write(objectMapper.writeValueAsString(ResultVo.createErrorResult("当前用户访问权限不够,请联系管理员增加对应权限",403)));
+		}
 
 }

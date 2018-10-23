@@ -30,6 +30,10 @@ public class AdminAccountRestController {
             throw new AppException(ExceptionEnum.ACTIVE_FAILURE);
         }
     }
+    @GetMapping("/hello")
+    public ResultVo hello() {
+        return ResultVo.createSuccessResult();
+    }
 
 
     @GetMapping("/me")

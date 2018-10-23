@@ -22,9 +22,13 @@ public class ResultVo<T> {
 	private String path;
 	private Date date = new Date();
 	private Integer status = 200;
-	
-	
-	
+
+	public ResultVo(int code, String message, int status) {
+		this.code = code;
+		this.message = message;
+		this.status = status;
+	}
+
 
 	public Integer getStatus() {
 		return status;
@@ -81,6 +85,22 @@ public class ResultVo<T> {
 		this.status = status;
 	}
 
+	public ResultVo(Integer code, String message,Date date,Integer status) {
+		this.code = code;
+		this.date = new Date();
+		this.message = message;
+		this.status = status;
+	}
+
+	public ResultVo(int code, String message, T data, String path, Date date, Integer status) {
+		this.code = code;
+		this.message = message;
+		this.data = data;
+		this.path = path;
+		this.date = date;
+		this.status = status;
+	}
+
 	public ResultVo(int code, T data) {
 		this.code = code;
 		this.data = data;
@@ -114,6 +134,10 @@ public class ResultVo<T> {
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	public static <T> ResultVo<T> createErrorResult(String message, T data) {
 		return new ResultVo(ResultEnum.ERROR.getCode(), message, data,500);
+	}
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	public static <T> ResultVo<T> createErrorResult() {
+		return new ResultVo(ResultEnum.ERROR.getCode(),"error",500);
 	}
 	@SuppressWarnings({"unchecked",})
 	public static <T> ResultVo createErrorResult(String message) {

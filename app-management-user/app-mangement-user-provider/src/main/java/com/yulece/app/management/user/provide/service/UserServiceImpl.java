@@ -1,8 +1,8 @@
 package com.yulece.app.management.user.provide.service;
 
-import com.sun.deploy.association.utility.AppConstants;
 import com.yulece.app.management.comments.api.CommentsApiService;
 import com.yulece.app.management.comments.api.entity.EmailMessage;
+import com.yulece.app.management.comments.api.interceptor.LoginHandlerInterceptor;
 import com.yulece.app.management.commons.utils.enums.AppParamEnum;
 import com.yulece.app.management.commons.utils.BeanValidator;
 import com.yulece.app.management.commons.utils.enums.ExceptionEnum;
@@ -26,6 +26,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -70,8 +71,13 @@ public class UserServiceImpl implements AdminUserService {
         //拷贝用户
         AdminUser updateUser = PojoConvertUtil.convertPojo(param, AdminUser.class);
         updateUser.setUserName(adminUser.getUserName());
-        //TODO 后续补充
-        int count = adminUserRepository.insertSelective(updateUser);
+        updateUser.setPassWord(adminUser.getPassWord());
+        updateUser.setStatus(adminUser.getStatus());
+        updateUser.setTelephone(adminUser.getTelephone());
+        updateUser.setMail(adminUser.getMail());
+        updateUser.setOperateIp((String) LoginHandlerInterceptor.local.get().get("operate_ip"));
+        updateUser.setOperator((String) LoginHandlerInterceptor.local.get().get("user_name"));
+        int count = adminUserRepository.updateByPrimaryKey(updateUser);
         if(count > 0){
             return true;
         }
@@ -98,8 +104,8 @@ public class UserServiceImpl implements AdminUserService {
         //随机产生用户密码
         String password = RandomStringUtils.randomAlphanumeric(8);
         //后期补充
-        adminUser.setOperateIp("127.0.0.1");
-        adminUser.setOperator("admin");
+        adminUser.setOperateIp((String) LoginHandlerInterceptor.local.get().get("operate_ip"));
+        adminUser.setOperator((String) LoginHandlerInterceptor.local.get().get("user_name"));
         adminUser.setPassWord(passwordEncoder.encode(password));
         adminUser.setStatus(AdminUserStatusEnum.USER_NON_ACTIVATED.getCode());
         int saveCount = adminUserRepository.insertSelective(adminUser);

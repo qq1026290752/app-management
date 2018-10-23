@@ -1,9 +1,5 @@
 package com.yulece.app.management.user.provide.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.yulece.app.management.user.dto.AdminUserVo;
-import org.springframework.beans.BeanUtils;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

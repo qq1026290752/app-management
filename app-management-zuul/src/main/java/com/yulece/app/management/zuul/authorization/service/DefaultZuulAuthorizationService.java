@@ -44,6 +44,7 @@ public class DefaultZuulAuthorizationService implements ZuulAuthorizationService
             //读取用户所有的Url,可以通过用户服务拿到当前用户服务拿到该用户的能访问的地址
             Set<String> urls = new HashSet<>();
             urls.add("/app/**");
+            urls.add("/me");
             for (String  url : urls) {
                 if (antPathMatcher.match(url, requestURI)) {
                     isPermission = true;

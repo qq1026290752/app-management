@@ -1,12 +1,10 @@
 package com.yulece.app.management.user.entity;
 
-import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Data
 public class AdminDeptParam {
 
     private Integer deptId;
@@ -23,4 +21,44 @@ public class AdminDeptParam {
 
     @NotNull(message = "请选在上级部门")
     private Integer deptParentId = 0;
+
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public Integer getDeptSeq() {
+        return deptSeq;
+    }
+
+    public void setDeptSeq(Integer deptSeq) {
+        this.deptSeq = deptSeq;
+    }
+
+    public String getDeptRemark() {
+        return deptRemark;
+    }
+
+    public void setDeptRemark(String deptRemark) {
+        this.deptRemark = deptRemark;
+    }
+
+    public Integer getDeptParentId() {
+        return deptParentId;
+    }
+
+    public void setDeptParentId(Integer deptParentId) {
+        this.deptParentId = deptParentId;
+    }
 }

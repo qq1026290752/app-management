@@ -37,21 +37,20 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 	@Autowired
 	private ClientDetailsService clientDetailsService;
 
-/*	private final AuthorizationServerTokenServices authorizationServerTokenServices;
+	private final AuthorizationServerTokenServices authorizationServerTokenServices;
 
 	@Autowired
 	public AppAuthenticationSuccessHandler(AuthorizationServerTokenServices authorizationServerTokenServices) {
 		this.authorizationServerTokenServices = authorizationServerTokenServices;
-	}*/
+	}
 
 
 	@Override
 	@Order
 	public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
-					HttpServletResponse httpServletResponse, Authentication authentication)
-			throws IOException, ServletException {
+					HttpServletResponse httpServletResponse, Authentication authentication) {
 		log.info("登陆成功");
-	/*	String header = httpServletRequest.getHeader("Authorization");
+		String header = httpServletRequest.getHeader("Authorization");
 		//请求头包含Authorization 并且以"Basic "开始
 		if (header == null || !header.startsWith("Basic ")) {
 			throw new UnapprovedClientAuthenticationException("请求头中无Authorization信息");
@@ -82,7 +81,7 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 			httpServletResponse.getWriter().write(objectMapper.writeValueAsString(createAccessToken));
 		} catch (Exception e) {
 			log.error(e.getMessage());
-		}*/
+		}
 	}
 
 	/**

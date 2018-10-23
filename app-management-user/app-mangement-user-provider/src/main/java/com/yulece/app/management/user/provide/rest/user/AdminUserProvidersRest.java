@@ -20,8 +20,8 @@ public class AdminUserProvidersRest{
 
 
     @PutMapping("/user/update")
-    public boolean update(AdminUserParam param) {
-        return false;
+    public boolean update(@RequestBody AdminUserParam param) {
+        return adminUserService.update(param);
     }
 
     @PostMapping("/user/save")

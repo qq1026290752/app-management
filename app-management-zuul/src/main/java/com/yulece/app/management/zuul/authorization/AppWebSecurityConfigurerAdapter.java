@@ -4,8 +4,12 @@ import com.yulece.app.management.zuul.constant.ZuulAppConstant;
 import com.yulece.app.management.zuul.expression.AppSecurityExpressionHandler;
 import com.yulece.app.management.zuul.properties.ZuulProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
@@ -15,6 +19,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 
 @Configuration
 @EnableResourceServer
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class AppWebSecurityConfigurerAdapter extends ResourceServerConfigurerAdapter {
 
 	private final AppSecurityExpressionHandler appSecurityExpressionHandler;
@@ -34,15 +39,12 @@ public class AppWebSecurityConfigurerAdapter extends ResourceServerConfigurerAda
 
 
 	@Override
+	@Order(Ordered.LOWEST_PRECEDENCE)
 	public void configure(HttpSecurity http) throws Exception {
 		http
-			.formLogin()
-				.failureHandler(appAuthenticationFailureHandler)
-				.successHandler(appAuthenticationSuccessHandler)
-				.loginPage(ZuulAppConstant.LOGIN_URL)
-				.loginProcessingUrl(ZuulAppConstant.LOGIN_JUMP_CONTROLLER)
-			.and()
-				.authorizeRequests()
+			.authorizeRequests()
+				.antMatchers(HttpMethod.OPTIONS,"/oauth/token","/oauth/check_token", "/rest/**", "/api/**", "/**")
+				.permitAll()
 				.antMatchers(HttpMethod.GET,zuulProperties.getAuth().toGetAdapter())
 				.permitAll()
 			.and()
@@ -56,7 +58,14 @@ public class AppWebSecurityConfigurerAdapter extends ResourceServerConfigurerAda
 			.and()
 				.exceptionHandling().accessDeniedHandler(appAccessDeniedHandler)
 			.and()
-				.csrf().disable()
+				.formLogin()
+				.failureHandler(appAuthenticationFailureHandler)
+				.successHandler(appAuthenticationSuccessHandler)
+				.loginPage(ZuulAppConstant.LOGIN_URL)
+				.permitAll()
+				.loginProcessingUrl(ZuulAppConstant.LOGIN_JUMP_CONTROLLER)
+				.permitAll()
+			.and()
 				.authorizeRequests()
 				.anyRequest()
 				.access("@defaultZuulAuthorizationService.hasPermission(request,authentication)");;
