@@ -70,18 +70,16 @@ public class UserServiceImpl implements AdminUserService {
         }
         //拷贝用户
         AdminUser updateUser = PojoConvertUtil.convertPojo(param, AdminUser.class);
+        //防止修改
         updateUser.setUserName(adminUser.getUserName());
         updateUser.setPassWord(adminUser.getPassWord());
         updateUser.setStatus(adminUser.getStatus());
         updateUser.setTelephone(adminUser.getTelephone());
         updateUser.setMail(adminUser.getMail());
-        updateUser.setOperateIp((String) LoginHandlerInterceptor.local.get().get("operate_ip"));
-        updateUser.setOperator((String) LoginHandlerInterceptor.local.get().get("user_name"));
+        updateUser.setOperateIp(LoginHandlerInterceptor.getCurrentIp());
+        updateUser.setOperator(LoginHandlerInterceptor.getCurrentUser());
         int count = adminUserRepository.updateByPrimaryKey(updateUser);
-        if(count > 0){
-            return true;
-        }
-        return false;
+        return count > 0;
     }
 
     @Override
@@ -104,8 +102,8 @@ public class UserServiceImpl implements AdminUserService {
         //随机产生用户密码
         String password = RandomStringUtils.randomAlphanumeric(8);
         //后期补充
-        adminUser.setOperateIp((String) LoginHandlerInterceptor.local.get().get("operate_ip"));
-        adminUser.setOperator((String) LoginHandlerInterceptor.local.get().get("user_name"));
+        adminUser.setOperateIp(LoginHandlerInterceptor.getCurrentUser());
+        adminUser.setOperator(LoginHandlerInterceptor.getCurrentIp());
         adminUser.setPassWord(passwordEncoder.encode(password));
         adminUser.setStatus(AdminUserStatusEnum.USER_NON_ACTIVATED.getCode());
         int saveCount = adminUserRepository.insertSelective(adminUser);

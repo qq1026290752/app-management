@@ -64,8 +64,8 @@ public class DeptServiceImpl implements AdminDeptService {
         Preconditions.checkNotNull(beforeDept, "该更新部门不存在");
         AdminDept adminDept = PojoConvertUtil.convertPojo(param, AdminDept.class);
         adminDept.setDeptLevel(LevelUtil.calculateLevel(getLevel(adminDept.getDeptParentId()), adminDept.getDeptParentId()));
-        adminDept.setOperator((String) LoginHandlerInterceptor.local.get().get("user_name"));//TODO
-        adminDept.setOperateIp((String) LoginHandlerInterceptor.local.get().get("operate_ip"));//todo
+        adminDept.setOperator(LoginHandlerInterceptor.getCurrentUser());//TODO
+        adminDept.setOperateIp(LoginHandlerInterceptor.getCurrentIp());//todo
         return updateWithChild(beforeDept, adminDept);
     }
 

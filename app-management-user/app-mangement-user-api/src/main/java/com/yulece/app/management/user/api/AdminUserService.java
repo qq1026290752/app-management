@@ -20,9 +20,8 @@ public interface AdminUserService {
 
     /**
      * 更新数据
-     * 可以更新的内容为 头像 状态 备注
-     * 不可以更新 用户名 手机号 邮箱
-     * 但是更新时需要携带 用户名 手机号 用户ID 头像 状态 备注
+     * 可以更新的内容为
+     * 头像 状态 备注
      * 更新成功返回:<code>true</code>
      * 更新失败返回:<code>false</code>
      * @param param

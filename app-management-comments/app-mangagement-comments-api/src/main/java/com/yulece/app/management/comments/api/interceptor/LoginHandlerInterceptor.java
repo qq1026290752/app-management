@@ -27,7 +27,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 
     private final static Logger LOGGER = LoggerFactory.getLogger(LoginHandlerInterceptor.class);
 
-    public static ThreadLocal<Map> local = new ThreadLocal<>();
+    private static ThreadLocal<Map> local = new ThreadLocal<>();
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -49,5 +49,13 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         LOGGER.info(">>>>>>>>>>>>>访问结束,删除local里面的数据<<<<<<<<<<<<<<<<<");
         local.remove();
+    }
+
+
+    public static String getCurrentUser(){
+        return (String) local.get().get("user_name");
+    }
+    public static String getCurrentIp(){
+        return (String) local.get().get("operate_ip");
     }
 }
