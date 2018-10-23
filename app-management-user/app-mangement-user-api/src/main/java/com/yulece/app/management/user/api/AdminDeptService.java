@@ -15,16 +15,15 @@ import org.springframework.web.bind.annotation.*;
  * @Description: 部门管理service
  * @Date 创建时间 2018/10/21-21:17
  **/
-@FeignClient(value = "app-management-user-provider")
-@RequestMapping("/dept")
+@FeignClient(value = "app-management-user-provider", configuration = FeignHeaderInterceptor.class)
 public interface AdminDeptService {
 
-    @PostMapping("/save")
+    @PostMapping("/dept/save")
     Boolean save(@RequestBody AdminDeptParam param);
 
-    @PutMapping("/update")
+    @PutMapping("/dept/update")
     Boolean update(@RequestBody AdminDeptParam param);
 
-    @DeleteMapping("/delete")
-    Boolean delete(Integer deptId);
+    @DeleteMapping("/dept/{deptId}")
+    Boolean delete(@PathVariable("deptId") Integer deptId);
 }

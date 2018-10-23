@@ -2,9 +2,14 @@ package com.yulece.app.management.user.consumer.controller;
 
 import com.yulece.app.management.commons.utils.ResultVo;
 import com.yulece.app.management.user.api.AdminDeptService;
+import com.yulece.app.management.user.api.AdminTreeService;
+import com.yulece.app.management.user.dto.DeptLevelDto;
 import com.yulece.app.management.user.entity.AdminDeptParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.smartcardio.ATR;
+import java.util.List;
 
 /**
  * Copyright © 2018 eSunny Info. Tech Ltd. All rights reserved.
@@ -22,6 +27,8 @@ public class AdminDeptController {
 
     @Autowired
     private AdminDeptService adminDeptService;
+    @Autowired
+    private AdminTreeService adminTreeService;
 
     @PostMapping
     public ResultVo create(@RequestBody AdminDeptParam param){
@@ -39,5 +46,11 @@ public class AdminDeptController {
     public ResultVo delete(@PathVariable("deptId") Integer deptId){
         Boolean success = adminDeptService.delete(deptId);
         return success ? ResultVo.createSuccessResult():ResultVo.createErrorResult();
+    }
+
+    @GetMapping("/tree")
+    public ResultVo<List<DeptLevelDto>> tree() {
+        List<DeptLevelDto> deptLevelList = adminTreeService.deptTree();
+        return ResultVo.createSuccessResult(deptLevelList);
     }
 }

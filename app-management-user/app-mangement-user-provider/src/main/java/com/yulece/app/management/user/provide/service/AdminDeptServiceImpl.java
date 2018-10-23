@@ -30,7 +30,7 @@ import java.util.List;
  * @Date 创建时间 2018/10/21-21:27
  **/
 @Service
-public class DeptServiceImpl implements AdminDeptService {
+public class AdminDeptServiceImpl implements AdminDeptService {
 
     @Autowired
     private AdminDeptRepository adminDeptRepository;
@@ -64,14 +64,16 @@ public class DeptServiceImpl implements AdminDeptService {
         Preconditions.checkNotNull(beforeDept, "该更新部门不存在");
         AdminDept adminDept = PojoConvertUtil.convertPojo(param, AdminDept.class);
         adminDept.setDeptLevel(LevelUtil.calculateLevel(getLevel(adminDept.getDeptParentId()), adminDept.getDeptParentId()));
-        adminDept.setOperator(LoginHandlerInterceptor.getCurrentUser());//TODO
-        adminDept.setOperateIp(LoginHandlerInterceptor.getCurrentIp());//todo
+        adminDept.setOperator(LoginHandlerInterceptor.getCurrentUser());
+        adminDept.setOperateIp(LoginHandlerInterceptor.getCurrentIp());
         return updateWithChild(beforeDept, adminDept);
     }
 
     @Override
     public Boolean delete(Integer deptId) {
         //查询是否存在子部门
+        AdminDept beforeDept = adminDeptRepository.selectByPrimaryKey(deptId);
+        Preconditions.checkNotNull(beforeDept, "需要删除的部门不存在");
         Integer deptCount = adminDeptRepository.findAdminDeptByParentId(deptId);
         if (deptCount > 0) {
             throw new AppException(AppParamEnum.DEPT_EXIST_DEPT);
