@@ -18,6 +18,7 @@ public enum AppParamEnum {
     ACL_MODEL_ACLMODEL_EXIST_ACL(14,"该权限模块下存在权限点"),
     ACL_ACL_NAME_EXIST_ERRPR(15,"权限点名称已经存在"),
     ACL_ACL_SEQ_EXIST_ERRPR(16,"权限点下排序存在"),
+    ACL_ACL_NULL_EXIST(17,"权限点不存在,请刷新")
     ;
     private int code;
     private String message;

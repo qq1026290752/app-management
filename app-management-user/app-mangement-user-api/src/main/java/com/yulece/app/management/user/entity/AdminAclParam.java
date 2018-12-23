@@ -1,6 +1,5 @@
 package com.yulece.app.management.user.entity;
 
-import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Max;
@@ -8,10 +7,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Data
 public class AdminAclParam {
 
     private Integer aclId;
+
+
     @NotBlank(message = "权限点名称不能为空")
     @Length(min = 1, max = 20, message = "权限点的名称长度请在1-20字符之间")
     private String aclName;
@@ -38,4 +38,68 @@ public class AdminAclParam {
     @NotBlank(message = "权限点备注不能为空")
     @Length(min = 1, max = 64, message = "权限点的备注长度请在1-64字符之间")
     private String aclRemark;
+
+    public Integer getAclId() {
+        return aclId;
+    }
+
+    public void setAclId(Integer aclId) {
+        this.aclId = aclId;
+    }
+
+    public String getAclName() {
+        return aclName;
+    }
+
+    public void setAclName(String aclName) {
+        this.aclName = aclName;
+    }
+
+    public Integer getAclModuleId() {
+        return aclModuleId;
+    }
+
+    public void setAclModuleId(Integer aclModuleId) {
+        this.aclModuleId = aclModuleId;
+    }
+
+    public String getAclUrl() {
+        return aclUrl;
+    }
+
+    public void setAclUrl(String aclUrl) {
+        this.aclUrl = aclUrl;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getAclSeq() {
+        return aclSeq;
+    }
+
+    public void setAclSeq(Integer aclSeq) {
+        this.aclSeq = aclSeq;
+    }
+
+    public String getAclRemark() {
+        return aclRemark;
+    }
+
+    public void setAclRemark(String aclRemark) {
+        this.aclRemark = aclRemark;
+    }
 }

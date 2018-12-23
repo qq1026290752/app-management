@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.yulece.app.management.zuul.constant.ZuulAppConstant;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -32,24 +34,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
+	private final static Logger LOGGER = LoggerFactory.getLogger(AppAuthenticationSuccessHandler.class);
+
 	@Autowired
 	private ObjectMapper objectMapper;
 	@Autowired
 	private ClientDetailsService clientDetailsService;
-
-	private final AuthorizationServerTokenServices authorizationServerTokenServices;
-
 	@Autowired
-	public AppAuthenticationSuccessHandler(AuthorizationServerTokenServices authorizationServerTokenServices) {
-		this.authorizationServerTokenServices = authorizationServerTokenServices;
-	}
+	private AuthorizationServerTokenServices authorizationServerTokenServices;
+
 
 
 	@Override
 	@Order
 	public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
 					HttpServletResponse httpServletResponse, Authentication authentication) {
-		log.info("登陆成功");
+		logger.info("登陆成功");
 		String header = httpServletRequest.getHeader("Authorization");
 		//请求头包含Authorization 并且以"Basic "开始
 		if (header == null || !header.startsWith("Basic ")) {
@@ -80,7 +80,7 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 			httpServletResponse.setContentType(ZuulAppConstant.CONTENT_TYPE_JSON);
 			httpServletResponse.getWriter().write(objectMapper.writeValueAsString(createAccessToken));
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			logger.error(e.getMessage());
 		}
 	}
 

@@ -16,6 +16,8 @@ import javax.validation.ValidatorFactory;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.yulece.app.management.commons.utils.enums.AppParamEnum;
+import com.yulece.app.management.commons.utils.exception.AppException;
 import com.yulece.app.management.commons.utils.exception.ParamException;
 import org.apache.commons.collections.MapUtils;
 
@@ -64,5 +66,13 @@ public class BeanValidator {
         if(MapUtils.isNotEmpty(errors)){
            throw  new ParamException(errors.toString());
         }
+    }
+
+    public static <T> T chekObjectNull(T target, AppParamEnum appParamEnum){
+        if(target == null){
+            throw new AppException(appParamEnum);
+        }
+        return target;
+
     }
 }

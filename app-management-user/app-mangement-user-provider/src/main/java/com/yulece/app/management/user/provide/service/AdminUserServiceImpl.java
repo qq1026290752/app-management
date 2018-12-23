@@ -30,25 +30,20 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
-public class UserServiceImpl implements AdminUserService {
+public class AdminUserServiceImpl implements AdminUserService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
-
     @Autowired
     private AppAdminProperties appAdminProperties;
 
-    private final CommentsApiService commentsApiService;
-    private final AdminUserRepository adminUserRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final StringRedisTemplate stringRedisTemplate;
-
     @Autowired
-    public UserServiceImpl(CommentsApiService commentsApiService, AdminUserRepository adminUserRepository, PasswordEncoder passwordEncoder, StringRedisTemplate stringRedisTemplate) {
-        this.commentsApiService = commentsApiService;
-        this.adminUserRepository = adminUserRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.stringRedisTemplate = stringRedisTemplate;
-    }
+    private CommentsApiService commentsApiService;
+    @Autowired
+    private AdminUserRepository adminUserRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     @Override
     public AdminUserVo getById(Integer id) {
