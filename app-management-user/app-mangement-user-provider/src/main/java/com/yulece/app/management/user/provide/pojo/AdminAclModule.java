@@ -28,6 +28,9 @@ public class AdminAclModule {
 
     private Date updateTime;
 
+
+
+
     public Integer getModuleId() {
         return moduleId;
     }

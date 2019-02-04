@@ -1,11 +1,9 @@
 package com.yulece.app.management.user.provide.service;
 
-import com.google.common.base.Preconditions;
 import com.yulece.app.management.comments.api.interceptor.LoginHandlerInterceptor;
 import com.yulece.app.management.commons.utils.BeanValidator;
 import com.yulece.app.management.commons.utils.enums.AppParamEnum;
 import com.yulece.app.management.commons.utils.exception.AppException;
-import com.yulece.app.management.commons.utils.exception.ParamException;
 import com.yulece.app.management.user.api.AdminAclService;
 import com.yulece.app.management.user.dto.AdminAclDto;
 import com.yulece.app.management.user.entity.AdminAclParam;
@@ -49,11 +47,11 @@ public class AdminAclServiceImpl implements AdminAclService {
         BeanValidator.check(adminAclParam);
         //查询权限点是否存在
         if (findAdminAclNameIsExistByAdminAcl(adminAclParam.getAclId(), adminAclParam.getAclName(), adminAclParam.getAclModuleId())) {
-            throw new AppException(AppParamEnum.ACL_ACL_NAME_EXIST_ERRPR);
+            throw new AppException(AppParamEnum.ACL_ACL_NAME_EXIST_ERROR);
         }
         //查询权限点排序是否存在
         if (findAdminAclSEQIsExistByAdminAcl(adminAclParam.getAclId(), adminAclParam.getAclSeq(), adminAclParam.getAclModuleId())) {
-            throw new AppException(AppParamEnum.ACL_ACL_SEQ_EXIST_ERRPR);
+            throw new AppException(AppParamEnum.ACL_ACL_SEQ_EXIST_ERROR);
         }
     }
 

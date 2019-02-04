@@ -66,11 +66,11 @@ public class PojoConvertUtil {
                     Object value = getFiledValue(field, orig);
                     if (value == null)
                         continue;
-                    Class orginType = field.getType();
+                    Class origType = field.getType();
                     Class targetType = targetField.getType();
                     // 两个类型是否相同
-                    boolean sameType = orginType.equals(targetType);
-                    if (isBasicType(orginType))
+                    boolean sameType = origType.equals(targetType);
+                    if (isBasicType(origType))
                     {
                         if (sameType)
                             setFieldValue(targetField, target, value);

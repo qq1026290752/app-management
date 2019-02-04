@@ -4,8 +4,11 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.yulece.app.management.user.api.AdminTreeService;
+import com.yulece.app.management.user.dto.AdminAclModuleDto;
 import com.yulece.app.management.user.dto.DeptLevelDto;
+import com.yulece.app.management.user.provide.pojo.AdminAclModule;
 import com.yulece.app.management.user.provide.pojo.AdminDept;
+import com.yulece.app.management.user.provide.repositories.AdminAclModuleRepository;
 import com.yulece.app.management.user.provide.repositories.AdminDeptRepository;
 import com.yulece.app.management.user.provide.utils.LevelUtil;
 import com.yulece.app.management.user.provide.utils.PojoConvertUtil;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Copyright © 2018 eSunny Info. Tech Ltd. All rights reserved.
@@ -33,6 +37,8 @@ public class AdminTreeServiceImpl implements AdminTreeService {
 
     @Autowired
     private AdminDeptRepository adminDeptRepository;
+    @Autowired
+    private AdminAclModuleRepository adminAclModelRepository;
 
     @Override
     public List<DeptLevelDto> deptTree() {
@@ -46,6 +52,32 @@ public class AdminTreeServiceImpl implements AdminTreeService {
             deptLevelDtos.add(deptLevelDto);
         }
         return deptToTree(deptLevelDtos);
+    }
+
+    @Override
+    public List<AdminAclModuleDto> adminModuleTree() {
+        List<AdminAclModule> adminAclModules = adminAclModelRepository.selectAll();
+        List<AdminAclModuleDto> adminAclModelDtoList = adminAclModules.stream().map(model ->
+                PojoConvertUtil.convertPojo(model, AdminAclModuleDto.class)
+        ).collect(Collectors.toList());
+        return aclModuleToTree(adminAclModelDtoList);
+    }
+
+    private List<AdminAclModuleDto> aclModuleToTree(List<AdminAclModuleDto> adminAclModelDtoList) {
+        if(CollectionUtils.isEmpty(adminAclModelDtoList)){
+            return Lists.newArrayList();
+        }
+        ArrayListMultimap<String, AdminAclModuleDto> arrayListMultimap = ArrayListMultimap.create();
+        List<AdminAclModuleDto> rootList = Lists.newArrayList();
+        for (AdminAclModuleDto adminAclModelDto : adminAclModelDtoList) {
+            arrayListMultimap.put(adminAclModelDto.getModuleLevel(),adminAclModelDto);
+            if(adminAclModelDto.getModuleLevel().equals(LevelUtil.ROOT)) {
+                rootList.add(adminAclModelDto);
+            }
+        }
+        Collections.sort(rootList,adminAclModelDtoComparator);
+        transformAclModelTree(rootList,LevelUtil.ROOT,arrayListMultimap);
+        return rootList;
     }
 
 
@@ -90,11 +122,37 @@ public class AdminTreeServiceImpl implements AdminTreeService {
         }
     }
 
+    private void transformAclModelTree(List<AdminAclModuleDto> adminAclModelDtoList, String level, Multimap<String, AdminAclModuleDto> adminAclModelDtoMultimap) {
+        for (int i = 0; i < adminAclModelDtoList.size(); i++) {
+            //循环遍历每个元素
+            AdminAclModuleDto adminAclModelDto = adminAclModelDtoList.get(i);
+            //处理当前层数据拿到下一层数据
+            String nextLevel = LevelUtil.calculateLevel(level, adminAclModelDto.getModuleId());
+            //拿到下一层数据
+            List<AdminAclModuleDto> aclModelDtoList = (List<AdminAclModuleDto>) adminAclModelDtoMultimap.get(nextLevel);
+            //下一层排序
+            if (!CollectionUtils.isEmpty(aclModelDtoList)) {
+                //排序
+                Collections.sort(aclModelDtoList, adminAclModelDtoComparator);
+                //把下一层加入到本层
+                adminAclModelDto.setAdminAclModelDtos(aclModelDtoList);
+                //开始递归下一层
+                transformAclModelTree(aclModelDtoList, nextLevel, adminAclModelDtoMultimap);
+            }
+        }
+    }
 
     private Comparator<DeptLevelDto> deptSeqComparator = new Comparator<DeptLevelDto>() {
         @Override
         public int compare(DeptLevelDto o1, DeptLevelDto o2) {
             return o1.getDeptSeq() - o2.getDeptSeq();
+        }
+    };
+
+    private Comparator<AdminAclModuleDto> adminAclModelDtoComparator = new Comparator<AdminAclModuleDto>() {
+        @Override
+        public int compare(AdminAclModuleDto o1, AdminAclModuleDto o2) {
+            return o1.getModuleSeq() - o2.getModuleSeq();
         }
     };
 }

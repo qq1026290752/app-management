@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
@@ -40,7 +41,7 @@ public class DefaultZuulAuthorizationService implements ZuulAuthorizationService
         if(authentication!=null&&!authentication.getPrincipal().equals("anonymousUser")&&
                 authentication.isAuthenticated()) {
 
-            String userName = (String)authentication.getPrincipal();
+            User principal = (User) authentication.getPrincipal();
             //读取用户所有的Url,可以通过用户服务拿到当前用户服务拿到该用户的能访问的地址
             Set<String> urls = new HashSet<>();
             urls.add("/app/**");
@@ -48,7 +49,7 @@ public class DefaultZuulAuthorizationService implements ZuulAuthorizationService
             for (String  url : urls) {
                 if (antPathMatcher.match(url, requestURI)) {
                     isPermission = true;
-                    LOGGER.info("用户[{}]鉴权,鉴权地址为:{}.",userName,requestURI);
+                    LOGGER.info("用户[{}]鉴权,鉴权地址为:{}.",principal.getUsername(),requestURI);
                     break;
                 }
             }

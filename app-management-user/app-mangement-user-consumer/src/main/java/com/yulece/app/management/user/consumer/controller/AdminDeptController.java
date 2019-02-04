@@ -21,7 +21,7 @@ import java.util.List;
  * @Description:部门控制层开发
  * @Date 创建时间 2018/10/22-12:08
  **/
-@RequestMapping("/admin/dept")
+@RequestMapping("/dept")
 @RestController
 public class AdminDeptController {
 

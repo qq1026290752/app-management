@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
 @RestController
-@RequestMapping("admin")
 public class AdminUserController {
 
     @Autowired

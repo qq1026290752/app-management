@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients(basePackageClasses
         = {AdminUserService.class, AdminDeptService.class, AdminTreeService.class,
-        AdminAclService.class, AdminAclModelService.class})
+        AdminAclService.class, AdminAclModuleService.class})
 public class ApplicationUserConsumerBootstrap {
 
     public static void main(String[] args) {

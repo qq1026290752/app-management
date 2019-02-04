@@ -38,14 +38,7 @@ public class AdminDeptServiceImpl implements AdminDeptService {
 
     @Override
     public Boolean save(AdminDeptParam param) {
-        BeanValidator.check(param);
-        //
-        if (existDeptName(param.getDeptName(), param.getDeptParentId(), param.getDeptId())) {
-            throw new AppException(AppParamEnum.DEPT_DEPTNAME_EXIST_ERRPR);
-        }
-        if (existDeptSeq(param.getDeptSeq(), param.getDeptParentId(), param.getDeptId())) {
-            throw new AppException(AppParamEnum.DEPT_DEPTSEQL_EXIST_ERRPR);
-        }
+        checkUser(param);
         AdminDept adminDept = PojoConvertUtil.convertPojo(param, AdminDept.class);
         adminDept.setDeptLevel(LevelUtil.calculateLevel(getLevel(adminDept.getDeptParentId()), adminDept.getDeptParentId()));
        return adminDeptRepository.insert(adminDept) > 0;
@@ -53,13 +46,7 @@ public class AdminDeptServiceImpl implements AdminDeptService {
 
     @Override
     public Boolean update(AdminDeptParam param) {
-        BeanValidator.check(param);
-        if (existDeptName(param.getDeptName(), param.getDeptParentId(), param.getDeptId())) {
-            throw new AppException(AppParamEnum.DEPT_DEPTNAME_EXIST_ERRPR);
-        }
-        if (existDeptSeq(param.getDeptSeq(), param.getDeptParentId(), param.getDeptId())) {
-            throw new AppException(AppParamEnum.DEPT_DEPTSEQL_EXIST_ERRPR);
-        }
+        checkUser(param);
         AdminDept beforeDept = adminDeptRepository.selectByPrimaryKey(param.getDeptId());
         Preconditions.checkNotNull(beforeDept, "该更新部门不存在");
         AdminDept adminDept = PojoConvertUtil.convertPojo(param, AdminDept.class);
@@ -67,6 +54,16 @@ public class AdminDeptServiceImpl implements AdminDeptService {
         adminDept.setOperator(LoginHandlerInterceptor.getCurrentUser());
         adminDept.setOperateIp(LoginHandlerInterceptor.getCurrentIp());
         return updateWithChild(beforeDept, adminDept);
+    }
+
+    private void checkUser(AdminDeptParam param) {
+        BeanValidator.check(param);
+        if (existDeptName(param.getDeptName(), param.getDeptParentId(), param.getDeptId())) {
+            throw new AppException(AppParamEnum.DEPT_NAME_EXIST_ERROR);
+        }
+        if (existDeptSeq(param.getDeptSeq(), param.getDeptParentId(), param.getDeptId())) {
+            throw new AppException(AppParamEnum.DEPT_SEQ_EXIST_ERROR);
+        }
     }
 
     @Override

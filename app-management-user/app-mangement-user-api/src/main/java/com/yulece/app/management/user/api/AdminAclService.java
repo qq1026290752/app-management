@@ -7,18 +7,17 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(value = "app-management-user-provider",configuration = FeignHeaderInterceptor.class)
-@RequestMapping("/acl")
 public interface AdminAclService {
 
     //增加权限点
-    @PostMapping
+    @PostMapping("/acl")
     Integer addAdminAcl(@RequestBody AdminAclParam adminAclParam);
     //修改权限点
-    @PutMapping
+    @PutMapping("/acl")
     Integer updateAdminAcl(@RequestBody AdminAclParam adminAclParam);
     //删除权限点
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/acl/{id}")
     Integer deleteByAclId(@PathVariable("id") Integer aclId);
-    @GetMapping("/{id}")
+    @GetMapping("/acl/{id}")
     AdminAclDto getByAclId(@PathVariable("id") Integer aclId);
 }

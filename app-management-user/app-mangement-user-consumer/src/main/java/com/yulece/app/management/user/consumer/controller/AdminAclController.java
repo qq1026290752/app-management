@@ -25,12 +25,12 @@ public class AdminAclController {
 
     @PostMapping()
     public ResultVo<Integer> save(@RequestBody AdminAclParam param){
-        return ResultVo.createErrorResult(adminAclService.addAdminAcl(param));
+        return ResultVo.createSuccessResult(adminAclService.addAdminAcl(param));
     }
 
     @PutMapping()
     public ResultVo<Integer> update(@RequestBody AdminAclParam param){
-        return ResultVo.createErrorResult(adminAclService.updateAdminAcl(param));
+        return ResultVo.createSuccessResult(adminAclService.updateAdminAcl(param));
     }
 
     @DeleteMapping("/{id}")

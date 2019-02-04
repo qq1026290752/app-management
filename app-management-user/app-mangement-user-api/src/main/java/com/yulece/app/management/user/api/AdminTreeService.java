@@ -1,6 +1,7 @@
 package com.yulece.app.management.user.api;
 
 import com.yulece.app.management.comments.api.interceptor.FeignHeaderInterceptor;
+import com.yulece.app.management.user.dto.AdminAclModuleDto;
 import com.yulece.app.management.user.dto.DeptLevelDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,4 +23,7 @@ public interface AdminTreeService {
 
     @GetMapping("/dept/tree")
     List<DeptLevelDto> deptTree();
+
+    @GetMapping("/aclModule/list")
+    List<AdminAclModuleDto> adminModuleTree();
 }

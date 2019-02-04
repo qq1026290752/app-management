@@ -1,9 +1,14 @@
 package com.yulece.app.management.user.provide.pojo;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
 public class AdminAcl {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer aclId;
 
     private String aclName;

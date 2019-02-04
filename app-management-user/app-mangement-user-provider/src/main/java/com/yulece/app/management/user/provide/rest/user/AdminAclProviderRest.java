@@ -21,23 +21,22 @@ public class AdminAclProviderRest {
     @Autowired
     private AdminAclService adminAclService;
 
-
     //增加权限点
-    @PostMapping
+    @PostMapping("/acl")
     public Integer addAdminAcl(@RequestBody AdminAclParam adminAclParam){
         return adminAclService.addAdminAcl(adminAclParam);
     }
     //修改权限点
-    @PutMapping
+    @PutMapping("/acl")
     public Integer updateAdminAcl(@RequestBody AdminAclParam adminAclParam){
         return adminAclService.updateAdminAcl(adminAclParam);
     }
     //删除权限点
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/acl/{id}")
     public Integer deleteByAclId(@PathVariable("id") Integer aclId){
         return adminAclService.deleteByAclId(aclId);
     }
-    @GetMapping("/{id}")
+    @GetMapping("/acl/{id}")
     public AdminAclDto getByAclId(@PathVariable("id") Integer aclId){
         return adminAclService.getByAclId(aclId);
     }

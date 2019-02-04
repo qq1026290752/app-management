@@ -3,6 +3,7 @@ package com.yulece.app.management.zuul.authorization;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yulece.app.management.zuul.constant.ZuulAppConstant;
 import com.yulece.app.management.zuul.properties.OAuth2ClientProperties;
 import com.yulece.app.management.zuul.properties.ZuulProperties;
 import org.apache.commons.lang.ArrayUtils;
@@ -62,11 +63,11 @@ public class AppAuthorizationServerConfig extends AuthorizationServerConfigurerA
 				   //刷新时间
 				   .refreshTokenValiditySeconds(3600*24*100)
 					//跳转地址
-				   .redirectUris("ws.28ph.cn")
+				   .redirectUris("http://api.yulece.com")
 				   //权限
 				   .scopes("all");
 			}
-		} 
+		}
 	}
 
 	@Override
@@ -96,7 +97,5 @@ public class AppAuthorizationServerConfig extends AuthorizationServerConfigurerA
 				.tokenKeyAccess("permitAll()")
 				.checkTokenAccess("isAuthenticated()");
 	}
-
-
 
 }

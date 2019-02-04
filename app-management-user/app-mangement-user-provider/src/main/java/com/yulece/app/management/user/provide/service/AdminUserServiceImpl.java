@@ -26,7 +26,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -86,11 +85,11 @@ public class AdminUserServiceImpl implements AdminUserService {
         }
         //查询手机号是否重复
         if (findMobilePhoneIsExist(param.getUserId(), param.getTelephone())) {
-            throw new AppException(AppParamEnum.USER_TLEL_PHONE_EXIST_RROE);
+            throw new AppException(AppParamEnum.USER_PHONE_EXIST);
         }
         //查询邮箱是否重复
         if (findEmailIsExist(param.getUserId(), param.getMail())) {
-            throw new AppException(AppParamEnum.USER_EMAI_EXIST_ERROE);
+            throw new AppException(AppParamEnum.USER_EMAIL_EXIST);
         }
         //拷贝用户
         AdminUser adminUser = PojoConvertUtil.convertPojo(param, AdminUser.class);

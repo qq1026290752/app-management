@@ -16,6 +16,7 @@
         <module>app-management-user</module>
         <module>app-management-consumer</module>
         <module>app-management-comments</module>
+        <module>app-management-sso</module>
     </modules>
     <packaging>pom</packaging>
 
