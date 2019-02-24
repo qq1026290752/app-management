@@ -43,7 +43,7 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 			public JwtAccessTokenConverter jwtAccessTokenConverter() {
 				JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
 				//加密秘钥
-				converter.setSigningKey(zuulProperties.getOauth().getoAuth2SigningKey());
+				converter.setSigningKey(zuulProperties.getOauth().getOauth2SigningKey());
 				return converter;
 			}
 

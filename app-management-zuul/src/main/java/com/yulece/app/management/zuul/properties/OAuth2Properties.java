@@ -4,7 +4,7 @@ public class OAuth2Properties {
 
     private OAuth2ClientProperties[] clients = {};
 
-    private String oAuth2SigningKey = "yulece";
+    private String oauth2SigningKey = "yulece";
 
     public OAuth2ClientProperties[] getClients() {
         return clients;
@@ -14,11 +14,11 @@ public class OAuth2Properties {
         this.clients = clients;
     }
 
-    public String getoAuth2SigningKey() {
-        return oAuth2SigningKey;
+    public String getOauth2SigningKey() {
+        return oauth2SigningKey;
     }
 
-    public void setoAuth2SigningKey(String oAuth2SigningKey) {
-        this.oAuth2SigningKey = oAuth2SigningKey;
+    public void setOauth2SigningKey(String oauth2SigningKey) {
+        this.oauth2SigningKey = oauth2SigningKey;
     }
 }

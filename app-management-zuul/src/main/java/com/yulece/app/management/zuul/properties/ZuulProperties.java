@@ -9,6 +9,10 @@ public class ZuulProperties{
 
     private OAuth2Properties oauth = new OAuth2Properties();
 
+    private SMSCodeProperties smsCodeProperties = new SMSCodeProperties();
+
+    private AliyunProperties aliyunProperties = new AliyunProperties();
+
     public OAuth2Properties getOauth() {
         return oauth;
     }
@@ -25,5 +29,19 @@ public class ZuulProperties{
         this.auth = auth;
     }
 
+    public SMSCodeProperties getSmsCodeProperties() {
+        return smsCodeProperties;
+    }
 
+    public void setSmsCodeProperties(SMSCodeProperties smsCodeProperties) {
+        this.smsCodeProperties = smsCodeProperties;
+    }
+
+    public AliyunProperties getAliyunProperties() {
+        return aliyunProperties;
+    }
+
+    public void setAliyunProperties(AliyunProperties aliyunProperties) {
+        this.aliyunProperties = aliyunProperties;
+    }
 }

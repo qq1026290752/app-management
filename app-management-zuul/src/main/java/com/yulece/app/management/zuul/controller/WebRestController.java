@@ -27,7 +27,7 @@ public class WebRestController {
         String toke = StringUtils.substringAfter(header, "bearer ");
 
         Map<String, Object> jwtClaims =
-                Jwts.parser().setSigningKey(zuulProperties.getOauth().getoAuth2SigningKey().getBytes("UTF-8")).parseClaimsJws(toke).getBody();
+                Jwts.parser().setSigningKey(zuulProperties.getOauth().getOauth2SigningKey().getBytes("UTF-8")).parseClaimsJws(toke).getBody();
         return jwtClaims;
 
     }
