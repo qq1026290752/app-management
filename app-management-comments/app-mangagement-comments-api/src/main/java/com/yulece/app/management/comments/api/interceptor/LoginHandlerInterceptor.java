@@ -1,6 +1,7 @@
 package com.yulece.app.management.comments.api.interceptor;
 
 import com.yulece.app.management.comments.api.utils.IpUtils;
+import com.yulece.app.management.commons.utils.IPUtils;
 import io.jsonwebtoken.Jwts;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 
         Map<String, Object> operateMap =
                 Jwts.parser().setSigningKey("yulece".getBytes("UTF-8")).parseClaimsJws(toke).getBody();
-        String operateIp = IpUtils.getIpFromRequest(request);
+        String operateIp = IPUtils.getIp(request);
         operateMap.put("operate_ip",operateIp);
         local.set(operateMap);
 

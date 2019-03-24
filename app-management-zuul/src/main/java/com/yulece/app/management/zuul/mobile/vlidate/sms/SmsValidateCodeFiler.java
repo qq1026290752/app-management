@@ -15,23 +15,20 @@ import com.yulece.app.management.zuul.constant.ZuulAppConstant;
 import com.yulece.app.management.zuul.mobile.vlidate.ValidateCode;
 import com.yulece.app.management.zuul.mobile.vlidate.ValidateCodeRepository;
 import com.yulece.app.management.zuul.properties.ZuulProperties;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.filter.OncePerRequestFilter;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.extern.slf4j.Slf4j;
-
-
-@Slf4j
 @Data
-@EqualsAndHashCode(callSuper = false)
+@Log4j2
 public class SmsValidateCodeFiler extends OncePerRequestFilter implements InitializingBean {	
 
 	private ValidateCodeRepository validateCodeRepository;
@@ -54,7 +51,7 @@ public class SmsValidateCodeFiler extends OncePerRequestFilter implements Initia
 		super.afterPropertiesSet();
 		//得到需要验证码拦截的URL
 	/*	String[] configUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(zuulProperties.getSmsCodeProperties().getUrl(), ",");
-		if(!ObjectUtils.equals(configUrls, null)) {			
+		if(!ObjectUtils.equals(configUrls, null)) {
 			for (String configUrl : configUrls) {
 				urls.add(configUrl);
 			}

@@ -16,6 +16,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.codec.Base64;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 import org.springframework.security.oauth2.provider.*;
@@ -41,6 +42,8 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 	@Autowired
 	private ClientDetailsService clientDetailsService;
 	@Autowired
+	private PasswordEncoder passwordEncoder;
+	@Autowired
 	private AuthorizationServerTokenServices authorizationServerTokenServices;
 
 
@@ -48,7 +51,7 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 	@Override
 	@Order
 	public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
-					HttpServletResponse httpServletResponse, Authentication authentication) {
+					HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
 		logger.info("登陆成功");
 		String header = httpServletRequest.getHeader("Authorization");
 		//请求头包含Authorization 并且以"Basic "开始
@@ -65,8 +68,8 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 			ClientDetails clientDetails = clientDetailsService.loadClientByClientId(clientId);
 			if(clientDetails == null) {
 				throw new UnapprovedClientAuthenticationException("clientId:"+clientId+"对应的信息不存在。");
-			}else if(!StringUtils.equals(clientSecret, clientDetails.getClientSecret())) {
-				throw new UnapprovedClientAuthenticationException("clientId:"+clientId+"对应的信息不匹配。");
+			}else if(!passwordEncoder.matches(clientSecret,clientDetails.getClientSecret())) {
+				throw new UnapprovedClientAuthenticationException("clientSecret:"+clientSecret+"对应的信息不匹配。");
 			}
 			@SuppressWarnings("unchecked")
 			TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_MAP, clientId, clientDetails.getScope(),"custom");
@@ -80,6 +83,8 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 			httpServletResponse.setContentType(ZuulAppConstant.CONTENT_TYPE_JSON);
 			httpServletResponse.getWriter().write(objectMapper.writeValueAsString(createAccessToken));
 		} catch (Exception e) {
+			httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			httpServletResponse.getWriter().write(objectMapper.writeValueAsString(e.getMessage()));
 			logger.error(e.getMessage());
 		}
 	}

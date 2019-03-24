@@ -19,7 +19,9 @@ public enum AppParamEnum {
     ACL_MODULE_NOT_EXIST(18,"权限模块不存在 "),
     ACL_ACL_NAME_EXIST_ERROR(15,"权限点名称已经存在"),
     ACL_ACL_SEQ_EXIST_ERROR(16,"权限点下排序存在"),
-    ACL_ACL_NULL_EXIST(17,"权限点不存在,请刷新")
+    ACL_ACL_NULL_EXIST(17,"权限点不存在,请刷新"),
+    ROLE_NAME_EXIST(18,"角色名称已存在"),
+    ROLE_SEQ_EXIST(19,"角色排序已存在")
     ;
     private int code;
     private String message;

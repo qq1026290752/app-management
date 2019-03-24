@@ -41,15 +41,16 @@ public class DefaultZuulAuthorizationService implements ZuulAuthorizationService
         if(authentication!=null&&!authentication.getPrincipal().equals("anonymousUser")&&
                 authentication.isAuthenticated()) {
 
-            User principal = (User) authentication.getPrincipal();
+            String username = (String) authentication.getPrincipal();
             //读取用户所有的Url,可以通过用户服务拿到当前用户服务拿到该用户的能访问的地址
             Set<String> urls = new HashSet<>();
             urls.add("/app/**");
             urls.add("/me");
+            urls.add("/hello");
             for (String  url : urls) {
                 if (antPathMatcher.match(url, requestURI)) {
                     isPermission = true;
-                    LOGGER.info("用户[{}]鉴权,鉴权地址为:{}.",principal.getUsername(),requestURI);
+                    LOGGER.info("用户[{}]鉴权,鉴权地址为:{}.",username,requestURI);
                     break;
                 }
             }
