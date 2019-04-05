@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yulece.app.management.user.provide.repositories.AdminDeptRepository">
+    <resultMap id="adminDeptResult" type="com.yulece.app.management.user.provide.pojo.AdminDept">
+        <id column="dept_id" property="deptId"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="deptLevel" column="dept_level"/>
+        <result property="deptSeq" column="dept_seq"/>
+        <result property="deptRemark" column="dept_remark"/>
+        <result property="deptParentId" column="dept_parent_id"/>
+        <result property="operator" column="operator"/>
+        <result property="operateIp" column="operate_ip"/>
+    </resultMap>
+
+    <sql id="base_column_list">
+        dept_id,dept_name,dept_level,dept_seq,dept_remark,dept_parent_id,operator,operate_ip
+    </sql>
+
+
+    <select id="findAdminDeptByParentId" parameterType="int" resultType="integer">
+        select count(dept_id) from admin_dept where admin_dept.dept_parent_id = #{value}
+    </select>
+
+    <select id="findUserCountByDeptId" resultType="integer" parameterType="int">
+        select count(user_id) from admin_user where admin_user.user_dept = #{value}
+    </select>
+
+    <select id="getDeptChildListByLevel" resultMap="adminDeptResult">
+        select
+        <include refid="base_column_list"/>
+        from
+        admin_dept
+        where
+        dept_level like concat(concat(#{value}),".%")
+    </select>
+
+    <select id="existDeptByDept" resultMap="adminDeptResult">
+      select
+        <include refid="base_column_list"/>
+      from
+        admin_dept
+      <where>
+          <if test="deptName!='' and deptName != null">
+              dept_name = #{dept_name}
+          </if>
+          <if test="deptId!=null and deptId > 0">
+              and dept_id = #{deptId}
+          </if>
+          <if test="deptParentId!=null and deptParentId > 0">
+              and dept_parent_id = #{deptParentId}
+          </if>
+          <if test="deptSeq!=null and deptSeq > 0">
+              and dept_seq = #{deptSeq}
+          </if>
+
+      </where>
+    </select>
+</mapper>

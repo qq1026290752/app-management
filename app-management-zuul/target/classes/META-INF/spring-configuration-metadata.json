@@ -1,0 +1,32 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.yulece.app.management.zuul.properties.ZuulProperties",
+      "name": "app.zuul",
+      "type": "com.yulece.app.management.zuul.properties.ZuulProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.yulece.app.management.zuul.properties.ZuulProperties",
+      "name": "app.zuul.aliyun-properties",
+      "type": "com.yulece.app.management.zuul.properties.AliyunProperties"
+    },
+    {
+      "sourceType": "com.yulece.app.management.zuul.properties.ZuulProperties",
+      "name": "app.zuul.auth",
+      "type": "com.yulece.app.management.zuul.properties.AuthProperties"
+    },
+    {
+      "sourceType": "com.yulece.app.management.zuul.properties.ZuulProperties",
+      "name": "app.zuul.oauth",
+      "type": "com.yulece.app.management.zuul.properties.OAuth2Properties"
+    },
+    {
+      "sourceType": "com.yulece.app.management.zuul.properties.ZuulProperties",
+      "name": "app.zuul.sms-code-properties",
+      "type": "com.yulece.app.management.zuul.properties.SMSCodeProperties"
+    }
+  ]
+}

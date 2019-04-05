@@ -1,0 +1,22 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.yulece.app.management.user.provide.properties.AppAdminProperties",
+      "name": "app.admin",
+      "type": "com.yulece.app.management.user.provide.properties.AppAdminProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.yulece.app.management.user.provide.properties.AppAdminProperties",
+      "name": "app.admin.not-intercept-url",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.yulece.app.management.user.provide.properties.AppAdminProperties",
+      "name": "app.admin.server-properties",
+      "type": "com.yulece.app.management.user.provide.properties.ServerProperties"
+    }
+  ]
+}

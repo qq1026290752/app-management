@@ -1,6 +1,5 @@
 package com.yulece.app.management.zuul.configurer;
 
-import com.yulece.app.management.zuul.filter.IpZuulFiler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,8 +22,4 @@ public class BeanConfigurer {
         return new InMemoryClientDetailsService();
     }
 
-    @Bean
-    public IpZuulFiler ipZuulFiler(){
-        return new IpZuulFiler();
-    }
 }

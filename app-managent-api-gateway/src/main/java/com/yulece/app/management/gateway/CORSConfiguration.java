@@ -1,4 +1,4 @@
-package com.yulece.app.management.zuul.configurer;
+package com.yulece.app.management.gateway;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;

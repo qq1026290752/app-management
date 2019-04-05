@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yulece.app.management.user.provide.repositories.AdminAclRepository">
+
+    <select id="findAdminAclIsExistByAdminAcl" resultType="java.lang.Integer" parameterType="com.yulece.app.management.user.provide.pojo.AdminAcl">
+        select count(t.acl_id) from admin_acl t
+        <where>
+            <if test="aclId!=null and aclId!=0">
+              t.acl_id != #{aclId}
+            </if>
+            <if test="aclName!=null and aclName!=''">
+              AND t.acl_name = #{aclName}
+            </if>
+            <if test="aclModuleId!=null and aclModuleId>0">
+              AND t.acl_module_id = #{aclModuleId}
+            </if>
+            <if test="aclSeq!=null and aclSeq>0">
+              AND t.acl_seq = #{aclSeq}
+            </if>
+        </where>
+
+    </select>
+</mapper>
