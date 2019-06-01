@@ -42,14 +42,23 @@ public class FeignHeaderInterceptor implements RequestInterceptor {
         Enumeration<String> bodyNames = request.getParameterNames();
         StringBuffer body =new StringBuffer();
         if (bodyNames != null) {
+            body.append("{");
             while (bodyNames.hasMoreElements()) {
                 String name = bodyNames.nextElement();
                 String values = request.getParameter(name);
-                body.append(name).append("=").append(values).append("&");
+                if(name.indexOf(".") != 1){
+                    body.append("\"").append(name.substring(name.indexOf(".")+1)).append("\":").append(values);
+                }else {
+                    body.append(name).append("=").append(values).append("&");
+                }
             }
+            body.append("}");
         }
-        if(body.length()!=0) {
-            body.deleteCharAt(body.length()-1);
+
+        if(body.length()!=0&&!body.toString().startsWith("{")) {
+            if(body.toString().endsWith("&")){
+                body.deleteCharAt(body.toString().length());
+            }
             requestTemplate.body(body.toString());
             LOGGER.info("feign interceptor body:{}",body.toString());
         }

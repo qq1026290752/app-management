@@ -16,14 +16,19 @@ import java.util.Date;
  * @Date 2019-03-10 10:27
  **/
 @Data
-@EqualsAndHashCode(callSuper = false)
-public class AdminRoleDto extends AdminRoleParam {
+public class AdminRoleDto {
 
-    private String operator;
+    private Integer roleId;
 
-    private String operateIp;
+    private String roleName;
+
+    private Integer roleType;
+
+    private Byte roleStatus;
+
+    private Integer roleSeq;
+
+    private String roleRemark;
 
     private Date createTime;
-
-    private Date updateTime;
 }

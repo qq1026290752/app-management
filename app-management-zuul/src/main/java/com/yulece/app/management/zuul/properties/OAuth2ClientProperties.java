@@ -7,7 +7,7 @@ public class OAuth2ClientProperties {
 	
 	private String clientSecret = "app_secret";
 	//默认值为0 没有过期时间 
-	private Integer accessTokenValiditySeconds = 60*60*12;
+	private Integer accessTokenValiditySeconds = 60*60;
 
 	public String getClientId() {
 		return clientId;

@@ -83,6 +83,11 @@
             <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
             <version>1.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.yulece.app.management</groupId>
+            <artifactId>app-mangement-user-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

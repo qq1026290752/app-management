@@ -1,5 +1,6 @@
 package com.yulece.app.management.user.provide.rest.user;
 
+import com.yulece.app.management.comments.api.entity.Page;
 import com.yulece.app.management.user.api.AdminRoleService;
 import com.yulece.app.management.user.dto.AdminRoleDto;
 import com.yulece.app.management.user.entity.AdminRoleParam;
@@ -21,26 +22,31 @@ public class AdminRoleProviderRest  {
 
     @Autowired
     private AdminRoleService adminRoleService;
-    @PostMapping("/role/save")
+    @PostMapping("/save")
     public Boolean save(@RequestBody AdminRoleParam param){
         return adminRoleService.save(param);
     }
 
-    @GetMapping("/role/{id}")
+    @GetMapping("/{id}")
     public AdminRoleDto getById(@PathVariable("id") Integer id){
         return adminRoleService.getById(id);
     }
 
-    @PutMapping("/role/update" )
+    @PutMapping("/update" )
     public Boolean update(@RequestBody AdminRoleParam param){
         return adminRoleService.update(param);
     }
 
-    @DeleteMapping("/role/{id}")
+    @DeleteMapping("/{id}")
     public Boolean delete(@PathVariable("id") Integer id){
         return  adminRoleService.delete(id);
     }
 
+    @PostMapping("/list")
+    public Page<AdminRoleDto> findAdminRoleByPage(
+            @RequestBody AdminRoleParam param){
+        return adminRoleService.findAdminRoleByPage(param);
+    }
 
 
 

@@ -1,5 +1,6 @@
 package com.yulece.app.management.user.entity;
 
+import com.yulece.app.management.comments.api.entity.PageParms;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -7,7 +8,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 /**
  * Copyright © 2019 eSunny Info. Tech Ltd. All rights reserved.
@@ -19,7 +19,7 @@ import java.util.Date;
  * @Date 2019-03-10 09:27
  **/
 @Data
-public class AdminRoleParam {
+public class AdminRoleParam extends PageParms {
 
     private Integer roleId;
 

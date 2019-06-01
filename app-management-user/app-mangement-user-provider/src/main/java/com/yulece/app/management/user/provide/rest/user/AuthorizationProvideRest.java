@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Set;
 
 /**
  * Copyright © 2019 eSunny Info. Tech Ltd. All rights reserved.
@@ -25,7 +26,7 @@ public class AuthorizationProvideRest {
     private AuthorizationService authorizationService;
 
     @RequestMapping("/checkIntercept")
-    public Boolean checkIntercept(){
+    public Set<String> checkIntercept(){
         return authorizationService.checkIntercept();
     }
 

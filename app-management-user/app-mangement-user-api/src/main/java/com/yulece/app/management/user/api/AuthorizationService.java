@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Set;
 
 
 /**
@@ -21,5 +22,5 @@ import javax.servlet.http.HttpServletRequest;
 public interface AuthorizationService {
 
     @RequestMapping("/rest/checkIntercept")
-    Boolean checkIntercept();
+    Set<String> checkIntercept();
 }

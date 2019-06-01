@@ -21,7 +21,8 @@ public enum AppParamEnum {
     ACL_ACL_SEQ_EXIST_ERROR(16,"权限点下排序存在"),
     ACL_ACL_NULL_EXIST(17,"权限点不存在,请刷新"),
     ROLE_NAME_EXIST(18,"角色名称已存在"),
-    ROLE_SEQ_EXIST(19,"角色排序已存在")
+    ROLE_SEQ_EXIST(19,"角色排序已存在"),
+    ROLE_NOT_EXIST(20,"需要更新的角色不存在"),
     ;
     private int code;
     private String message;

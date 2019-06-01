@@ -1,5 +1,6 @@
 package com.yulece.app.management.user.api;
 
+import com.yulece.app.management.comments.api.entity.Page;
 import com.yulece.app.management.comments.api.interceptor.FeignHeaderInterceptor;
 import com.yulece.app.management.user.dto.AdminRoleDto;
 import com.yulece.app.management.user.entity.AdminRoleParam;
@@ -30,8 +31,7 @@ public interface AdminRoleService {
     @DeleteMapping("/role/{id}")
     Boolean delete(@PathVariable("id") Integer id);
 
-
-
-
+    @PostMapping("/role/list")
+    Page<AdminRoleDto> findAdminRoleByPage(@RequestBody AdminRoleParam param);
 
 }
