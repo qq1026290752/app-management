@@ -39,10 +39,16 @@
         </where>
 
     </select>
+    <sql id="base_column_list">
+        module_id, module_name, module_parent_id, module_level, status, module_seq, module_remark, operator, operate_ip, create_time, update_time
+    </sql>
     <select id="existAclModuleCount" resultType="java.lang.Integer" parameterType="integer">
         select count(module_id) from admin_acl_module where module_id = #{aclModelId}
     </select>
     <select id="findChildModule" resultMap="aclModuleResult" parameterType="string">
         select module_id,module_level from admin_acl_module where  module_level like concat(concat(#{value}),".%")
+    </select>
+    <select id="getAclModuleList"  resultMap="aclModuleResult" parameterType="com.yulece.app.management.user.param.AdminAclModuleParam">
+        select <include refid="base_column_list"/> from admin_acl_module t
     </select>
 </mapper>

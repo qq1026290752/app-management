@@ -1,6 +1,6 @@
 package com.yulece.app.management.user.provide.repositories;
 
-import com.yulece.app.management.user.entity.AdminDeptParam;
+import com.yulece.app.management.user.param.AdminDeptParam;
 import com.yulece.app.management.user.provide.pojo.AdminDept;
 import com.yulece.app.management.user.provide.utils.AppUserProviderMapper;
 

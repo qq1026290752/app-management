@@ -6,7 +6,7 @@ import com.yulece.app.management.commons.utils.BeanValidator;
 import com.yulece.app.management.commons.utils.enums.AppParamEnum;
 import com.yulece.app.management.commons.utils.exception.AppException;
 import com.yulece.app.management.user.api.AdminDeptService;
-import com.yulece.app.management.user.entity.AdminDeptParam;
+import com.yulece.app.management.user.param.AdminDeptParam;
 import com.yulece.app.management.user.provide.pojo.AdminDept;
 import com.yulece.app.management.user.provide.repositories.AdminDeptRepository;
 import com.yulece.app.management.user.provide.utils.LevelUtil;

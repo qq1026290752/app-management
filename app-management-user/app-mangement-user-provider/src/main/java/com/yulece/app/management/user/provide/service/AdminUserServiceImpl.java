@@ -2,14 +2,16 @@ package com.yulece.app.management.user.provide.service;
 
 import com.yulece.app.management.comments.api.CommentsApiService;
 import com.yulece.app.management.comments.api.entity.EmailMessage;
+import com.yulece.app.management.comments.api.entity.Page;
 import com.yulece.app.management.comments.api.interceptor.LoginHandlerInterceptor;
 import com.yulece.app.management.commons.utils.enums.AppParamEnum;
 import com.yulece.app.management.commons.utils.BeanValidator;
 import com.yulece.app.management.commons.utils.enums.ExceptionEnum;
 import com.yulece.app.management.commons.utils.exception.AppException;
 import com.yulece.app.management.user.api.AdminUserService;
+import com.yulece.app.management.user.dto.AdminUserDto;
 import com.yulece.app.management.user.dto.AdminUserVo;
-import com.yulece.app.management.user.entity.AdminUserParam;
+import com.yulece.app.management.user.param.AdminUserParam;
 import com.yulece.app.management.user.provide.constant.AdminConstant;
 import com.yulece.app.management.user.provide.enums.AdminUserStatusEnum;
 import com.yulece.app.management.user.provide.pojo.AdminUser;
@@ -142,6 +144,12 @@ public class AdminUserServiceImpl implements AdminUserService {
         stringRedisTemplate.delete(String.format(AdminConstant.ACTIVE_MAIL_KEY, key));
         LOGGER.info("账户[{}]激活",user.getUserName());
         return true;
+    }
+
+    @Override
+    public Page<AdminUserDto> getList(AdminUserParam param) {
+        Page<AdminUserDto> page = new Page<>(param.getPageNo(),param.getPageSize());
+        return page.setResult(adminUserRepository.findListByAdminUserParam(page,param));
     }
 
     /**

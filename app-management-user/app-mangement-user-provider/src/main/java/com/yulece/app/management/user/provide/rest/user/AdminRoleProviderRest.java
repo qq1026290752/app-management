@@ -3,7 +3,7 @@ package com.yulece.app.management.user.provide.rest.user;
 import com.yulece.app.management.comments.api.entity.Page;
 import com.yulece.app.management.user.api.AdminRoleService;
 import com.yulece.app.management.user.dto.AdminRoleDto;
-import com.yulece.app.management.user.entity.AdminRoleParam;
+import com.yulece.app.management.user.param.AdminRoleParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +27,8 @@ public class AdminRoleProviderRest  {
         return adminRoleService.save(param);
     }
 
-    @GetMapping("/{id}")
-    public AdminRoleDto getById(@PathVariable("id") Integer id){
+    @GetMapping
+    public AdminRoleDto getById(@RequestParam("id") Integer id){
         return adminRoleService.getById(id);
     }
 

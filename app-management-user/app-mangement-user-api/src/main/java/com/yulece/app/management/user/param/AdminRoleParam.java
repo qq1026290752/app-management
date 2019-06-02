@@ -1,6 +1,6 @@
-package com.yulece.app.management.user.entity;
+package com.yulece.app.management.user.param;
 
-import com.yulece.app.management.comments.api.entity.PageParms;
+import com.yulece.app.management.comments.api.entity.PageParams;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -14,12 +14,12 @@ import javax.validation.constraints.NotNull;
  *
  * @author wangyichao@28ph.cn
  * @Title: AdminRoleParam
- * @Package com.yulece.app.management.user.entity
+ * @Package com.yulece.app.management.user.param
  * @Description:
  * @Date 2019-03-10 09:27
  **/
 @Data
-public class AdminRoleParam extends PageParms {
+public class AdminRoleParam extends PageParams {
 
     private Integer roleId;
 

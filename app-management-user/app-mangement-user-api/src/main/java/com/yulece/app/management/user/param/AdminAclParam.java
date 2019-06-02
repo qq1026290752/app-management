@@ -1,4 +1,4 @@
-package com.yulece.app.management.user.entity;
+package com.yulece.app.management.user.param;
 
 import org.hibernate.validator.constraints.Length;
 

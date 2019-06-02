@@ -2,7 +2,7 @@ package com.yulece.app.management.user.api;
 
 import com.yulece.app.management.comments.api.interceptor.FeignHeaderInterceptor;
 import com.yulece.app.management.user.dto.AdminAclDto;
-import com.yulece.app.management.user.entity.AdminAclParam;
+import com.yulece.app.management.user.param.AdminAclParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

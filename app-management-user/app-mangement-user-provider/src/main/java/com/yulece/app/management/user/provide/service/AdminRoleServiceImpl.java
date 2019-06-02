@@ -7,14 +7,12 @@ import com.yulece.app.management.commons.utils.enums.AppParamEnum;
 import com.yulece.app.management.commons.utils.exception.AppException;
 import com.yulece.app.management.user.api.AdminRoleService;
 import com.yulece.app.management.user.dto.AdminRoleDto;
-import com.yulece.app.management.user.entity.AdminRoleParam;
+import com.yulece.app.management.user.param.AdminRoleParam;
 import com.yulece.app.management.user.provide.pojo.AdminRole;
 import com.yulece.app.management.user.provide.repositories.AdminRoleRepository;
 import com.yulece.app.management.user.provide.utils.PojoConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
 
 /**
  * Copyright © 2019 eSunny Info. Tech Ltd. All rights reserved.
@@ -64,7 +62,8 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     @Override
     public AdminRoleDto getById(Integer id) {
         AdminRole adminRole = adminRoleRepository.selectByPrimaryKey(id);
-        return  PojoConvertUtil.convertPojo(adminRole, AdminRoleDto.class);
+        return  PojoConvertUtil.convertPojo(BeanValidator.chekObjectNull(adminRole,AppParamEnum.ROLE_NOT_EXIST),
+                AdminRoleDto.class);
     }
 
     @Override

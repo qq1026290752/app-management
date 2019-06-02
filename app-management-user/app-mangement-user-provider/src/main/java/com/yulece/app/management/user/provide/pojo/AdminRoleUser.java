@@ -28,7 +28,13 @@ public class AdminRoleUser {
 
     private Date updateTime;
 
-    private Integer roleStatus;
+    public AdminRoleUser(Integer roleId, Integer userId, String operator, String operateIp) {
+        this.roleId = roleId;
+        this.userId = userId;
+        this.operator = operator;
+        this.operateIp = operateIp;
+    }
 
-
+    public AdminRoleUser() {
+    }
 }

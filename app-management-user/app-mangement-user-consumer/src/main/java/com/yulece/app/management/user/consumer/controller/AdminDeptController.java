@@ -4,11 +4,10 @@ import com.yulece.app.management.commons.utils.ResultVo;
 import com.yulece.app.management.user.api.AdminDeptService;
 import com.yulece.app.management.user.api.AdminTreeService;
 import com.yulece.app.management.user.dto.DeptLevelDto;
-import com.yulece.app.management.user.entity.AdminDeptParam;
+import com.yulece.app.management.user.param.AdminDeptParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.smartcardio.ATR;
 import java.util.List;
 
 /**

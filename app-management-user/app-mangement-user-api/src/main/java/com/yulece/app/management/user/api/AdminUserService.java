@@ -1,12 +1,12 @@
 package com.yulece.app.management.user.api;
 
+import com.yulece.app.management.comments.api.entity.Page;
 import com.yulece.app.management.comments.api.interceptor.FeignHeaderInterceptor;
+import com.yulece.app.management.user.dto.AdminUserDto;
 import com.yulece.app.management.user.dto.AdminUserVo;
-import com.yulece.app.management.user.entity.AdminUserParam;
+import com.yulece.app.management.user.param.AdminUserParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @FeignClient(value = "app-management-user-provider",configuration =FeignHeaderInterceptor.class)
 public interface AdminUserService {
@@ -48,5 +48,8 @@ public interface AdminUserService {
      */
     @GetMapping("/user/active")
     boolean active(@RequestParam("key")String  key);
+
+    @PostMapping("/user/list")
+    Page<AdminUserDto> getList(@RequestBody AdminUserParam param);
 
 }

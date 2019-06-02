@@ -1,8 +1,9 @@
 package com.yulece.app.management.user.api;
 
+import com.yulece.app.management.comments.api.entity.Page;
 import com.yulece.app.management.comments.api.interceptor.FeignHeaderInterceptor;
 import com.yulece.app.management.user.dto.AdminAclModuleDto;
-import com.yulece.app.management.user.entity.AdminAclModuleParam;
+import com.yulece.app.management.user.param.AdminAclModuleParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,4 +42,7 @@ public interface AdminAclModuleService {
      */
     @GetMapping("/aclModule/{aclModelId}")
     AdminAclModuleDto getAdminAclModelById(@PathVariable("aclModelId")Integer aclModelId);
+
+    @PostMapping("/aclModule/list")
+    Page<AdminAclModuleDto> getList(@RequestBody AdminAclModuleParam param);
 }

@@ -1,13 +1,17 @@
 package com.yulece.app.management.user.consumer.controller;
 
+import com.yulece.app.management.comments.api.entity.Page;
+import com.yulece.app.management.comments.api.utils.DateUtils;
 import com.yulece.app.management.commons.utils.ResultVo;
 import com.yulece.app.management.user.api.AdminAclModuleService;
 import com.yulece.app.management.user.api.AdminTreeService;
 import com.yulece.app.management.user.dto.AdminAclModuleDto;
-import com.yulece.app.management.user.entity.AdminAclModuleParam;
+import com.yulece.app.management.user.param.AdminAclModuleParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,6 +26,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/adminAclModule")
 public class AdminModuleController {
+
+    @InitBinder("param")
+    public void InitBinderAdminAclModuleParam(WebDataBinder webDataBinder){
+        webDataBinder.setFieldDefaultPrefix("param.");
+        webDataBinder.registerCustomEditor(Date.class,
+                DateUtils.fromCustomDateEditor(DateUtils.FormDateType.DATE.format));
+    }
 
     @Autowired
     private AdminAclModuleService adminAclModelService;
@@ -51,5 +62,10 @@ public class AdminModuleController {
     @GetMapping("/tree")
     public ResultVo<List<AdminAclModuleDto>> tree(){
         return ResultVo.createSuccessResult(adminTreeService.adminModuleTree());
+    }
+
+    @GetMapping("list")
+    public ResultVo<Page<AdminAclModuleDto>> getList(@ModelAttribute("param") AdminAclModuleParam param){
+        return ResultVo.createSuccessResult(adminAclModelService.getList(param));
     }
 }

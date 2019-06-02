@@ -3,7 +3,7 @@ package com.yulece.app.management.user.api;
 import com.yulece.app.management.comments.api.entity.Page;
 import com.yulece.app.management.comments.api.interceptor.FeignHeaderInterceptor;
 import com.yulece.app.management.user.dto.AdminRoleDto;
-import com.yulece.app.management.user.entity.AdminRoleParam;
+import com.yulece.app.management.user.param.AdminRoleParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +22,8 @@ public interface AdminRoleService {
     @PostMapping("/role/save")
     Boolean save(@RequestBody AdminRoleParam param);
 
-    @GetMapping("/role/{id}")
-    AdminRoleDto getById(@PathVariable("id") Integer id);
+    @GetMapping("/role")
+    AdminRoleDto getById(@RequestParam("id") Integer id);
 
     @PutMapping("/role/update" )
     Boolean update(@RequestBody AdminRoleParam param);

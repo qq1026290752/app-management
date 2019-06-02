@@ -1,5 +1,6 @@
-package com.yulece.app.management.user.entity;
+package com.yulece.app.management.user.param;
 
+import com.yulece.app.management.comments.api.entity.PageParams;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
@@ -9,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
-public class AdminAclModuleParam {
+public class AdminAclModuleParam extends PageParams {
 
     private Integer moduleId;
 

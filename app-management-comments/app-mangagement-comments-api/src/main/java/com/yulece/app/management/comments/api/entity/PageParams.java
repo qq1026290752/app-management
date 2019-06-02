@@ -1,6 +1,6 @@
 package com.yulece.app.management.comments.api.entity;
 
-public class PageParms {
+public class PageParams {
     private int pageNo = 1;// 页码，默认是第一页
     private int pageSize = 10;// 每页显示的记录数，默认是15
 

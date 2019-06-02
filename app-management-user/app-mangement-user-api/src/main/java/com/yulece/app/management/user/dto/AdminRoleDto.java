@@ -1,8 +1,6 @@
 package com.yulece.app.management.user.dto;
 
-import com.yulece.app.management.user.entity.AdminRoleParam;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 

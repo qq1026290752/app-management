@@ -19,6 +19,17 @@
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
     </resultMap>
+    <resultMap id="AdminUserDtoResult" type="com.yulece.app.management.user.dto.AdminUserDto">
+        <result column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="nike_name" property="nikeName"/>
+        <result column="telephone" property="telephone"/>
+        <result column="mail" property="mail"/>
+        <result column="header_url" property="headerUrl"/>
+        <result column="status" property="status"/>
+        <result column="user_remark" property="userRemark"/>
+        <result column="dept_name" property="deptName"/>
+    </resultMap>
 
     <sql id="base_column_list">
         user_id,user_name,pass_word,nike_name,telephone,mail,header_url,status,user_remark,operator,operate_ip,user_dept,create_time,update_time
@@ -40,7 +51,7 @@
         </where>
     </select>
     <!--查询-->
-    <select id="countUserByUserParam" parameterType="com.yulece.app.management.user.entity.AdminUserParam" resultType="integer">
+    <select id="countUserByUserParam" parameterType="com.yulece.app.management.user.param.AdminUserParam" resultType="integer">
         select count(user_id) from admin_user
         <where>
             <if test="userId!=null and userId > 0">
@@ -60,5 +71,21 @@
     </select>
     <select id="findAdminUserByMail" parameterType="string" resultMap="AdminUserResult" >
         SELECT <include refid="base_column_list"/> FROM admin_user WHERE mail = #{value}
+    </select>
+    <select id="findListByAdminUserParam" resultMap="AdminUserDtoResult" parameterType="com.yulece.app.management.user.param.AdminUserParam">
+        select
+            u.user_id,
+            u.user_name,
+            u.nike_name,
+            u.telephone,
+            u.mail,
+            u.header_url,
+            u.status,
+            u.user_remark,
+            a.dept_name
+         from
+            admin_user u
+        left join
+            admin_dept a on u.user_dept = a.dept_id
     </select>
 </mapper>

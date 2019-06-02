@@ -1,5 +1,8 @@
 package com.yulece.app.management.user.provide.repositories;
 
+import com.yulece.app.management.comments.api.entity.Page;
+import com.yulece.app.management.user.dto.AdminAclModuleDto;
+import com.yulece.app.management.user.param.AdminAclModuleParam;
 import com.yulece.app.management.user.provide.pojo.AdminAclModule;
 import com.yulece.app.management.user.provide.utils.AppUserProviderMapper;
 import org.apache.ibatis.annotations.Param;
@@ -38,4 +41,6 @@ public interface AdminAclModuleRepository extends AppUserProviderMapper<AdminAcl
     Integer existAclModuleCount(@Param("moduleId")Integer aclModelId);
 
     List<AdminAclModule> findChildModule( @Param("level") String moduleLevel);
+
+    List<AdminAclModuleDto> getAclModuleList(@Param("param") AdminAclModuleParam param, Page page);
 }

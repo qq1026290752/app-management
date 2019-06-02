@@ -73,8 +73,9 @@ public class Page<T> {
         return result;
     }
 
-    public  void setResult(List<T> result) {
+    public  Page setResult(List<T> result) {
         this.result = result;
+        return this;
     }
 
 

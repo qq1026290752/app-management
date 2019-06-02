@@ -4,7 +4,7 @@ import com.yulece.app.management.comments.api.entity.Page;
 import com.yulece.app.management.commons.utils.ResultVo;
 import com.yulece.app.management.user.api.AdminRoleService;
 import com.yulece.app.management.user.dto.AdminRoleDto;
-import com.yulece.app.management.user.entity.AdminRoleParam;
+import com.yulece.app.management.user.param.AdminRoleParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +36,8 @@ public class AdminRoleController {
         return ResultVo.createSuccessResult(adminRoleService.save(param));
     }
 
-    @GetMapping("/{id}")
-    public ResultVo<AdminRoleDto> getById(@PathVariable Integer id){
+    @GetMapping
+    public ResultVo<AdminRoleDto> getById(@RequestParam Integer id){
         return ResultVo.createSuccessResult(adminRoleService.getById(id));
     }
 

@@ -1,8 +1,10 @@
 package com.yulece.app.management.user.provide.rest.user;
 
+import com.yulece.app.management.comments.api.entity.Page;
 import com.yulece.app.management.user.api.AdminUserService;
+import com.yulece.app.management.user.dto.AdminUserDto;
 import com.yulece.app.management.user.dto.AdminUserVo;
-import com.yulece.app.management.user.entity.AdminUserParam;
+import com.yulece.app.management.user.param.AdminUserParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,4 +35,11 @@ public class AdminUserProvidersRest{
     public boolean active(@RequestParam("key") String key) {
       return adminUserService.active(key);
     }
+
+    @PostMapping("/user/list")
+    private Page<AdminUserDto> getlList(@RequestBody AdminUserParam param){
+        return adminUserService.getList(param);
+    }
+
+
 }

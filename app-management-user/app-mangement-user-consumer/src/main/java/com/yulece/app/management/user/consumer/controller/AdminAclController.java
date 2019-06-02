@@ -3,7 +3,7 @@ package com.yulece.app.management.user.consumer.controller;
 import com.yulece.app.management.commons.utils.ResultVo;
 import com.yulece.app.management.user.api.AdminAclService;
 import com.yulece.app.management.user.dto.AdminAclDto;
-import com.yulece.app.management.user.entity.AdminAclParam;
+import com.yulece.app.management.user.param.AdminAclParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

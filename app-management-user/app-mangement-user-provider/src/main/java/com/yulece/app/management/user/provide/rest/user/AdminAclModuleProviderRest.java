@@ -1,8 +1,9 @@
 package com.yulece.app.management.user.provide.rest.user;
 
+import com.yulece.app.management.comments.api.entity.Page;
 import com.yulece.app.management.user.api.AdminAclModuleService;
 import com.yulece.app.management.user.dto.AdminAclModuleDto;
-import com.yulece.app.management.user.entity.AdminAclModuleParam;
+import com.yulece.app.management.user.param.AdminAclModuleParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,5 +57,10 @@ public class AdminAclModuleProviderRest {
     @GetMapping("/{aclModuleId}")
     public AdminAclModuleDto getAdminAclModelById(@PathVariable("aclModuleId")Integer aclModuleId){
         return adminAclModuleService.getAdminAclModelById(aclModuleId);
+    }
+
+    @PostMapping("/list")
+    public Page<AdminAclModuleDto> getList(@RequestBody AdminAclModuleParam param){
+        return adminAclModuleService.getList(param);
     }
 }

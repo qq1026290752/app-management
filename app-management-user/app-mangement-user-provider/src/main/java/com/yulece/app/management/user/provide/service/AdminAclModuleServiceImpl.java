@@ -1,12 +1,13 @@
 package com.yulece.app.management.user.provide.service;
 
+import com.yulece.app.management.comments.api.entity.Page;
 import com.yulece.app.management.comments.api.interceptor.LoginHandlerInterceptor;
 import com.yulece.app.management.commons.utils.BeanValidator;
 import com.yulece.app.management.commons.utils.enums.AppParamEnum;
 import com.yulece.app.management.commons.utils.exception.AppException;
 import com.yulece.app.management.user.api.AdminAclModuleService;
 import com.yulece.app.management.user.dto.AdminAclModuleDto;
-import com.yulece.app.management.user.entity.AdminAclModuleParam;
+import com.yulece.app.management.user.param.AdminAclModuleParam;
 import com.yulece.app.management.user.provide.pojo.AdminAclModule;
 import com.yulece.app.management.user.provide.repositories.AdminAclModuleRepository;
 import com.yulece.app.management.user.provide.utils.LevelUtil;
@@ -124,4 +125,12 @@ public class AdminAclModuleServiceImpl implements AdminAclModuleService {
         BeanValidator.chekObjectNull(adminAclModule, AppParamEnum.ACL_MODULE_NOT_EXIST);
         return PojoConvertUtil.convertPojo(adminAclModule, AdminAclModuleDto.class);
     }
+
+    @Override
+    public Page<AdminAclModuleDto> getList(AdminAclModuleParam param) {
+        Page<AdminAclModuleDto> page = new Page<>(param.getPageNo(), param.getPageSize());
+        return page.setResult(adminAclModuleRepository.getAclModuleList(param,page));
+    }
+
+
 }

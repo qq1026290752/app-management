@@ -6,7 +6,7 @@ import com.yulece.app.management.commons.utils.enums.AppParamEnum;
 import com.yulece.app.management.commons.utils.exception.AppException;
 import com.yulece.app.management.user.api.AdminAclService;
 import com.yulece.app.management.user.dto.AdminAclDto;
-import com.yulece.app.management.user.entity.AdminAclParam;
+import com.yulece.app.management.user.param.AdminAclParam;
 import com.yulece.app.management.user.provide.pojo.AdminAcl;
 import com.yulece.app.management.user.provide.repositories.AdminAclRepository;
 import com.yulece.app.management.user.provide.utils.PojoConvertUtil;

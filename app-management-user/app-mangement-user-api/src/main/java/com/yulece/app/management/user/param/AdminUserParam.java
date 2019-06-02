@@ -1,5 +1,6 @@
-package com.yulece.app.management.user.entity;
+package com.yulece.app.management.user.param;
 
+import com.yulece.app.management.comments.api.entity.PageParams;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
@@ -10,7 +11,7 @@ import javax.validation.constraints.Pattern;
 /**
  * 用户注册信息服务
  */
-public class AdminUserParam {
+public class AdminUserParam extends PageParams {
 
 
     private Integer userId;
