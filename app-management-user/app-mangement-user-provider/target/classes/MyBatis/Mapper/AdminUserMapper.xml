@@ -51,7 +51,7 @@
         </where>
     </select>
     <!--查询-->
-    <select id="countUserByUserParam" parameterType="com.yulece.app.management.user.entity.AdminUserParam" resultType="integer">
+    <select id="countUserByUserParam" parameterType="com.yulece.app.management.user.param.AdminUserParam" resultType="integer">
         select count(user_id) from admin_user
         <where>
             <if test="userId!=null and userId > 0">
@@ -72,7 +72,7 @@
     <select id="findAdminUserByMail" parameterType="string" resultMap="AdminUserResult" >
         SELECT <include refid="base_column_list"/> FROM admin_user WHERE mail = #{value}
     </select>
-    <select id="findListByAdminUserParam" resultMap="AdminUserDtoResult" parameterType="com.yulece.app.management.user.entity.AdminUserParam">
+    <select id="findListByAdminUserParam" resultMap="AdminUserDtoResult" parameterType="com.yulece.app.management.user.param.AdminUserParam">
         select
             u.user_id,
             u.user_name,

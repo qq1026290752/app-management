@@ -7,13 +7,26 @@
     <resultMap id="UserRoleResult" type="com.yulece.app.management.user.dto.AdminUserRoleDto">
         <result property="userId" column="user_id"/>
         <result property="userName" column="user_name"/>
-        <association property="adminRoles" javaType="com.yulece.app.management.user.dto.AdminRoleDto">
-
-        </association>
+        <collection property="adminRoles" ofType="com.yulece.app.management.user.dto.AdminRoleDto">
+            <result column="role_id" property="roleId"/>
+            <result column="role_name" property="roleName"/>
+        </collection>
     </resultMap>
+    <delete id="deleteUserId" parameterType="integer">
+        delete from admin_role_user where user_id =#{userId}
+    </delete>
 
     <select id="findUserRoleListByUserId" parameterType="integer" resultMap="UserRoleResult">
-        
-
+            SELECT
+                U.user_id,
+                U.user_name,
+                R.role_id,
+                R.role_name
+            FROM
+                admin_role_user RU
+                LEFT JOIN admin_user U ON U.user_id = RU.user_id
+                LEFT JOIN admin_role R ON R.role_id = RU.role_id
+            WHERE
+                U.user_id = #{value}
     </select>
 </mapper>

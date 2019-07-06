@@ -3,6 +3,7 @@ package com.yulece.app.management.user.provide.repositories;
 import com.yulece.app.management.user.dto.AdminUserRoleDto;
 import com.yulece.app.management.user.provide.pojo.AdminRoleUser;
 import com.yulece.app.management.user.provide.utils.AppUserProviderMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * Copyright © 2019 eSunny Info. Tech Ltd. All rights reserved.
@@ -20,5 +21,8 @@ public interface AdminRoleUserRepository extends AppUserProviderMapper<AdminRole
      * @param userId
      * @return
      */
-    AdminUserRoleDto findUserRoleListByUserId(Integer userId);
+    AdminUserRoleDto findUserRoleListByUserId(@Param("value") Integer userId);
+
+    void deleteUserId(@Param("userId") Integer userId);
+
 }

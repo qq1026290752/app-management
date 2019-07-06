@@ -3,7 +3,9 @@ package com.yulece.app.management.user.consumer.controller;
 import com.yulece.app.management.comments.api.entity.Page;
 import com.yulece.app.management.commons.utils.ResultVo;
 import com.yulece.app.management.user.api.AdminRoleService;
+import com.yulece.app.management.user.dto.AdminRoleAclDto;
 import com.yulece.app.management.user.dto.AdminRoleDto;
+import com.yulece.app.management.user.param.AdminRoleAclParam;
 import com.yulece.app.management.user.param.AdminRoleParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.WebDataBinder;
@@ -55,4 +57,10 @@ public class AdminRoleController {
     public ResultVo<Page> list(@ModelAttribute("param") AdminRoleParam param ){
         return ResultVo.createSuccessResult(adminRoleService.findAdminRoleByPage(param));
     }
+
+    @PostMapping("/addAdminRoleAcl")
+    public ResultVo<AdminRoleAclDto> addAdminRoleAcl(@RequestBody AdminRoleAclParam param){
+        return ResultVo.createSuccessResult(adminRoleService.addAdminRoleAcl(param));
+    }
+
 }

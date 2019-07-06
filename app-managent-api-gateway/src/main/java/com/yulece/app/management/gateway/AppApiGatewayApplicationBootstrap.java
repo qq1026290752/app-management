@@ -46,12 +46,15 @@ public class AppApiGatewayApplicationBootstrap {
         this.environment = environment;
     }
 
-    @Scheduled(fixedRate = 5 * 1000, initialDelay = 3 * 1000)
+    @Scheduled(fixedRate  = 5 * 1000, initialDelay = 3 * 1000)
     public void autoRefresh() {
 
-        Set<String> updatedPropertyNames = contextRefresher.refresh();
+        Set<String> updatedPropertyNames =
+                contextRefresher.refresh();
 
-        updatedPropertyNames.forEach( propertyName -> LOGGER.warn("[Thread :{}] 当前配置已更新，具体 Key：{} , Value : {}", Thread.currentThread().getName(), propertyName, environment.getProperty(propertyName)));
+        updatedPropertyNames.forEach( propertyName ->
+                LOGGER.warn("[Thread :{}] 当前配置已更新，具体 Key：{} , Value : {}", Thread.currentThread().getName(), propertyName,
+                        environment.getProperty(propertyName)));
     }
 
 }

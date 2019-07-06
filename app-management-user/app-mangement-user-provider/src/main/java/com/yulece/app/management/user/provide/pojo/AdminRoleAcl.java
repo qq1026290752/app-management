@@ -79,4 +79,12 @@ public class AdminRoleAcl {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+
+    public AdminRoleAcl(Integer roleId, Integer aclId, String operator, String operateIp) {
+        this.roleId = roleId;
+        this.aclId = aclId;
+        this.operator = operator;
+        this.operateIp = operateIp;
+    }
 }

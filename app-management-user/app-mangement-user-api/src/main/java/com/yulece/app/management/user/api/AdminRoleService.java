@@ -2,7 +2,9 @@ package com.yulece.app.management.user.api;
 
 import com.yulece.app.management.comments.api.entity.Page;
 import com.yulece.app.management.comments.api.interceptor.FeignHeaderInterceptor;
+import com.yulece.app.management.user.dto.AdminRoleAclDto;
 import com.yulece.app.management.user.dto.AdminRoleDto;
+import com.yulece.app.management.user.param.AdminRoleAclParam;
 import com.yulece.app.management.user.param.AdminRoleParam;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +35,8 @@ public interface AdminRoleService {
 
     @PostMapping("/role/list")
     Page<AdminRoleDto> findAdminRoleByPage(@RequestBody AdminRoleParam param);
+
+    @PostMapping("/role/addAdminRoleAcl")
+    AdminRoleAclDto addAdminRoleAcl(@RequestBody AdminRoleAclParam param);
 
 }

@@ -40,16 +40,22 @@ public class AdminRoleUserServiceImpl implements AdminRoleUserService {
         AdminUserVo adminUserVo = adminUserService.getById(param.getUserId());
         BeanValidator.chekObjectNull(adminUserVo, AppParamEnum.USER_NOT_EXIST_ERROR);
         //删除用户当前角色
-        AdminRoleUser adminRoleUser = new AdminRoleUser();
-        adminRoleUserRepository.deleteByExample(adminRoleUser);
+        adminRoleUserRepository.deleteUserId(param.getUserId());
         //为当前用户添加角色集合
         List<AdminRoleUser> adminRoleUsers =
                 param.getRoleId().stream().map(roleId -> new AdminRoleUser(roleId,param.getUserId()
                         , LoginHandlerInterceptor.getCurrentUser()
-                        , LoginHandlerInterceptor.getCurrentUser()))
+                        , LoginHandlerInterceptor.getCurrentIp()))
                         .collect(Collectors.toList());
         adminRoleUserRepository.insertList(adminRoleUsers);
         //查询当前用户所有角色
         return  adminRoleUserRepository.findUserRoleListByUserId(param.getUserId());
+    }
+
+    @Override
+    public AdminUserRoleDto findUserRole(Integer userId) {
+        AdminUserVo adminUserVo = adminUserService.getById(userId);
+        BeanValidator.chekObjectNull(adminUserVo, AppParamEnum.USER_NOT_EXIST_ERROR);
+        return adminRoleUserRepository.findUserRoleListByUserId(userId);
     }
 }

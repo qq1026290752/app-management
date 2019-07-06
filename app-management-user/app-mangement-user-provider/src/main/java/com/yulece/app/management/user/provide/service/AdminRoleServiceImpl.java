@@ -6,13 +6,21 @@ import com.yulece.app.management.commons.utils.BeanValidator;
 import com.yulece.app.management.commons.utils.enums.AppParamEnum;
 import com.yulece.app.management.commons.utils.exception.AppException;
 import com.yulece.app.management.user.api.AdminRoleService;
+import com.yulece.app.management.user.dto.AdminRoleAclDto;
 import com.yulece.app.management.user.dto.AdminRoleDto;
+import com.yulece.app.management.user.param.AdminRoleAclParam;
 import com.yulece.app.management.user.param.AdminRoleParam;
 import com.yulece.app.management.user.provide.pojo.AdminRole;
+import com.yulece.app.management.user.provide.pojo.AdminRoleAcl;
 import com.yulece.app.management.user.provide.repositories.AdminRoleRepository;
 import com.yulece.app.management.user.provide.utils.PojoConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Copyright © 2019 eSunny Info. Tech Ltd. All rights reserved.
@@ -26,8 +34,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminRoleServiceImpl implements AdminRoleService {
 
-    @Autowired
+    @Resource
     private AdminRoleRepository adminRoleRepository;
+    @Autowired
+    private AdminRoleAclService adminRoleAclService;
 
     @Override
     public Boolean save(AdminRoleParam param) {
@@ -92,5 +102,24 @@ public class AdminRoleServiceImpl implements AdminRoleService {
         Page<AdminRoleDto> page = new Page<>(param.getPageNo(),param.getPageSize());
         page.setResult(adminRoleRepository.findAdminRoleByPage(page,param));
         return page;
+    }
+
+    @Override
+    @Transactional
+    public AdminRoleAclDto addAdminRoleAcl(AdminRoleAclParam param) {
+        BeanValidator.check(param);
+        //查询此权限是否可用
+        AdminRole adminRole = adminRoleRepository.selectByPrimaryKey(param.getRoleId());
+        BeanValidator.chekObjectNull(adminRole,AppParamEnum.ROLE_NOT_EXIST);
+       //删除当前角色所有的权限点
+        adminRoleAclService.deleteAllAclByRoleId(param.getRoleId());
+       //为当前角色添加所有的权限点
+        List<AdminRoleAcl> newRoleAcls = param.getAclIds().stream()
+                .map(e ->
+                        new AdminRoleAcl(param.getRoleId(),e,LoginHandlerInterceptor.getCurrentUser(),LoginHandlerInterceptor.getCurrentIp())
+                ).collect(Collectors.toList());
+        adminRoleAclService.addRoleAcl(newRoleAcls);
+        //查询当前角色现在的权限点
+        return adminRoleAclService.findRoleAclByRoleId(param.getRoleId());
     }
 }

@@ -69,4 +69,9 @@ public class AdminUserController {
     private ResultVo<AdminUserRoleDto> addUserByRole(@RequestBody AdminUserRoleParam param){
         return ResultVo.createSuccessResult(adminRoleUserService.addUserByRole(param));
     }
+
+    @GetMapping("/user/getUserRole")
+    public ResultVo<AdminUserRoleDto> findUserRole(@RequestParam("userId")Integer userId){
+        return ResultVo.createSuccessResult(adminRoleUserService.findUserRole(userId));
+    }
 }

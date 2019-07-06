@@ -2,7 +2,9 @@ package com.yulece.app.management.user.provide.rest.user;
 
 import com.yulece.app.management.comments.api.entity.Page;
 import com.yulece.app.management.user.api.AdminRoleService;
+import com.yulece.app.management.user.dto.AdminRoleAclDto;
 import com.yulece.app.management.user.dto.AdminRoleDto;
+import com.yulece.app.management.user.param.AdminRoleAclParam;
 import com.yulece.app.management.user.param.AdminRoleParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +50,9 @@ public class AdminRoleProviderRest  {
         return adminRoleService.findAdminRoleByPage(param);
     }
 
-
+    @PostMapping("/addAdminRoleAcl")
+    public AdminRoleAclDto addAdminRoleAcl(@RequestBody AdminRoleAclParam param){
+        return adminRoleService.addAdminRoleAcl(param);
+    }
 
 }
