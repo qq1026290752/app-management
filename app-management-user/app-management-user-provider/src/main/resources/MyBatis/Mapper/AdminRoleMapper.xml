@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yulece.app.management.user.provide.repositories.AdminRoleRepository">
+
+    <resultMap id="adminRoleResult" type="com.yulece.app.management.user.provide.pojo.AdminRole">
+        <id column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
+        <result column="role_type" property="roleType"/>
+        <result column="role_status" property="roleStatus"/>
+        <result column="role_seq" property="roleSeq"/>
+        <result column="role_remark" property="roleRemark"/>
+        <result column="operator" property="operator"/>
+        <result column="operate_ip" property="operateIp"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <sql id="base_column_list">
+        role_id, role_name, role_type, role_status, role_seq, role_remark, operator, operate_ip, create_time, update_time
+    </sql>
+
+    <select id="getAdminRoleByAdminRole" resultMap="adminRoleResult" parameterType="com.yulece.app.management.user.provide.pojo.AdminRoleUser">
+        select
+            <include refid="base_column_list"/>
+        from
+            admin_role
+        <where>
+            <if test="roleName!=null and roleName!=''">
+                and role_name = #{roleName}
+            </if>
+
+            <if test="roleSeq!=null and roleSeq!=''">
+                and role_seq = #{roleSeq}
+            </if>
+            <if test="roleId!=null and roleId!=''">
+                and role_id != #{roleId}
+            </if>
+
+        </where>
+    </select>
+    <select id="findAdminRoleByPage" resultType="com.yulece.app.management.user.dto.AdminRoleDto" resultMap="adminRoleResult">
+        select
+            <include refid="base_column_list"/>
+        from
+            admin_role
+    </select>
+
+</mapper>
