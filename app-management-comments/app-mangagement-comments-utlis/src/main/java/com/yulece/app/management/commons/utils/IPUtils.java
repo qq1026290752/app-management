@@ -3,6 +3,8 @@ package com.yulece.app.management.commons.utils;
 import javax.servlet.http.HttpServletRequest;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Copyright © 2019 eSunny Info. Tech Ltd. All rights reserved.
@@ -16,6 +18,8 @@ import java.net.UnknownHostException;
 public class IPUtils {
 
     public static String getIpAddress(HttpServletRequest request) {
+
+        Arrays.asList(1);
         String ip = getIP(request);
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
@@ -60,5 +64,11 @@ public class IPUtils {
             ipAddress = request.getHeader("WL-Proxy-Client-IP");
         }
         return ipAddress;
+    }
+
+    public static void main(String[] args) {
+        List<Integer> integers = Arrays.asList(12, 13);
+        integers.add(123);
+       // System.out.print(integers.forEach(i -> i));
     }
 }

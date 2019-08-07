@@ -14,6 +14,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients(basePackageClasses = {AdminUserService.class})
 public class AppOauthApplicationBootstrap {
 
+
     public static void main(String[] args) {
         SpringApplication.run(AppOauthApplicationBootstrap.class,args);
     }
