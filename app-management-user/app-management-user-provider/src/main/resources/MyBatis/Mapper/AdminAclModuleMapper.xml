@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yulece.app.management.user.provide.repositories.AdminAclModuleRepository">
+
+    <resultMap id="aclModuleResult" type="com.yulece.app.management.user.provide.pojo.AdminAclModule">
+        <id column="module_id" property="moduleId"/>
+        <result column="module_level" property="moduleLevel"/>
+    </resultMap>
+
+    <select id="countAclModuleName" resultType="java.lang.Integer" parameterType="map">
+        SELECT COUNT(module_id) FROM admin_acl_module
+        <where>
+            <if test="moduleId!=null and moduleId>0">
+                AND module_id != #{moduleId}
+            </if>
+
+            <if test="moduleParentId!=null and moduleParentId>0">
+                AND module_parent_id = #{moduleParentId}
+            </if>
+            <if test="moduleName!=null and moduleName!=''">
+                AND module_name = #{moduleName}
+            </if>
+        </where>
+    </select>
+    <select id="countAclModuleSeq" resultType="java.lang.Integer" parameterType="map">
+        <where>
+            <if test="moduleId!=null and moduleId>0">
+                AND module_id != #{moduleId}
+            </if>
+
+            <if test="moduleParentId!=null and moduleParentId>0">
+                AND module_parent_id = #{moduleParentId}
+            </if>
+            <if test="moduleSeq!=null and moduleSeq!=-1">
+                AND module_seq = #{moduleSeq}
+            </if>
+        </where>
+
+    </select>
+    <sql id="base_column_list">
+        module_id, module_name, module_parent_id, module_level, status, module_seq, module_remark, operator, operate_ip, create_time, update_time
+    </sql>
+    <select id="existAclModuleCount" resultType="java.lang.Integer" parameterType="integer">
+        select count(module_id) from admin_acl_module where module_id = #{aclModelId}
+    </select>
+    <select id="findChildModule" resultMap="aclModuleResult" parameterType="string">
+        select module_id,module_level from admin_acl_module where  module_level like concat(concat(#{value}),".%")
+    </select>
+    <select id="getAclModuleList"  resultMap="aclModuleResult" parameterType="com.yulece.app.management.user.param.AdminAclModuleParam">
+        select <include refid="base_column_list"/> from admin_acl_module t
+    </select>
+</mapper>

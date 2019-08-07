@@ -17,9 +17,11 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.yulece.app.management.commons.utils.enums.AppParamEnum;
+import com.yulece.app.management.commons.utils.enums.ExceptionEnum;
 import com.yulece.app.management.commons.utils.exception.AppException;
 import com.yulece.app.management.commons.utils.exception.ParamException;
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.ObjectUtils;
 
 public class BeanValidator {
 
@@ -68,11 +70,16 @@ public class BeanValidator {
         }
     }
 
-    public static <T> T chekObjectNull(T target, AppParamEnum appParamEnum){
-        if(target == null){
+    public static <T> T checkObjectNull(T target, AppParamEnum appParamEnum){
+        if(!ObjectUtils.allNotNull(target)){
             throw new AppException(appParamEnum);
         }
         return target;
-
+    }
+    public static <T> T checkObjectNull(T target, ExceptionEnum exceptionEnum){
+        if(!ObjectUtils.allNotNull(target)){
+            throw new AppException(exceptionEnum);
+        }
+        return target;
     }
 }

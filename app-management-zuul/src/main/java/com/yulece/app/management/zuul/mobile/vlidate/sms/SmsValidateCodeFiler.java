@@ -15,6 +15,7 @@ import com.yulece.app.management.zuul.constant.ZuulAppConstant;
 import com.yulece.app.management.zuul.mobile.vlidate.ValidateCode;
 import com.yulece.app.management.zuul.mobile.vlidate.ValidateCodeRepository;
 import com.yulece.app.management.zuul.properties.ZuulProperties;
+import lombok.EqualsAndHashCode;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
@@ -27,25 +28,27 @@ import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.filter.OncePerRequestFilter;
 import lombok.Data;
+
 @Data
 @Log4j2
-public class SmsValidateCodeFiler extends OncePerRequestFilter implements InitializingBean {	
+@EqualsAndHashCode(callSuper = true)
+public class SmsValidateCodeFiler extends OncePerRequestFilter implements InitializingBean {
 
 	private ValidateCodeRepository validateCodeRepository;
 
 	public SmsValidateCodeFiler(ValidateCodeRepository validateCodeRepository) {
 		this.validateCodeRepository = validateCodeRepository;
 	}
-	
+
 	private AuthenticationFailureHandler appAuthenticationFailureHandler;
 	//存放所有验证码路径
 	private Set<String> urls = new HashSet<>();
-	
+
 	private ZuulProperties zuulProperties;
 	//路径匹配器
 	private AntPathMatcher antPathMatcher = new AntPathMatcher();
-	
-	
+
+
 	@Override
 	public void afterPropertiesSet() throws ServletException {
 		super.afterPropertiesSet();
@@ -58,7 +61,7 @@ public class SmsValidateCodeFiler extends OncePerRequestFilter implements Initia
 		}*/
 		urls.add(ZuulAppConstant.SMS_URL);
 	}
-	
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
@@ -82,23 +85,23 @@ public class SmsValidateCodeFiler extends OncePerRequestFilter implements Initia
 	}
 
 	private void validateCode(ServletWebRequest request) throws ServletRequestBindingException {
-		   ValidateCode code =  validateCodeRepository.
-	                get(request, ZuulAppConstant.SMS_SESSION_KEY);
-	        String imageCode = ServletRequestUtils.getStringParameter(request.getRequest(), "sms_code");
-	        if(StringUtils.isBlank(imageCode)){
-	            throw new SMSException(SecurityEnum.SMS_CODE_ERROR_CODE);
-	        }
-	        if(code == null){
-	            throw new SMSException(SecurityEnum.SMS_CODE_EXIST);
-	        }
-	        if(code.isExpried()){
-	        	validateCodeRepository.remove(request,ZuulAppConstant.SMS_SESSION_KEY);
-	            throw new SMSException(SecurityEnum.SMS_CODE_PAST);
-	        }
-	        if(!StringUtils.equals(imageCode,code.getCode())){
-	            throw new SMSException(SecurityEnum.SMS_CODE_ERROR);
-	        }
-	        validateCodeRepository.remove(request,ZuulAppConstant.SMS_SESSION_KEY);
+		ValidateCode code =  validateCodeRepository.
+				get(request, ZuulAppConstant.SMS_SESSION_KEY);
+		String imageCode = ServletRequestUtils.getStringParameter(request.getRequest(), "sms_code");
+		if(StringUtils.isBlank(imageCode)){
+			throw new SMSException(SecurityEnum.SMS_CODE_ERROR_CODE);
+		}
+		if(code == null){
+			throw new SMSException(SecurityEnum.SMS_CODE_EXIST);
+		}
+		if(code.isExpried()){
+			validateCodeRepository.remove(request,ZuulAppConstant.SMS_SESSION_KEY);
+			throw new SMSException(SecurityEnum.SMS_CODE_PAST);
+		}
+		if(!StringUtils.equals(imageCode,code.getCode())){
+			throw new SMSException(SecurityEnum.SMS_CODE_ERROR);
+		}
+		validateCodeRepository.remove(request,ZuulAppConstant.SMS_SESSION_KEY);
 	}
 
 }

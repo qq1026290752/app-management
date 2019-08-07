@@ -85,8 +85,8 @@
         </dependency>
         <dependency>
             <groupId>com.yulece.app.management</groupId>
-            <artifactId>app-mangement-user-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <artifactId>app-management-user-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

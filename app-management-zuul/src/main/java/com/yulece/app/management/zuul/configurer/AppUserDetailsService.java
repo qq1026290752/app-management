@@ -19,9 +19,9 @@ public class AppUserDetailsService implements UserDetailsService {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(AppUserDetailsService.class);
 	@Autowired
-	private PasswordEncoder passwordEncoder;
-	@Autowired
 	private AdminUserService adminUserService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 
 	/**
