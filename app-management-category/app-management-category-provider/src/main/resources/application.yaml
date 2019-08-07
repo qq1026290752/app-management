@@ -1,0 +1,21 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: app-category-progory
+  datasource:
+    url: jdbc:mysql://47.94.90.76:3306/yulece_aike?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 19940509WYC
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://140.143.234.53:8761/eureka
+  instance:
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    ip-address: true

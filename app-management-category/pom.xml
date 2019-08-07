@@ -10,6 +10,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>app-management-category</artifactId>
-
+    <packaging>pom</packaging>
+    <modules>
+        <module>app-management-category-provider</module>
+        <module>app-management-catgory-api</module>
+    </modules>
 
 </project>
