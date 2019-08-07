@@ -40,7 +40,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         //当前用户
         String currentUser = LoginHandlerInterceptor.getCurrentUser();
 
-        HashSet<String> authorizationSets = Sets.newHashSet("/app/**", "/order/**");
+        HashSet<String> authorizationSets = Sets.newHashSet("/admin/**", "/order/**");
         //查詢當前用戶
         return authorizationSets;
     }

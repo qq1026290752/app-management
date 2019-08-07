@@ -18,6 +18,7 @@
 /logs/
 /target/
 
+
 ### NetBeans ###
 /nbproject/private/
 /build/
