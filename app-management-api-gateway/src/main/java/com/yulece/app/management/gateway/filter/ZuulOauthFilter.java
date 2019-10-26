@@ -38,12 +38,15 @@ public class ZuulOauthFilter extends ZuulFilter {
     private final static Logger LOGGER = LoggerFactory.getLogger(ZuulOauthFilter.class);
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
-    @Autowired
-    private AuthorizationService authorizationService;
+    private final AuthorizationService authorizationService;
 
 
     @Value("${auth.url}")
     private String authUrl;
+
+    public ZuulOauthFilter(AuthorizationService authorizationService) {
+        this.authorizationService = authorizationService;
+    }
 
 
     @Override
