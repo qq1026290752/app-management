@@ -11,4 +11,11 @@
 
     <artifactId>app-mangagement-comments-api</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.yulece.app.management</groupId>
+            <artifactId>app-mangagement-comments-utlis</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>

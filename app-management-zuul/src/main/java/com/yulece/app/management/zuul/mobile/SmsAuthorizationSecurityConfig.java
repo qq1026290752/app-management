@@ -32,6 +32,7 @@ public class SmsAuthorizationSecurityConfig extends SecurityConfigurerAdapter<De
 		SMSAuthenticationProvider smsAuthenticationProvider = new SMSAuthenticationProvider();
 		smsAuthenticationProvider.setUserDetailsService(userDetailsService);
 		http.authenticationProvider(smsAuthenticationProvider)
-			.addFilterAfter(smsAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);//短信验证码加入过滤器
+			.addFilterAfter(smsAuthenticationFilter,
+					UsernamePasswordAuthenticationFilter.class);//短信验证码加入过滤器
 	}
 }

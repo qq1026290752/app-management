@@ -88,6 +88,11 @@
             <artifactId>app-management-user-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.yulece.app.management</groupId>
+            <artifactId>app-mangagement-comments-utlis</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
