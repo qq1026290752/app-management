@@ -11,10 +11,4 @@
 
     <artifactId>app-management-user</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>app-management-user-api</module>
-        <module>app-management-user-provider</module>
-        <module>app-management-user-consumer</module>
-    </modules>
-
 </project>

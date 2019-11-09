@@ -1,13 +1,15 @@
 package com.yulece.app.management.zuul.properties;
 
 import com.google.common.collect.Lists;
+import com.yulece.app.management.zuul.constant.ZuulAppConstant;
 
 import java.util.List;
 
 public class AuthProperties {
 
 
-    private List<String> methodGetUrl = Lists.newArrayList();
+    private List<String> methodGetUrl = Lists.newArrayList(ZuulAppConstant.LOGIN_JUMP_CONTROLLER,
+            ZuulAppConstant.LOGIN_URL);
     private List<String> methodPostUrl = Lists.newArrayList("hello");
 
     public List<String> getMethodGetUrl() {

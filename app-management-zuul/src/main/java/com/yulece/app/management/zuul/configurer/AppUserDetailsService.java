@@ -1,6 +1,5 @@
 package com.yulece.app.management.zuul.configurer;
   
-import com.yulece.app.management.user.api.AdminUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +11,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import lombok.extern.slf4j.Slf4j;
 
 @Component
 public class AppUserDetailsService implements UserDetailsService {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(AppUserDetailsService.class);
-	@Autowired
-	private AdminUserService adminUserService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 

@@ -55,11 +55,14 @@ public class AppResourceServiceAdapter extends ResourceServerConfigurerAdapter {
 		smsValidateCodeFiler.afterPropertiesSet();
 		http.addFilterAfter(smsValidateCodeFiler, UsernamePasswordAuthenticationFilter.class)
 				.formLogin()
+				.loginProcessingUrl(ZuulAppConstant.LOGIN_URL)
+				.loginPage(ZuulAppConstant.LOGIN_JUMP_CONTROLLER)
 				.failureHandler(appAuthenticationFailureHandler)
 				.successHandler(appAuthenticationSuccessHandler)
 			.and()
 				.authorizeRequests()
-				.antMatchers(HttpMethod.GET,zuulProperties.getAuth().toGetAdapter())
+				.antMatchers(HttpMethod.GET,
+						zuulProperties.getAuth().toGetAdapter())
 				.permitAll()
 				.antMatchers(HttpMethod.POST,zuulProperties.getAuth().toPostAdapter())
 				.permitAll()
@@ -78,8 +81,7 @@ public class AppResourceServiceAdapter extends ResourceServerConfigurerAdapter {
 		    .and()
 			    .apply(smsAuthorizationSecurityConfig)
             .and()
-				.csrf().disable()
-				.cors().disable();
+				.csrf().disable();
 	}
 
 }
