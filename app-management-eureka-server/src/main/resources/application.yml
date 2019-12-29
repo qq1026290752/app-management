@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: app-management-eureka-server
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  server:
+    enable-self-preservation: false
+  instance:
+    prefer-ip-address: true
