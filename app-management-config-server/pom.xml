@@ -20,50 +20,20 @@
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
     </dependencies>
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <properties>
-                <profileActive>dev</profileActive>
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <profileActive>prod</profileActive>
-            </properties>
-        </profile>
-    </profiles>
     <build>
         <finalName>spring-cloud-config-service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/webapp</directory>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>application-${profileActive}.yml</include>
-                    <include>application.yml</include>
-                    <include>**/*.xml</include>
-                </includes>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-        </resources>
     </build>
 </project>
