@@ -2,13 +2,11 @@ package com.yulece.app.management.zuul.authorization.handler;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.yulece.app.management.zuul.constant.ZuulAppConstant;
 import org.apache.commons.collections.MapUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,15 +35,22 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(AppAuthenticationSuccessHandler.class);
 
-	@Autowired
 	private ObjectMapper objectMapper;
-	@Autowired
 	private ClientDetailsService clientDetailsService;
-	@Autowired
 	private PasswordEncoder passwordEncoder;
-	@Autowired
-	private AuthorizationServerTokenServices authorizationServerTokenServices;
+	private final AuthorizationServerTokenServices authorizationServerTokenServices;
 
+	public AppAuthenticationSuccessHandler(AuthorizationServerTokenServices authorizationServerTokenServices) {
+		this.authorizationServerTokenServices = authorizationServerTokenServices;
+	}
+
+	@Autowired
+	public AppAuthenticationSuccessHandler(ObjectMapper objectMapper, ClientDetailsService clientDetailsService, PasswordEncoder passwordEncoder, AuthorizationServerTokenServices authorizationServerTokenServices) {
+		this.objectMapper = objectMapper;
+		this.clientDetailsService = clientDetailsService;
+		this.passwordEncoder = passwordEncoder;
+		this.authorizationServerTokenServices = authorizationServerTokenServices;
+	}
 
 
 	@Override

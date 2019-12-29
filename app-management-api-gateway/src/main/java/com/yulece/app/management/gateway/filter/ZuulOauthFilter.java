@@ -90,10 +90,11 @@ public class ZuulOauthFilter extends ZuulFilter {
             //查询用户是否有权限访问路径
             Set<String> urls = new HashSet<>();
             urls.add("/me");
+            urls.add("/admin/**");
             for (String  url : urls) {
                 if (antPathMatcher.match(url.trim(), requestURI)) {
                     isPermission = true;
-                    LOGGER.info("地址:{},不需要进行访问", requestURI);
+                    LOGGER.info("地址:{},已经通过了权限核验.可以进行访问", requestURI);
                     break;
                 }
             }
