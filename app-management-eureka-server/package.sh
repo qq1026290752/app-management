@@ -1,5 +1,5 @@
 #！/bin/bash
-mvn clean package -P pro
+mvn clean package -P prod
 cp target/*.jar /usr/local/spring-cloud/build/eureka.jar
 cp Dockerfile /usr/local/spring-cloud/build/Dockerfile
 # shellcheck disable=SC2164
