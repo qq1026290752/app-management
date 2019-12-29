@@ -1,5 +1,5 @@
-FROM openjdk:11.0-jdk
+FROM openjdk:7
 WORKDIR /usr/local/eureka/
-COPY eureka.jar /usr/local/eureka/
+COPY ./target/application-eureka.jar /usr/local/eureka/
 EXPOSE 80
-ENTRYPOINT [ "nohup","java","-jar","eureka.jar","&" ]
+ENTRYPOINT ["java","-jar","application-eureka.jar"]
