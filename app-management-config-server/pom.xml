@@ -43,17 +43,21 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <resources>
             <resource>
-                <directory>src/main/webapp</directory>
-            </resource>
-            <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>application-${profileActive}.yml</include>
-                    <include>application.yml</include>
+                    <include>application-${profileActive}.yaml</include>
+                    <include>application.yaml</include>
                     <include>**/*.xml</include>
                 </includes>
                 <filtering>true</filtering>
