@@ -1,7 +1,7 @@
 #！/bin/bash
 mvn clean package -P pro
 cp target/*.jar /usr/local/spring-cloud/build/eureka.jar
-cp Dockerfile /usr/local/spring-cloud/build/
+cp Dockerfile /usr/local/spring-cloud/build/Dockerfile
 # shellcheck disable=SC2164
 cd /usr/local/spring-cloud/build/
 docker rmi registry.cn-beijing.aliyuncs.com/application-spring-cloud/eureka:v1
