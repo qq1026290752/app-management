@@ -1,6 +1,8 @@
 spring:
   application:
     name: app-management-eureka-server
+  profiles:
+    active: pro
 eureka:
   client:
     register-with-eureka: false
