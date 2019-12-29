@@ -2,4 +2,4 @@ spring:
   application:
     name: app-management-eureka-server
   profiles:
-    active: pro
+    active: prod

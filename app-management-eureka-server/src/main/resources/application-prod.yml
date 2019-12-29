@@ -3,7 +3,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://application-spring-cloud-eureka
+      defaultZone: http://eureka.yulece.com/eureka
     register-with-eureka: true
     fetch-registry: true
   server:
