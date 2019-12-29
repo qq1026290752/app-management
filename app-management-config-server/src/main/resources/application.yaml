@@ -1,6 +1,6 @@
 spring:
   application:
-    name: app-config-server
+    name:  application-spring-cloud-eureka
   cloud:
     config:
       server:
