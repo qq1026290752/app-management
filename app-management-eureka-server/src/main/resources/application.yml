@@ -3,11 +3,3 @@ spring:
     name: app-management-eureka-server
   profiles:
     active: pro
-eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-  server:
-    enable-self-preservation: false
-  instance:
-    prefer-ip-address: true
