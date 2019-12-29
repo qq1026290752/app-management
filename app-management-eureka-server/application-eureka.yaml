@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: application-spring-cloud-eureka
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         image: registry.cn-beijing.aliyuncs.com/application-spring-cloud/eureka:v2
         ports:
         - containerPort: 80
