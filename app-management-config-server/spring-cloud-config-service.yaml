@@ -21,6 +21,9 @@ spec:
         image: registry.cn-beijing.aliyuncs.com/application-spring-cloud/spring-cloud-config-service:v2
         ports:
         - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: common-config
 ---
 apiVersion: v1
 kind: Service

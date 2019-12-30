@@ -1,9 +1,15 @@
 #！/bin/bash
 mvn clean package -P prod
-cp target/*.jar /usr/local/spring-cloud/build/spring-cloud-config-service.jar
-cp Dockerfile /usr/local/spring-cloud/build/Dockerfile
+path='/usr/local/spring-cloud/build/config-service/'
+if [ ! -d  ${path} ]; then
+   mkdir  ${path}
+fi
+rm -rf ${path}*
+cp target/*.jar ${path}spring-cloud-config-service.jar
+cp Dockerfile ${path}Dockerfile
+cp spring-cloud-config-service.yaml ${path}spring-cloud-config-service.yaml
 # shellcheck disable=SC2164
-cd /usr/local/spring-cloud/build/
+cd ${path}
 docker rmi registry.cn-beijing.aliyuncs.com/application-spring-cloud/spring-cloud-config-service:v2
 docker build -t registry.cn-beijing.aliyuncs.com/application-spring-cloud/spring-cloud-config-service:v2 .
 docker push registry.cn-beijing.aliyuncs.com/application-spring-cloud/spring-cloud-config-service:v2
