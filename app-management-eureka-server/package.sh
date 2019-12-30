@@ -1,7 +1,12 @@
 #！/bin/bash
 mvn clean package -P prod
-cp target/*.jar /usr/local/spring-cloud/build/eureka.jar
-cp Dockerfile /usr/local/spring-cloud/build/Dockerfile
+var path = usr/local/spring-cloud/build/eureka/
+if [ ! -d  "$path" ]; then
+  mkdir  "$path"
+fi
+cp target/*.jar "${path}"eureka.jar
+cp Dockerfile "${path}"Dockerfile
+cp application-eureka.yaml "${path}"application-eureka.yaml
 # shellcheck disable=SC2164
 cd /usr/local/spring-cloud/build/
 docker rmi registry.cn-beijing.aliyuncs.com/application-spring-cloud/eureka:v2
