@@ -1,4 +1,4 @@
-package com.yulece.app.management.comments.api.interceptor;
+package com.yulece.app.management.commons.utils.interceptor;
 
 import com.yulece.app.management.commons.utils.IPUtils;
 import io.jsonwebtoken.Jwts;

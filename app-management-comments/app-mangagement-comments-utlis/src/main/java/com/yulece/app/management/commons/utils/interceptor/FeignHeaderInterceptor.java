@@ -1,4 +1,4 @@
-package com.yulece.app.management.comments.api.interceptor;
+package com.yulece.app.management.commons.utils.interceptor;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -17,7 +17,7 @@ import java.util.Enumeration;
  * @author wangyichao@28ph.cn
  * @program: app-management
  * @title:FeignHeaderInterceptor
- * @Package com.yulece.app.management.comments.api.interceptor
+ * @Package com.yulece.app.management.commons.utils.interceptor
  * @Description:
  * @Date 创建时间 2018/10/22-13:26
  **/

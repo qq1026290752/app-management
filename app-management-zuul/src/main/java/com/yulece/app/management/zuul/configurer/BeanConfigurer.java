@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.provider.client.InMemoryClientDetails
 import org.springframework.stereotype.Component;
 
 @Component
-@ComponentScan("com.yulece.app.management.comments.api.interceptor.FeignHeaderInterceptor")
+@ComponentScan("com.yulece.app.management.commons.utils.interceptor.FeignHeaderInterceptor")
 public class BeanConfigurer {
 
     @Bean
