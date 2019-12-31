@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: dev
+  name:  spring-cloud-oauth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      namespace: dev
+      app:  spring-cloud-oauth-service
+  template:
+    metadata:
+      labels:
+         namespace: dev
+         app:  spring-cloud-oauth-service
+    spec:
+      containers:
+      - name:  spring-cloud-oauth-service
+        imagePullPolicy: Always
+        image: registry.cn-beijing.aliyuncs.com/application-spring-cloud/spring-cloud-oauth-service:v2
+        ports:
+        - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: common-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name:  spring-cloud-oauth-service
+  namespace: dev
+spec:
+  ports:
+   - port: 80
+     protocol: TCP
+     targetPort: 80
+  selector:
+    namespace: dev
+    app:  spring-cloud-oauth-service

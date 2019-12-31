@@ -2,8 +2,15 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: common-config
+  namespace: dev
 data:
   SPRING_PROFILES_ACTIVE: prod
   SERVER_PORT: "80"
   EUREKA_SERVICE_ENDPOINT: http://application-spring-cloud-eureka
   CONFIG_SERVICE_ENDPOINT: http://spring-cloud-config-service
+  MYSQL_HOST_SERVICE_ENDPOINT: 47.94.90.76
+  MYSQL_PORT_SERVICE_ENDPOINT: 3306
+  MYSQL_USERNAME_SERVICE_ENDPOINT: root
+  MYSQL_PASSWORD_SERVICE_ENDPOINT: 19940509WYC
+  REDIS_HOST_SERVICE_ENDPOINT: 47.94.90.76
+  REDIS_PORT_SERVICE_ENDPOINT: 6379
