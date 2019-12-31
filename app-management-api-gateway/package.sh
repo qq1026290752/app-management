@@ -2,7 +2,7 @@
 mvn clean package -P prod
 path='/usr/local/spring-cloud/build/getaway-service/'
 FILE_NAME='spring-cloud-config-getaway'
-K8S_CONFIG_NAME='spring-cloud-config-geteway.yaml'
+K8S_CONFIG_NAME='spring-cloud-config-gateway.yaml'
 DOCKER_REG_SERVICE='registry.cn-beijing.aliyuncs.com/application-spring-cloud/'
 if [ ! -d  ${path} ]; then
    mkdir  ${path}

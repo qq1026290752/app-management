@@ -75,6 +75,8 @@
                 <includes>
                     <include>application-${profileActive}.properties</include>
                     <include>application.properties</include>
+                    <include>bootstrap-${profileActive}.properties</include>
+                    <include>bootstrap.properties</include>
                     <include>**/*.xml</include>
                 </includes>
                 <filtering>true</filtering>
