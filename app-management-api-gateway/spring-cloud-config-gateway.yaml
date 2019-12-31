@@ -18,7 +18,7 @@ spec:
       containers:
       - name:  spring-cloud-config-getaway
         imagePullPolicy: Always
-        image: registry.cn-beijing.aliyuncs.com/application-spring-cloud/ spring-cloud-config-getaway:v2
+        image: registry.cn-beijing.aliyuncs.com/application-spring-cloud/spring-cloud-config-getaway:v2
         ports:
         - containerPort: 80
         envFrom:
