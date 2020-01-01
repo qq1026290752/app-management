@@ -3,7 +3,7 @@ mvn clean package -P prod
 path='/usr/local/spring-cloud/build/spring-cloud-oauth-service/'
 FILE_NAME='spring-cloud-oauth-service'
 K8S_CONFIG_NAME='spring-cloud-oauth-service.yaml'
-DOCKER_REG_SERVICE='registry.cn-beijing.aliyuncs.com/spring-cloud-oauth-service/'
+DOCKER_REG_SERVICE='registry.cn-beijing.aliyuncs.com/application-spring-cloud/'
 if [ ! -d  ${path} ]; then
    mkdir  ${path}
 fi
