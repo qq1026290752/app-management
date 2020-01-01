@@ -40,13 +40,25 @@
         </dependency>
         <dependency>
             <groupId>com.yulece.app.management</groupId>
-            <artifactId>app-mangagement-comments-utlis</artifactId>
+            <artifactId>app-mangement-comments-utlis</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.lambdaworks</groupId>
             <artifactId>scrypt</artifactId>
             <version>1.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
         </dependency>
     </dependencies>
 

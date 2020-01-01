@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
  **/
 @Configuration
 public class ExceptionConfig {
+
     private final ObjectMapper objectMapper;
 
     public ExceptionConfig(ObjectMapper objectMapper) {

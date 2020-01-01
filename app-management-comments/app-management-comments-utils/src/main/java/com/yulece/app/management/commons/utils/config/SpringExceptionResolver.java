@@ -1,6 +1,6 @@
 package com.yulece.app.management.commons.utils.config;
 
-import com.alibaba.fastjson.JSON;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yulece.app.management.commons.utils.ResultVo;
 import com.yulece.app.management.commons.utils.exception.AppException;
@@ -50,8 +50,8 @@ public class SpringExceptionResolver {
             String errorMessage = e.getMessage();
             if (errorMessage.contains("code") && errorMessage.contains("message")) {
                 String message = errorMessage.substring(errorMessage.indexOf("{"));
-                Map parse = (Map) JSON.parse(message);
-                response.getWriter().print(objectMapper.writeValueAsString(ResultVo.createErrorResult((String)parse.get("message"), 500)));
+                ResultVo parse = objectMapper.readValue(message,ResultVo.class);
+                response.getWriter().print(objectMapper.writeValueAsString(parse));
             } else {
                 response.getWriter().print(objectMapper.writeValueAsString(ResultVo.createErrorResult("程序内部错误,请稍后重试", 500)));
             }

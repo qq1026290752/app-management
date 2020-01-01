@@ -1,7 +1,6 @@
 package com.yulece.app.management;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
-import com.yulece.app.management.commons.utils.annotation.EnableExceptionUtils;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,7 +20,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableDiscoveryClient
 @MapperScan("com.yulece.app.management.pms.repository")
-@EnableExceptionUtils
 @EnableTransactionManagement
 public class AppAdminApplication {
 
