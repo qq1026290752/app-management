@@ -80,7 +80,7 @@
         </profile>
     </profiles>
     <build>
-        <finalName>spring-cloud-pms-service</finalName>
+        <finalName>spring-cloud-pms</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
