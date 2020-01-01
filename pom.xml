@@ -9,6 +9,9 @@
     <modules>
         <module>app-management-comments</module>
         <module>app-management-zuul</module>
+        <module>app-management-eureka-server</module>
+        <module>app-management-config-server</module>
+        <module>app-management-admin</module>
     </modules>
     <packaging>pom</packaging>
 
