@@ -11,7 +11,6 @@
         <module>app-management-eureka-server</module>
         <module>app-management-zuul</module>
         <module>app-management-comments</module>
-        <module>app-management-comments-provider</module>
         <module>app-management-api-gateway</module>
         <module>app-management-admin</module>
     </modules>
