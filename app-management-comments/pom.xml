@@ -14,7 +14,6 @@
     <modules>
         <module>app-management-comments-api</module>
         <module>app-management-comments-utils</module>
-        <module>app-management-comments-provider</module>
     </modules>
     <dependencies>
         <dependency>
