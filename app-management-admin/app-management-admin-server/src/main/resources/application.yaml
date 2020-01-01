@@ -1,6 +1,6 @@
 spring:
   application:
-    name: app-admin
+    name: spring-cloud-pms
 eureka:
   instance:
     prefer-ip-address: true
