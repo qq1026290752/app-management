@@ -94,9 +94,9 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>application-${profileActive}.properties</include>
+                    <include>application-${profileActive}.yaml</include>
                     <include>application.properties</include>
-                    <include>bootstrap-${profileActive}.properties</include>
+                    <include>bootstrap-${profileActive}.yaml</include>
                     <include>bootstrap.properties</include>
                     <include>**/*.xml</include>
                 </includes>
