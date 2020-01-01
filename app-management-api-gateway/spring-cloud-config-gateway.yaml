@@ -38,3 +38,18 @@ spec:
   selector:
     namespace: dev
     app:  spring-cloud-config-getaway
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: dev
+  name: spring-cloud-config-getaway
+spec:
+  rules:
+    - host: zuul.yulece.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: spring-cloud-config-getaway
+              servicePort: 80

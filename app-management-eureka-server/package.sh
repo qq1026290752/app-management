@@ -14,3 +14,5 @@ cd ${path}
 docker rmi registry.cn-beijing.aliyuncs.com/application-spring-cloud/eureka:v2
 docker build -t registry.cn-beijing.aliyuncs.com/application-spring-cloud/eureka:v2 .
 docker push registry.cn-beijing.aliyuncs.com/application-spring-cloud/eureka:v2
+kubectl delete -f application-eureka.yaml
+kubectl create -f application-eureka.yaml
