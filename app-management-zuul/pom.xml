@@ -80,7 +80,7 @@
         </dependency>
         <dependency>
             <groupId>com.yulece.app.management</groupId>
-            <artifactId>app-manement-comments-utlis</artifactId>
+            <artifactId>app-management-comments-utlis</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
