@@ -7,11 +7,11 @@
     <artifactId>app-management</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>app-management-config-server</module>
-        <module>app-management-eureka-server</module>
-        <module>app-management-zuul</module>
         <module>app-management-comments</module>
+        <module>app-management-eureka-server</module>
+        <module>app-management-config-server</module>
         <module>app-management-api-gateway</module>
+        <module>app-management-zuul</module>
         <module>app-management-admin</module>
     </modules>
     <packaging>pom</packaging>
@@ -97,14 +97,6 @@
             <artifactId>guava</artifactId>
         </dependency>
         <!--validate -->
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
-        </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
