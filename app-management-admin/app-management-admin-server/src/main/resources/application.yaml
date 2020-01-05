@@ -4,3 +4,4 @@ spring:
 eureka:
   instance:
     prefer-ip-address: true
+HOST_WEBSITE: account.yulece.com

@@ -15,7 +15,7 @@ import java.util.Date;
  * @Date 2019-12-28 23:46
  **/
 @Data
-public class AdminUserListResponse {
+public class AdminUserResponse {
 
     private Integer userId;
     private String userName;

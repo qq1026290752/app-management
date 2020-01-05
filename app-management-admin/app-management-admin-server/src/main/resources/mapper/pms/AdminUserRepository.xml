@@ -1,0 +1,47 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yulece.app.management.pms.repository.AdminUserRepository">
+
+    <resultMap id="adminUserResult" type="com.yulece.app.management.pms.dto.user.AdminUserResponse">
+        <id  property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="nikeName" column="nike_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="phone" column="phone"/>
+        <result property="mail" column="mail"/>
+        <result property="status" column="status"/>
+        <result property="deptName" column="dept_name"/>
+        <result property="userRemark" column="user_remark"/>
+        <result property="headerUrl" column="header_url"/>
+    </resultMap>
+
+    <select id="findAllByPageAndObject" resultMap="adminUserResult">
+        select
+            u.*,t.dept_name
+        from
+            admin_user U
+        LEFT JOIN admin_dept t on U.user_dept = t.dept_name
+        <where>
+            <if test="model.userName!=null and model.userName!=''">
+                u.user_name like CONCAT(CONCAT('%',#{model.userName},'%'))
+            </if>
+            <if test="model.nikeName!=null and model.nikeName!=''">
+               AND u.nike_name like CONCAT(CONCAT('%',#{model.nikeName},'%'))
+            </if>
+            <if test="model.userDept!=null and model.userDept!=-1">
+                AND t.dept_id =#{model.userDept}
+            </if>
+            <if test="model.status!=null and model.status!=-1">
+                AND t.status =#{model.status}
+            </if>
+            <if test="model.mail!=null and model.mail!=''">
+                AND u.mail like CONCAT(CONCAT('%',#{model.mail},'%'))
+            </if>
+            <if test="model.phone!=null and model.phone!=''">
+                AND u.phone like CONCAT(CONCAT('%',#{model.phone},'%'))
+            </if>
+
+        </where>
+    </select>
+</mapper>

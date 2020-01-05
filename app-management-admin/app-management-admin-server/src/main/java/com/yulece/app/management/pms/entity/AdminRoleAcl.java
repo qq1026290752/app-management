@@ -16,7 +16,6 @@ import java.util.Date;
  **/
 @Data
 public class AdminRoleAcl {
-
     private Integer roleAclId;
     private Integer roleId;
     private Integer aclId;

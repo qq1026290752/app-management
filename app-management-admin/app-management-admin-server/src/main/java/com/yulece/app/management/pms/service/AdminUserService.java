@@ -1,6 +1,9 @@
 package com.yulece.app.management.pms.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.yulece.app.management.pms.dto.user.AdminUserResponse;
 import com.yulece.app.management.pms.vo.user.AdminUserCreateRequest;
+import com.yulece.app.management.pms.vo.user.AdminUserQueryRequest;
 import com.yulece.app.management.pms.vo.user.AdminUserUpdateRequest;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +23,7 @@ public interface AdminUserService {
      * @param param
      * @param request
      */
-    String save(AdminUserCreateRequest param, HttpServletRequest request);
+    Integer save(AdminUserCreateRequest param, HttpServletRequest request);
 
     /**
      * 更新接口
@@ -29,6 +32,23 @@ public interface AdminUserService {
      */
     void update(AdminUserUpdateRequest param, HttpServletRequest request);
 
+    /**
+     * 激活账号
+     * @param active
+     */
+    void activeAccount(String active);
 
+    /**
+     * 获取分页数据
+     * @param request
+     * @return
+     */
+    IPage<AdminUserResponse> page(AdminUserQueryRequest request);
 
+    /**
+     * 查询一条数据 根据ID查询
+     * @param userId
+     * @return
+     */
+    AdminUserResponse findOne(Integer userId);
 }

@@ -12,6 +12,7 @@
         <module>app-management-eureka-server</module>
         <module>app-management-config-server</module>
         <module>app-management-admin</module>
+        <module>app-management-asyc-provicer</module>
     </modules>
     <packaging>pom</packaging>
 

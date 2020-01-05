@@ -1,11 +1,14 @@
 package com.yulece.app.management;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
+import com.yulece.app.management.comments.api.CommentsMailApiService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -21,6 +24,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableDiscoveryClient
 @MapperScan("com.yulece.app.management.pms.repository")
 @EnableTransactionManagement
+@EnableFeignClients(basePackageClasses = {CommentsMailApiService.class})
+@EnableAsync
 public class AppAdminApplication {
 
     public static void main(String[] args) {

@@ -1,12 +1,16 @@
 package com.yulece.app.management.comments.api.entity;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class EmailMessage implements Serializable {
 
     private static final long serialVersionUID = -1896343237520686072L;
+    @NotNull(message = "邮件标题不能为空")
     private String title;
+    @NotNull(message = "邮件内容不能为空")
     private String context;
+    @NotNull(message = "发送邮件地址不能为空")
     private String email;
 
     public String getTitle() {
@@ -33,12 +37,10 @@ public class EmailMessage implements Serializable {
         this.email = email;
     }
 
-    public EmailMessage(String title, String context, String email) {
+    public EmailMessage(@NotNull String title, @NotNull String context, @NotNull String email) {
         this.title = title;
         this.context = context;
         this.email = email;
     }
 
-    public EmailMessage() {
-    }
 }

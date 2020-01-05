@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: app-async-provider
+  profiles:
+    active: dev
+ALIYUN_MAIL_ACCESSKEY: LTAI4FoVnAxwriGoUCySpu7m
+ALIYUN_MAIL_ACCESSSECRET: hNrd4H6Yyb4QdJ633dgn4Z0i4FECnS
+ALIYUN_MAIL_FROMALIAS: OA服务平台
+ALIYUN_MAIL_HOST: admin@mail.yulece.com

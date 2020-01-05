@@ -21,6 +21,9 @@ public class AppException extends RuntimeException {
 		this.code = paramEnum.getCode();
 	}
 
+	public AppException(AppException e) {
+		super(e);
+	}
 	public AppException(Integer code, String message) {
 		super(message);
 		this.code = code;

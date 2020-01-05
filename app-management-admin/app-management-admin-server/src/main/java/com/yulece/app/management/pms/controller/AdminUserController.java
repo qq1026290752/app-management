@@ -1,13 +1,14 @@
 package com.yulece.app.management.pms.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yulece.app.management.commons.utils.ResultVo;
+import com.yulece.app.management.pms.dto.user.AdminUserResponse;
 import com.yulece.app.management.pms.service.AdminUserService;
 import com.yulece.app.management.pms.vo.user.AdminUserCreateRequest;
+import com.yulece.app.management.pms.vo.user.AdminUserQueryRequest;
+import com.yulece.app.management.pms.vo.user.AdminUserUpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,6 +34,23 @@ public class AdminUserController {
     public ResultVo save(@RequestBody AdminUserCreateRequest param, HttpServletRequest request){
         adminUserService.save(param,request);
         return ResultVo.createSuccessResult();
+    }
+
+    @PutMapping
+    public ResultVo update(@RequestBody AdminUserUpdateRequest param, HttpServletRequest request){
+        adminUserService.update(param,request);
+        return ResultVo.createSuccessResult();
+    }
+    @PostMapping
+    public ResultVo<IPage<AdminUserResponse>> update(@RequestBody AdminUserQueryRequest model, HttpServletRequest request){
+        IPage<AdminUserResponse> page = adminUserService.page(model);
+        return ResultVo.createSuccessResult(page);
+    }
+
+    @GetMapping("{userId}")
+    public ResultVo<AdminUserResponse> findOne(@PathVariable Integer userId){
+        AdminUserResponse ones = adminUserService.findOne(userId);
+        return ResultVo.createSuccessResult(ones);
     }
 
 }

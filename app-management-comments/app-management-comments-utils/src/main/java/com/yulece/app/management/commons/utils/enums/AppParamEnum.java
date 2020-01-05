@@ -6,6 +6,7 @@ public enum AppParamEnum {
     USER_USERNAME_EXIST_ERROR(1,"用户名已存在"),
     USER_EMAIL_EXIST(2,"邮箱已存在"),
     USER_PHONE_EXIST(4,"联系方式已存在"),
+    USER_ACTIVE_ERROR(3,"用户激活信息已经失效"),
     PARAMS_NOT_LEGAL(5,"所带入参数不合法"),
     USER_ACTIVE_KEY_ERROR(6,"用户激活KEY不正确,或者KEY超过有效时间"),
     DEPT_NAME_EXIST_ERROR(7,"部门名称已经存在"),

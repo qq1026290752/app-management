@@ -29,6 +29,8 @@ public class ResultVo<T> {
 		this.status = status;
 	}
 
+	public ResultVo() {
+	}
 
 	public Integer getStatus() {
 		return status;

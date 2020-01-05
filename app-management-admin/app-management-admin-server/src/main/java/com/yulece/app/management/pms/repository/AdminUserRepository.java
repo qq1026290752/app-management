@@ -1,7 +1,12 @@
 package com.yulece.app.management.pms.repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yulece.app.management.pms.dto.user.AdminUserResponse;
 import com.yulece.app.management.pms.entity.AdminUser;
+import com.yulece.app.management.pms.vo.user.AdminUserQueryRequest;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,4 +21,12 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 public interface AdminUserRepository extends BaseMapper<AdminUser> {
+    /**
+     * 分页获取数据
+     * @param adminUserPage
+     * @param request
+     * @return
+     */
+    IPage<AdminUserResponse> findAllByPageAndObject(Page<AdminUser> adminUserPage,
+                                                    @Param("model") AdminUserQueryRequest request);
 }
