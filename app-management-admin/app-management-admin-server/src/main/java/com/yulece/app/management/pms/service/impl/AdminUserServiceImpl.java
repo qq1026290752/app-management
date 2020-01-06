@@ -183,18 +183,18 @@ public class AdminUserServiceImpl implements AdminUserService {
     private boolean  isExistUserName(AdminUserCreateRequest param, Integer userId) {
         return adminUserRepository.selectList(new QueryWrapper<AdminUser>().lambda()
                 .eq(AdminUser::getUserName,param.getUserName())
-                .eq(userId!=null,AdminUser::getUserId,userId)).size()>0;
+                .ne(userId!=null,AdminUser::getUserId,userId)).size()>0;
     }
 
     private boolean isExistPhone(AdminUserCreateRequest param, Integer userId) {
         return adminUserRepository.selectList(new QueryWrapper<AdminUser>().lambda()
                 .eq(AdminUser::getPhone,param.getUserName())
-                .eq(userId!=null,AdminUser::getUserId,userId)).size()>0;
+                .ne(userId!=null,AdminUser::getUserId,userId)).size()>0;
     }
 
     private boolean isExistMail(AdminUserCreateRequest param, Integer userId) {
         return adminUserRepository.selectList(new QueryWrapper<AdminUser>().lambda()
                 .eq(AdminUser::getMail,param.getUserName())
-                .eq(userId!=null,AdminUser::getUserId,userId)).size()>0;
+                .ne(userId!=null,AdminUser::getUserId,userId)).size()>0;
     }
 }

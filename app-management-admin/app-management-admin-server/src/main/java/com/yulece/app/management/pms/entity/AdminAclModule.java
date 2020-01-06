@@ -19,8 +19,8 @@ public class AdminAclModule {
     private String moduleName;
     private Integer moduleParentId;
     private String moduleLevel;
-    private String status;
-    private String moduleSeq;
+    private Integer status;
+    private Integer moduleSeq;
     private String moduleRemark;
     private String operator;
     private String operateIp;

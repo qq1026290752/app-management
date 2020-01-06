@@ -79,14 +79,14 @@ public class AdminDeptServiceImpl implements AdminDeptService {
         return adminDeptRepository.selectList(new QueryWrapper<AdminDept>().lambda()
                 .eq(true,AdminDept::getDeptName,deptName)
                 .eq(true,AdminDept::getDeptParentId,deptParentId)
-                .eq(deptId!=null,AdminDept::getDeptId,deptId)).size()>0;
+                .ne(deptId!=null,AdminDept::getDeptId,deptId)).size()>0;
     }
 
     private boolean checkExistSort(Integer deptSeq, Integer deptParentId,Integer deptId) {
         return adminDeptRepository.selectList(new QueryWrapper<AdminDept>().lambda()
                 .eq(true,AdminDept::getDeptSeq,deptSeq)
                 .eq(true,AdminDept::getDeptParentId,deptParentId)
-                .eq(deptId!=null,AdminDept::getDeptId,deptId)).size()>0;
+                .ne(deptId!=null,AdminDept::getDeptId,deptId)).size()>0;
     }
 
     @Override
