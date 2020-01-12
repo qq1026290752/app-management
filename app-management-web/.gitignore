@@ -25,4 +25,4 @@
 /dist/
 /nbdist/
 /.nb-gradle/
-/app-management-web/node/
+/node/**
