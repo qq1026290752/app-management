@@ -15,5 +15,4 @@ FOR /F "delims=" %%F IN ('CALL "%NODE_EXE%" "%NPM_CLI_JS%" prefix -g') DO (
 IF EXIST "%NPM_PREFIX_NPM_CLI_JS%" (
   SET "NPM_CLI_JS=%NPM_PREFIX_NPM_CLI_JS%"
 )
-
 "%NODE_EXE%" "%NPM_CLI_JS%" %*
