@@ -41,7 +41,7 @@ public class AdminUserController {
         adminUserService.update(param,request);
         return ResultVo.createSuccessResult();
     }
-    @PostMapping
+    @PostMapping("/list")
     public ResultVo<IPage<AdminUserResponse>> update(@RequestBody AdminUserQueryRequest model, HttpServletRequest request){
         IPage<AdminUserResponse> page = adminUserService.page(model);
         return ResultVo.createSuccessResult(page);
