@@ -1,0 +1,40 @@
+<form role="form" (ngSubmit)="onLogin()">
+  <mat-form-field>
+    <label for="user-name-label">
+      <input id="user-name-label" type="text" [(ngModel)]="user.userName"
+             [formControl]="userName"
+             name="userName" matInput placeholder="请输入登陆用户名">
+      <mat-error *ngIf="userName.invalid">{{getUserNameErrorMessage()}}</mat-error>
+    </label>
+  </mat-form-field>
+  <mat-form-field>
+    <label for="password-label">
+      <input matInput type="password" id="password-label" [(ngModel)]="user.passWord"
+             [formControl]="password"
+             name="passWord" placeholder="请输入登陆密码">
+      <mat-error *ngIf="userName.invalid">{{getPasswordErrorMessage()}}</mat-error>
+    </label>
+  </mat-form-field>
+  <div el-row gutter="20" style="margin-bottom: 15%">
+    <div el-col [span]="8">
+      <section class="example-section">
+          <mat-slide-toggle
+            [color]="color"
+            [checked]="user.check"
+            [disabled]="disabled">
+            7天内自动登录
+          </mat-slide-toggle
+            >
+
+      </section>
+    </div>
+    <div el-col [span]="6"><a routerLink="/pms/register" mat-button [color]="color" >找回密码</a></div>
+    <div el-col [span]="6"><button type="button" mat-button [color]="color">匿名登陆</button></div>
+    <div class="el-input__clear"></div>
+  </div>
+  <div el-row gutter="20" >
+    <div el-col [span]="8">&nbsp;</div>
+    <div el-col [span]="4"><button type="submit" [color]="color" mat-raised-button>登陆</button></div>
+    <div el-col [span]="8">&nbsp;</div>
+  </div>
+</form>

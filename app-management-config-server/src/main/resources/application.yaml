@@ -7,7 +7,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/qq1026290752/yulece-config
+            uri: https://github.com/qq1026290752/yulece-config
 eureka:
   instance:
     prefer-ip-address: true

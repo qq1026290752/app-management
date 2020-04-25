@@ -1,17 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LoginComponent } from './components';
-import {PmsRoutingModule} from "./pms.routing.module";
+import {ShareModule} from "../share";
 
 
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [],
   imports: [
-    CommonModule
-  ],
-  exports:[
-    PmsRoutingModule
+    ShareModule
   ]
 })
 export class PmsModule { }

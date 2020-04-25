@@ -26,3 +26,4 @@
 /nbdist/
 /.nb-gradle/
 /app-management-web/node/
+/app-management-async-provider/resources/application.yaml

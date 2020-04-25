@@ -1,0 +1,22 @@
+<mat-sidenav-container>
+  <mat-sidenav-content class="mat-sidenav-content" el-row>
+    <mat-card class="pms-content mdl-shadow" el-col span="12">
+      <mat-card-header>
+          <a routerLink="/pms/login" mat-raised-button color="primary">账号密码登陆</a>
+          <a routerLink="/pms/register" mat-raised-button color="accent" >手机验证登陆</a>
+      </mat-card-header>
+      <mat-card-content>
+        <router-outlet></router-outlet>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="pms-left mdl-shadow" el-col span="12">
+      <mat-card-content style="height: 85%">
+        <img src="assets/authentication/img/psm_ima.jpg" width="100%" height="100%">
+      </mat-card-content>
+      <mat-card-footer>
+        <p style="padding-left: 1rem">锄禾日当午，汗滴禾下如土</p>
+        <p style="text-align: right;padding-right: 1rem">--王之涣《登鹳雀楼》</p>
+      </mat-card-footer>
+    </mat-card>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -8,8 +8,8 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>app-management-comments</module>
+         <module>app-management-zuul</module>
         <module>app-management-async-provider</module>
-        <module>app-management-zuul</module>
         <module>app-management-eureka-server</module>
         <module>app-management-config-server</module>
         <module>app-management-admin</module>

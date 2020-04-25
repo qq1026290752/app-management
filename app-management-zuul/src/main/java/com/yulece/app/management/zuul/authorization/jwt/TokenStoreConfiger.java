@@ -33,7 +33,7 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 			@Autowired
 			private ZuulProperties zuulProperties;
 
-			@Bean
+			@Bean("tokenStore")
 			public TokenStore jwtTokenStore() {
 				return new JwtTokenStore(jwtAccessTokenConverter());
 			}

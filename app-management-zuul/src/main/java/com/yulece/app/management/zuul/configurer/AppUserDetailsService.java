@@ -2,7 +2,6 @@ package com.yulece.app.management.zuul.configurer;
   
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,12 +11,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 
-@Component
+@Component("userDetailsService")
 public class AppUserDetailsService implements UserDetailsService {
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(AppUserDetailsService.class);
-	@Autowired
-	private PasswordEncoder passwordEncoder;
+
+	private final PasswordEncoder passwordEncoder;
+	public AppUserDetailsService(PasswordEncoder passwordEncoder) {
+		this.passwordEncoder = passwordEncoder;
+	}
 
 
 	/**

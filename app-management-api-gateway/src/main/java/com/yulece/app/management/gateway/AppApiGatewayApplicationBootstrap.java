@@ -22,7 +22,6 @@ import java.util.Set;
  * @Description:
  * @Date 2019-03-24 11:06
  **/
-@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @SpringBootApplication
 @EnableEurekaClient
 @EnableZuulProxy
@@ -43,14 +42,14 @@ public class AppApiGatewayApplicationBootstrap {
         this.environment = environment;
     }
 
-    @Scheduled(fixedRate  = 5 * 1000, initialDelay = 3 * 1000)
+    @Scheduled(fixedRate  = 1000 * 3600 * 24, initialDelay = 3 * 1000)
     public void autoRefresh() {
 
         Set<String> updatedPropertyNames =
                 contextRefresher.refresh();
 
         updatedPropertyNames.forEach( propertyName ->
-                LOGGER.warn("[Thread :{}] 当前配置已更新，具体 Key：{} , Value : {}", Thread.currentThread().getName(), propertyName,
+                LOGGER.debug("[Thread :{}] 当前配置已更新，具体 Key：{} , Value : {}", Thread.currentThread().getName(), propertyName,
                         environment.getProperty(propertyName)));
     }
 
