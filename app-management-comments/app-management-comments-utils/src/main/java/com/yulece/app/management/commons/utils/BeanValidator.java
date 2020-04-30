@@ -20,7 +20,7 @@ import com.yulece.app.management.commons.utils.enums.AppParamEnum;
 import com.yulece.app.management.commons.utils.enums.ExceptionEnum;
 import com.yulece.app.management.commons.utils.exception.AppException;
 import com.yulece.app.management.commons.utils.exception.ParamException;
-import org.apache.commons.collections.MapUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.ObjectUtils;
 
 public class BeanValidator {

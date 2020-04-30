@@ -3,17 +3,12 @@ package com.yulece.app.management.zuul.authorization;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.yulece.app.management.zuul.constant.ZuulAppConstant;
-import com.yulece.app.management.zuul.properties.OAuth2ClientProperties;
 import com.yulece.app.management.zuul.properties.ZuulProperties;
-import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -24,6 +19,8 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
+import javax.sql.DataSource;
+
 
 @Configuration
 @EnableAuthorizationServer
@@ -33,10 +30,9 @@ public class AppAuthorizationServerConfig extends AuthorizationServerConfigurerA
 	private final UserDetailsService userDetailsService;
 	private final ZuulProperties zuulProperties;
 	private final TokenStore tokenStore ;
-	@Autowired(required = false)
-	private JwtAccessTokenConverter jwtAccessTokenConverter;
-	@Autowired(required = false)
-	private TokenEnhancer jwtTokenEnhancer;
+	private final JwtAccessTokenConverter jwtAccessTokenConverter;
+	private final DataSource dataSource;
+	private final TokenEnhancer jwtTokenEnhancer;
 	private final PasswordEncoder passwordEncoder;
 
 	@Autowired
@@ -44,18 +40,22 @@ public class AppAuthorizationServerConfig extends AuthorizationServerConfigurerA
 										UserDetailsService userDetailsService,
 										ZuulProperties zuulProperties,
 										TokenStore tokenStore,
-										PasswordEncoder passwordEncoder) {
+										PasswordEncoder passwordEncoder, JwtAccessTokenConverter jwtAccessTokenConverter, DataSource dataSource, TokenEnhancer jwtTokenEnhancer) {
 		this.authenticationManager = authenticationManager;
 		this.userDetailsService = userDetailsService;
 		this.zuulProperties = zuulProperties;
 		this.tokenStore = tokenStore;
 		this.passwordEncoder = passwordEncoder;
+		this.jwtAccessTokenConverter = jwtAccessTokenConverter;
+		this.dataSource = dataSource;
+		this.jwtTokenEnhancer = jwtTokenEnhancer;
 	}
 
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		InMemoryClientDetailsServiceBuilder builder = clients.inMemory();
+		clients.jdbc(dataSource);
+		/*InMemoryClientDetailsServiceBuilder builder = clients.inMemory();
 		OAuth2ClientProperties[] clientProperties = zuulProperties.getOauth().getClients();
 		if(ArrayUtils.isNotEmpty(zuulProperties.getOauth().getClients())) {
 			for (OAuth2ClientProperties oAuth2ClientProperties : clientProperties) {
@@ -68,11 +68,11 @@ public class AppAuthorizationServerConfig extends AuthorizationServerConfigurerA
 				   //刷新时间
 				   .refreshTokenValiditySeconds(3600*24*100)
 					//跳转地址
-				   .redirectUris("http://api.yulece.com")
+				   .redirectUris("9")
 				   //权限
 				   .scopes("all");
 			}
-		}
+		}*/
 	}
 
 	@Override

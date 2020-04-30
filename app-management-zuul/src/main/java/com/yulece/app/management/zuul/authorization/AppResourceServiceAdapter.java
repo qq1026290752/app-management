@@ -22,28 +22,31 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableResourceServer
 public class AppResourceServiceAdapter extends ResourceServerConfigurerAdapter {
 
-	@Autowired
-	private AppSecurityExpressionHandler appSecurityExpressionHandler;
+	private final AppSecurityExpressionHandler appSecurityExpressionHandler;
+	private final ZuulProperties zuulProperties;
+	private final AuthenticationSuccessHandler appAuthenticationSuccessHandler;
+	private final AuthenticationFailureHandler appAuthenticationFailureHandler;
+	private final AccessDeniedHandler appAccessDeniedHandler;
+	private final ValidateCodeRepository appValidateCodeRepository;
+	private final ValidateCodeRepository sessionCodeRepository;
+	private final SmsAuthorizationSecurityConfig smsAuthorizationSecurityConfig;
+
+	public AppResourceServiceAdapter(AppSecurityExpressionHandler appSecurityExpressionHandler, ZuulProperties zuulProperties, AuthenticationSuccessHandler appAuthenticationSuccessHandler, AuthenticationFailureHandler appAuthenticationFailureHandler, AccessDeniedHandler appAccessDeniedHandler, ValidateCodeRepository appValidateCodeRepository, ValidateCodeRepository sessionCodeRepository, SmsAuthorizationSecurityConfig smsAuthorizationSecurityConfig) {
+		this.appSecurityExpressionHandler = appSecurityExpressionHandler;
+		this.zuulProperties = zuulProperties;
+		this.appAuthenticationSuccessHandler = appAuthenticationSuccessHandler;
+		this.appAuthenticationFailureHandler = appAuthenticationFailureHandler;
+		this.appAccessDeniedHandler = appAccessDeniedHandler;
+		this.appValidateCodeRepository = appValidateCodeRepository;
+		this.sessionCodeRepository = sessionCodeRepository;
+		this.smsAuthorizationSecurityConfig = smsAuthorizationSecurityConfig;
+	}
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) {
 		resources.expressionHandler(appSecurityExpressionHandler);
 	}
 
-	@Autowired
-	private ZuulProperties zuulProperties;
-	@Autowired
-	private AuthenticationSuccessHandler appAuthenticationSuccessHandler;
-	@Autowired
-	private AuthenticationFailureHandler appAuthenticationFailureHandler;
-	@Autowired
-	private AccessDeniedHandler appAccessDeniedHandler;
-	@Autowired
-	private ValidateCodeRepository appValidateCodeRepository;
-	@Autowired
-	private ValidateCodeRepository sessionCodeRepository;
-	@Autowired
-    private SmsAuthorizationSecurityConfig smsAuthorizationSecurityConfig;
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
@@ -74,10 +77,6 @@ public class AppResourceServiceAdapter extends ResourceServerConfigurerAdapter {
 				.authenticated()
 				.and()
 				.exceptionHandling().accessDeniedHandler(appAccessDeniedHandler)
-			.and()
-				.authorizeRequests()
-				.anyRequest()
-				.access("@defaultZuulAuthorizationService.hasPermission(request,authentication)")
 		    .and()
 			    .apply(smsAuthorizationSecurityConfig)
             .and()

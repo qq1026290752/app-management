@@ -18,8 +18,11 @@ import java.util.Map;
 @RestController
 public class WebRestController {
 
-    @Autowired
-    private ZuulProperties zuulProperties;
+    private final ZuulProperties zuulProperties;
+
+    public WebRestController(ZuulProperties zuulProperties) {
+        this.zuulProperties = zuulProperties;
+    }
 
     @PostMapping("/me")
     public  Map<String, Object> getCurrentUser(Authentication user, HttpServletRequest request) throws UnsupportedEncodingException {

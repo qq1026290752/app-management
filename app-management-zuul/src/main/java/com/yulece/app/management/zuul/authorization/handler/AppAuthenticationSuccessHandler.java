@@ -5,8 +5,9 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.collect.Maps;
 import com.yulece.app.management.zuul.constant.ZuulAppConstant;
-import org.apache.commons.collections.MapUtils;
+import org.apache.commons.collections4.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +78,7 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
 				throw new UnapprovedClientAuthenticationException("clientSecret:"+clientSecret+"对应的信息不匹配。");
 			}
 			@SuppressWarnings("unchecked")
-			TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_MAP, clientId, clientDetails.getScope(),"custom");
+			TokenRequest tokenRequest = new TokenRequest(Maps.newHashMap(), clientId, clientDetails.getScope(),"custom");
 
 			OAuth2Request auth2Request = tokenRequest.createOAuth2Request(clientDetails);
 

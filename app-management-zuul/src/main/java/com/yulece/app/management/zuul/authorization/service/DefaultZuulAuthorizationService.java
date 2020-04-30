@@ -35,7 +35,7 @@ public class DefaultZuulAuthorizationService implements ZuulAuthorizationService
         boolean isPermission = false;
         String requestURI = request.getRequestURI();
         if(StringUtils.isEmpty(requestURI)){
-            return isPermission;
+            return false;
         }
         //匿名用户不能经过授权
         if(authentication!=null&&!authentication.getPrincipal().equals("anonymousUser")&&
@@ -56,6 +56,6 @@ public class DefaultZuulAuthorizationService implements ZuulAuthorizationService
             }
             return isPermission;
         }
-        return isPermission;
+        return false;
     }
 }
