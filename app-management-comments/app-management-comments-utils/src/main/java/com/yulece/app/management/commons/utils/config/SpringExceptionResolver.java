@@ -41,7 +41,7 @@ public class SpringExceptionResolver {
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public void handleGlobalException(HttpServletRequest request, Exception e, HttpServletResponse response) throws IOException {
-        response.setContentType(MediaType.APPLICATION_JSON_UTF8.toString());
+        response.setContentType(MediaType.APPLICATION_JSON.toString());
         if (e instanceof NoHandlerFoundException) {
             response.getWriter().print(objectMapper.writeValueAsString(ResultVo.createErrorResult(e.getMessage(), 404)));
         } else if (e instanceof AppException) {
@@ -50,8 +50,7 @@ public class SpringExceptionResolver {
             String errorMessage = e.getMessage();
             if (errorMessage.contains("code") && errorMessage.contains("message")) {
                 String message = errorMessage.substring(errorMessage.indexOf("{"));
-                ResultVo parse = objectMapper.readValue(message,ResultVo.class);
-                response.getWriter().print(objectMapper.writeValueAsString(parse));
+                response.getWriter().print(objectMapper.writeValueAsString(objectMapper.readValue(message,ResultVo.class)));
             } else {
                 response.getWriter().print(objectMapper.writeValueAsString(ResultVo.createErrorResult("程序内部错误,请稍后重试", 500)));
             }

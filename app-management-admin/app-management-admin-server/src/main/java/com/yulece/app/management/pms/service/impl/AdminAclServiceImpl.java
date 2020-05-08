@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AdminAclServiceImpl implements AdminAclService {
 
-    @Autowired
     private final AdminAclRepository adminAclRepository;
 
     public AdminAclServiceImpl(AdminAclRepository adminAclRepository) {

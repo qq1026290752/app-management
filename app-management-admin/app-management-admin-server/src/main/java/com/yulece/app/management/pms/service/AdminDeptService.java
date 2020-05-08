@@ -1,7 +1,7 @@
 package com.yulece.app.management.pms.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yulece.app.management.pms.dto.dept.AdminDeptListResponse;
-import com.yulece.app.management.pms.dto.dept.AdminDeptTreeDto;
+import com.yulece.app.management.pms.entity.tree.AdminDeptTreeDto;
 import com.yulece.app.management.pms.vo.dept.AdminDeptCreateRequest;
 import com.yulece.app.management.pms.vo.dept.AdminDeptQueryRequest;
 import com.yulece.app.management.pms.vo.dept.AdminDeptUpdateRequest;

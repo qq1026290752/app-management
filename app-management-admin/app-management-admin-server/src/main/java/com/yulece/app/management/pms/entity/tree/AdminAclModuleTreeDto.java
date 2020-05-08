@@ -1,8 +1,9 @@
-package com.yulece.app.management.pms.dto.acl.module;
+package com.yulece.app.management.pms.entity.tree;
 
 import com.google.common.collect.Lists;
 import com.yulece.app.management.pms.entity.AdminAclModule;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  * @Description:
  * @Date 2020-01-05 23:18
  **/
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class AdminAclModuleTreeDto extends AdminAclModule {
 

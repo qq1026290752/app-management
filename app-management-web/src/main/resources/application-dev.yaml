@@ -4,3 +4,12 @@ eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:8761/eureka
+spring:
+  redis:
+    database: 0
+    host: 140.143.234.53
+    port: 6999
+zuul:
+  serviceId: spring-cloud-getaway-config
+
+

@@ -1,8 +1,10 @@
 package com.yulece.app.management.pms.entity;
 
 import lombok.Data;
+import org.springframework.data.annotation.Transient;
 
 import java.util.Date;
+
 /**
  * Copyright © 2019 eSunny Info. Tech Ltd. All rights reserved.
  *
@@ -26,5 +28,18 @@ public class AdminAclModule {
     private String operateIp;
     private Date createTime;
     private Date updateTime;
+    @Transient
+    public static String LEVEL = "0";
 
+    public static String getLevel(AdminAclModule adminAclModule){
+        if(adminAclModule==null){
+            return LEVEL;
+        }else {
+            return adminAclModule.getModuleLevel().concat(",").concat(String.valueOf(adminAclModule.getModuleId()));
+        }
+    }
+
+    public static String getLevel(String level,Integer moduleParentId){
+        return level.concat(",").concat(level);
+    }
 }

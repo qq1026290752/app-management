@@ -1,15 +1,18 @@
 package com.yulece.app.management.pms.authentication;
 
+import com.yulece.app.management.commons.utils.ResultVo;
 import com.yulece.app.management.pms.request.LoginRequest;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import com.yulece.app.management.pms.response.TokenInfo;
+import com.yulece.app.management.utils.RestTemplateTools;
+import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Copyright © 2019 eSunny Info. Tech Ltd. All rights reserved.
@@ -24,23 +27,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("pms")
 public class AuthenticationController {
 
-  public ResponseEntity login(@RequestBody LoginRequest loginRequest){
-
-   /* String oauthLoginUrl = "http://localhost/auth/authentication/form";
-
-    HttpHeaders headers = new HttpHeaders();
-    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-    headers.setBasicAuth("admin", "123456");
-
-    MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-    params.add("code", code);
-    params.add("grant_type", "authorization_code");
-    params.add("redirect_uri", "http://admin.imooc.com:8080/oauth/callback");
-
-    HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
-
-    ResponseEntity<TokenInfo> token = restTemplate.exchange(oauthLoginUrl, HttpMethod.POST, entity, TokenInfo.class);*/
-    return null;
+  private final RestTemplateTools restTemplateTools;
+  public AuthenticationController(RestTemplateTools restTemplateTools) {
+    this.restTemplateTools = restTemplateTools;
   }
 
+
+  @RequestMapping(value = "login",method = RequestMethod.POST)
+  public ResultVo login(@RequestBody LoginRequest loginRequest, HttpServletRequest request){
+    String url="/auth/authentication/form";
+    MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+    params.add("username", loginRequest.getUserName());
+    params.add("password", loginRequest.getPassWord());
+    TokenInfo tokenInfo = restTemplateTools.postLogin(params, MediaType.APPLICATION_FORM_URLENCODED, url, TokenInfo.class);
+    request.getSession(true).setAttribute("userToken",tokenInfo);
+    return ResultVo.createSuccessResult();
+  }
+
+  @RequestMapping(value = "getMe",method = RequestMethod.GET)
+  public ResultVo<String> getMe(HttpServletRequest request){
+    String token = restTemplateTools.request(null, "/auth/me", true, request,HttpMethod.GET,MediaType.APPLICATION_JSON,String.class);
+    return ResultVo.createSuccessResult(token);
+  }
 }

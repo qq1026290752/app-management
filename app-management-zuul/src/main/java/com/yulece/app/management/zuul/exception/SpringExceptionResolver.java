@@ -6,7 +6,6 @@ import com.yulece.app.management.commons.utils.exception.AppException;
 import com.yulece.app.management.commons.utils.exception.ParamException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -30,10 +29,13 @@ import java.io.IOException;
 @ControllerAdvice
 public class SpringExceptionResolver {
 
-    @Autowired
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+
+    public SpringExceptionResolver(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
 
 
     @ExceptionHandler(value = Exception.class)

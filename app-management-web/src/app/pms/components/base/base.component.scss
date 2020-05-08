@@ -1,0 +1,14 @@
+.site{
+  display: flex;
+  flex-direction: column;
+}
+main{
+  flex: 1;
+}
+header,footer{
+  height: 8%;
+  width: 100%;
+}
+mat-sidenav{
+  width: 10%;
+}

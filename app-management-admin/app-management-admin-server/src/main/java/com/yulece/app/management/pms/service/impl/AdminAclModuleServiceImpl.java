@@ -13,9 +13,8 @@ import com.yulece.app.management.commons.utils.PojoConvertUtil;
 import com.yulece.app.management.commons.utils.enums.AppParamEnum;
 import com.yulece.app.management.commons.utils.exception.AppException;
 import com.yulece.app.management.pms.dto.acl.module.AdminAclModuleResponse;
-import com.yulece.app.management.pms.dto.acl.module.AdminAclModuleTreeDto;
 import com.yulece.app.management.pms.entity.AdminAclModule;
-import com.yulece.app.management.pms.entity.AdminUser;
+import com.yulece.app.management.pms.entity.tree.AdminAclModuleTreeDto;
 import com.yulece.app.management.pms.repository.AdminAclModuleRepository;
 import com.yulece.app.management.pms.service.AdminAclModuleService;
 import com.yulece.app.management.pms.vo.acl.module.AdminAclModuleCreateRequest;
@@ -62,7 +61,7 @@ public class AdminAclModuleServiceImpl implements AdminAclModuleService {
         }
         AdminAclModule parentAclModule = adminAclModuleRepository.selectById(param.getModuleParentId());
         AdminAclModule adminAclModule = PojoConvertUtil.convertPojo(param, AdminAclModule.class);
-        adminAclModule.setModuleLevel(param.getLevel(parentAclModule));
+        adminAclModule.setModuleLevel(AdminAclModule.getLevel(parentAclModule));
         adminAclModule.setCreateTime(new Date());
         adminAclModule.setOperateIp(IPUtils.getIp(request));
         adminAclModule.setUpdateTime(new Date());
@@ -103,7 +102,7 @@ public class AdminAclModuleServiceImpl implements AdminAclModuleService {
         String oldAclModuleLevel = oldAclModule.getModuleLevel();
         if(!param.getModuleParentId().equals(oldAclModule.getModuleParentId())){
             AdminAclModule parentAclModule = adminAclModuleRepository.selectById(param.getModuleParentId());
-            oldAclModule.setModuleLevel(param.getLevel(parentAclModule));
+            oldAclModule.setModuleLevel(AdminAclModule.getLevel(parentAclModule));
             List<AdminAclModule> adminAclModules = adminAclModuleRepository.selectList(new QueryWrapper<AdminAclModule>().lambda()
                     .likeRight(AdminAclModule::getModuleLevel, oldAclModule.getModuleLevel())
             );
@@ -146,19 +145,19 @@ public class AdminAclModuleServiceImpl implements AdminAclModuleService {
 
         for (AdminAclModuleTreeDto dto : dtoList) {
             levelAclModuleMap.put(dto.getModuleLevel(), dto);
-            if (AdminAclModuleCreateRequest.LEVEL.equals(dto.getModuleLevel())) {
+            if (AdminAclModule.LEVEL.equals(dto.getModuleLevel())) {
                 rootList.add(dto);
             }
         }
         Collections.sort(rootList, aclModuleSeqComparator);
-        transformAclModuleTree(rootList, AdminAclModuleCreateRequest.LEVEL, levelAclModuleMap);
+        transformAclModuleTree(rootList, AdminAclModule.LEVEL, levelAclModuleMap);
         return rootList;
     }
 
     private void transformAclModuleTree(List<AdminAclModuleTreeDto> rootList, String level, Multimap<String, AdminAclModuleTreeDto> levelAclModuleMap) {
         for (int i = 0; i < rootList.size(); i++) {
             AdminAclModuleTreeDto dto = rootList.get(i);
-            String nextLevel = AdminAclModuleCreateRequest.getLevel(level, dto.getModuleId());
+            String nextLevel = AdminAclModule.getLevel(level, dto.getModuleId());
             List<AdminAclModuleTreeDto> tempList = (List<AdminAclModuleTreeDto>) levelAclModuleMap.get(nextLevel);
             if (!CollectionUtils.isEmpty(tempList)) {
                 Collections.sort(tempList, aclModuleSeqComparator);

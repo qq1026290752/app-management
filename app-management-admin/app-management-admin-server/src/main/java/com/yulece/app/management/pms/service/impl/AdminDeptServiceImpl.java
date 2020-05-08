@@ -13,7 +13,7 @@ import com.yulece.app.management.commons.utils.PojoConvertUtil;
 import com.yulece.app.management.commons.utils.enums.AppParamEnum;
 import com.yulece.app.management.commons.utils.exception.AppException;
 import com.yulece.app.management.pms.dto.dept.AdminDeptListResponse;
-import com.yulece.app.management.pms.dto.dept.AdminDeptTreeDto;
+import com.yulece.app.management.pms.entity.tree.AdminDeptTreeDto;
 import com.yulece.app.management.pms.entity.AdminDept;
 import com.yulece.app.management.pms.repository.AdminDeptRepository;
 import com.yulece.app.management.pms.service.AdminDeptService;

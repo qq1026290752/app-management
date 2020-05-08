@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,21 +25,15 @@ public class WebRestController {
         this.zuulProperties = zuulProperties;
     }
 
-    @PostMapping("/me")
-    public  Map<String, Object> getCurrentUser(Authentication user, HttpServletRequest request) throws UnsupportedEncodingException {
-        String header = request.getHeader("Authorization");
-        String toke = StringUtils.substringAfter(header, "bearer ");
-
-        Map<String, Object> jwtClaims =
-                Jwts.parser().setSigningKey(zuulProperties.getOauth().getOauth2SigningKey().getBytes("UTF-8")).parseClaimsJws(toke).getBody();
-        return jwtClaims;
-
+    @GetMapping("/me")
+    public String getCurrentUser(Authentication user, HttpServletRequest request) throws UnsupportedEncodingException {
+        return user.getName();
     }
-    @GetMapping("/hello")
-    public Map<String,Object> word(){
-       HashMap<String, Object> map = Maps.newHashMap();
-       map.put("hello","word");
-       return map;
+    @PostMapping("/hello")
+    public String word(@RequestBody User user){
+       return "success";
     }
+
+
 
 }

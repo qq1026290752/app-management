@@ -1,7 +1,7 @@
 package com.yulece.app.management.pms.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.yulece.app.management.pms.dto.dept.AdminDeptTreeDto;
+import com.yulece.app.management.pms.entity.tree.AdminDeptTreeDto;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
 

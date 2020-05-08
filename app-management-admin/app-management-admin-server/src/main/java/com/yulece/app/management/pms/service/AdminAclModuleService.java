@@ -2,7 +2,7 @@ package com.yulece.app.management.pms.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yulece.app.management.pms.dto.acl.module.AdminAclModuleResponse;
-import com.yulece.app.management.pms.dto.acl.module.AdminAclModuleTreeDto;
+import com.yulece.app.management.pms.entity.tree.AdminAclModuleTreeDto;
 import com.yulece.app.management.pms.vo.acl.module.AdminAclModuleCreateRequest;
 import com.yulece.app.management.pms.vo.acl.module.AdminAclModuleQueryRequest;
 import com.yulece.app.management.pms.vo.acl.module.AdminAclModuleUpdateRequest;

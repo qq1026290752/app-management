@@ -1,4 +1,4 @@
-package com.yulece.app.management.pms.dto.dept;
+package com.yulece.app.management.pms.entity.tree;
 
 import com.yulece.app.management.pms.entity.AdminDept;
 

@@ -2,4 +2,9 @@ spring:
   application:
     name: application-angular-web
   profiles:
-    active: dev
+    active: pord
+  main:
+    allow-bean-definition-overriding: true
+oauth2:
+  clientId: app
+  clientSecret: 123456

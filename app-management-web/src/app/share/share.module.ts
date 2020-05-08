@@ -1,21 +1,34 @@
-import { NgModule } from '@angular/core';
+import {NgModule, Optional, SkipSelf} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {AppRoutingModule} from "../app-routing.module";
-import {MatSidenavModule} from "@angular/material";
-import {MatCardModule} from "@angular/material/card";
-import {MatButtonModule} from "@angular/material/button";
-import { FormsModule } from '@angular/forms'
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatIconModule} from "@angular/material/icon";
-import {MatSlideToggleModule} from "@angular/material/slide-toggle";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {ElColModule} from "element-angular/release/col/module";
-import {ElRowModule} from "element-angular/release/row/module";
 
+import {FormsModule } from '@angular/forms'
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ElModule} from "element-angular/release/element-angular.module";
+import {DomSanitizer} from "@angular/platform-browser";
+import {
+  HeaderComponent,
+  FooterComponent,
+  SidebarComponent
+} from "./componentes";
+import {AppRoutingModule} from "../app-routing.module";
+import {loadIconResources} from "../utils/icon.utils";
+import {
+  MatListModule,
+  MatButtonModule,
+  MatCardModule,
+  MatSidenavModule,
+  MatToolbarModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSlideToggleModule,
+  MatIconModule,
+  MatIconRegistry,
+  MatExpansionModule,
+  MatAccordionDisplayMode
+} from "@angular/material";
+import {} from "@angular/material/expansion";
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     AppRoutingModule,
@@ -28,13 +41,16 @@ import {ElRowModule} from "element-angular/release/row/module";
     FormsModule,
     MatSlideToggleModule,
     BrowserAnimationsModule,
-    ElColModule,
-    ElRowModule
+    ElModule,
+    MatListModule,
+    MatToolbarModule,
+    MatExpansionModule
   ],
   exports: [
     CommonModule,
     AppRoutingModule,
     MatSidenavModule,
+    MatExpansionModule,
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -43,8 +59,20 @@ import {ElRowModule} from "element-angular/release/row/module";
     FormsModule,
     MatSlideToggleModule,
     BrowserAnimationsModule,
-    ElColModule,
-    ElRowModule
-  ]
+    ElModule,
+    HeaderComponent,
+    FooterComponent,
+    SidebarComponent,
+    MatListModule,
+    MatToolbarModule,
+  ],
+  declarations: [HeaderComponent, FooterComponent, SidebarComponent]
 })
-export class ShareModule { }
+export class ShareModule {
+  constructor(@Optional() @SkipSelf() parent :ShareModule,ir:MatIconRegistry,ds:DomSanitizer) {
+    if(parent){
+      throw new Error('核心模块，只需要加载一次')
+    }
+    loadIconResources(ir,ds);
+  }
+}

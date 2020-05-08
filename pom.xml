@@ -33,6 +33,9 @@
         <pagehelper.spring.version>1.2.6</pagehelper.spring.version>
         <spring-security.version>5.2.3.RELEASE</spring-security.version>
         <jwt.verson>0.9.0</jwt.verson>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
     </properties>
 
     <dependencyManagement>
@@ -55,6 +58,13 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>2.2.6.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.session</groupId>
+                <artifactId>spring-session-bom</artifactId>
+                <version>Corn-SR2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

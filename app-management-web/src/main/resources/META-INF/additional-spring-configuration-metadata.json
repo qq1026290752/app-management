@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.devtools.restart.exclude.META-INF/resources/**,resources/**,static/**,public/**,templates/**,**/*Test",
+      "type": "java.lang.String",
+      "description": "Description for spring.devtools.restart.exclude.META-INF/resources/**,resources/**,static/**,public/**,templates/**,**/*Test."
+  }
+] }

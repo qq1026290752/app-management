@@ -1,9 +1,8 @@
 package com.yulece.app.management.pms.controller;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.yulece.app.management.commons.utils.ResultVo;
 import com.yulece.app.management.pms.dto.acl.module.AdminAclModuleResponse;
-import com.yulece.app.management.pms.dto.acl.module.AdminAclModuleTreeDto;
+import com.yulece.app.management.pms.entity.tree.AdminAclModuleTreeDto;
 import com.yulece.app.management.pms.service.AdminAclModuleService;
 import com.yulece.app.management.pms.vo.acl.module.AdminAclModuleCreateRequest;
 import com.yulece.app.management.pms.vo.acl.module.AdminAclModuleQueryRequest;
@@ -33,20 +32,20 @@ public class AdminAclModuleController {
     }
 
     @PostMapping
-    public ResultVo create(HttpServletRequest request, @RequestBody AdminAclModuleCreateRequest params){
+    public ResultVo<Void> create(HttpServletRequest request, @RequestBody AdminAclModuleCreateRequest params){
         adminAclModuleService.save(request, params);
         return ResultVo.createSuccessResult();
     }
 
     @PutMapping
-    public ResultVo update(HttpServletRequest request, @RequestBody AdminAclModuleUpdateRequest params){
+    public ResultVo<Void> update(HttpServletRequest request, @RequestBody AdminAclModuleUpdateRequest params){
         adminAclModuleService.update(request, params);
         return ResultVo.createSuccessResult();
     }
 
     @PostMapping("/list")
     public ResultVo<IPage<AdminAclModuleResponse>> list(@RequestBody AdminAclModuleQueryRequest request){
-         IPage<AdminAclModuleResponse> list = adminAclModuleService.page(request);
+        IPage<AdminAclModuleResponse> list = adminAclModuleService.page(request);
         return ResultVo.createSuccessResult(list);
     }
 
