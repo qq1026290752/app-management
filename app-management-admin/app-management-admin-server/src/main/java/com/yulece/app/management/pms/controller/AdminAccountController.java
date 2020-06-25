@@ -27,9 +27,8 @@ public class AdminAccountController {
         this.adminUserService = adminUserService;
     }
 
-
     @GetMapping("/{active}/active")
-    public ResultVo activeAccount(@PathVariable("active") String active){
+    public ResultVo<Void> activeAccount(@PathVariable("active") String active){
         adminUserService.activeAccount(active);
         return ResultVo.createSuccessResult();
     }

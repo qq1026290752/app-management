@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Date 2019-12-28 22:05
  **/
 @RestController
-@RequestMapping("/user")
+@RequestMapping("user")
 public class AdminUserController {
 
     private final AdminUserService adminUserService;
@@ -31,16 +31,18 @@ public class AdminUserController {
         this.adminUserService = adminUserService;
     }
     @PostMapping
-    public ResultVo save(@RequestBody AdminUserCreateRequest param, HttpServletRequest request){
+    public ResultVo<Void> save(@RequestBody AdminUserCreateRequest param, HttpServletRequest request){
         adminUserService.save(param,request);
         return ResultVo.createSuccessResult();
     }
 
     @PutMapping
-    public ResultVo update(@RequestBody AdminUserUpdateRequest param, HttpServletRequest request){
+    public ResultVo<Void> update(@RequestBody AdminUserUpdateRequest param, HttpServletRequest request){
         adminUserService.update(param,request);
         return ResultVo.createSuccessResult();
     }
+
+
     @PostMapping("/list")
     public ResultVo<IPage<AdminUserResponse>> update(@RequestBody AdminUserQueryRequest model, HttpServletRequest request){
         IPage<AdminUserResponse> page = adminUserService.page(model);

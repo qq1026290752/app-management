@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {AclModuleComponent, BaseComponent, DashboardComponent} from "./components";
-import {PmsGuard} from "../pms.guard";
 const routes: Routes = [
   {
     path : "pms",
@@ -20,7 +19,6 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  providers:[PmsGuard]
+  imports: [RouterModule.forChild(routes)]
 })
 export class PmsRoutingModule { }

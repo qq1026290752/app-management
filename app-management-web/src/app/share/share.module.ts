@@ -1,7 +1,6 @@
 import {NgModule, Optional, SkipSelf} from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import {FormsModule } from '@angular/forms'
+import { FormsModule,ReactiveFormsModule } from '@angular/forms'
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ElModule} from "element-angular/release/element-angular.module";
 import {DomSanitizer} from "@angular/platform-browser";
@@ -23,10 +22,10 @@ import {
   MatSlideToggleModule,
   MatIconModule,
   MatIconRegistry,
-  MatExpansionModule,
-  MatAccordionDisplayMode
+  MatSelectModule,
+  MatExpansionModule
 } from "@angular/material";
-import {} from "@angular/material/expansion";
+import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   imports: [
@@ -42,9 +41,11 @@ import {} from "@angular/material/expansion";
     MatSlideToggleModule,
     BrowserAnimationsModule,
     ElModule,
+    MatSelectModule,
     MatListModule,
     MatToolbarModule,
-    MatExpansionModule
+    MatTableModule,
+    ReactiveFormsModule,
   ],
   exports: [
     CommonModule,
@@ -52,6 +53,7 @@ import {} from "@angular/material/expansion";
     MatSidenavModule,
     MatExpansionModule,
     MatCardModule,
+    MatSelectModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
@@ -65,6 +67,8 @@ import {} from "@angular/material/expansion";
     SidebarComponent,
     MatListModule,
     MatToolbarModule,
+    MatTableModule,
+    ReactiveFormsModule,
   ],
   declarations: [HeaderComponent, FooterComponent, SidebarComponent]
 })

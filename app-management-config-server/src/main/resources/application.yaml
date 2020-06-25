@@ -2,7 +2,7 @@ spring:
   application:
     name:  application-spring-cloud-eureka
   profiles:
-    active: prod
+    active: dev
   cloud:
     config:
       server:

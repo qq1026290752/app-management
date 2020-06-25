@@ -12,6 +12,7 @@
     <artifactId>app-management-zuul</artifactId>
     <properties>
         <skipTests>true</skipTests>
+        <java.version>1.8</java.version>
     </properties>
 
     <dependencies>

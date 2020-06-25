@@ -97,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<mat-expansion-panel [disabled]=\"isDisabled\" >\n  <mat-expansion-panel-header>\n    <mat-panel-title>\n      基础管理 &gt; 权限模块管理\n    </mat-panel-title>\n  </mat-expansion-panel-header>\n</mat-expansion-panel>\n<mat-divider [inset]=\"true\"></mat-divider>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<mat-card>\r\n  <mat-card-header>\r\n    <mat-card-title>\r\n      基础管理 &lt; 权限模块管理\r\n    </mat-card-title>\r\n  </mat-card-header>\r\n  <ng-form>\r\n    <mat-card-content  class=\"el-row\">\r\n      <mat-form-field class=\"el-col-8\">\r\n        <label>\r\n          <input matInput placeholder=\"权限模块名称\" name=\"aclModuleName\" [(ngModel)]=\"model.aclModuleName\">\r\n        </label>\r\n      </mat-form-field>\r\n      <mat-form-field class=\"el-col-8\">\r\n        <mat-select placeholder=\"模块状态选择\" name=\"aclModuleStatus\" [(ngModel)]=\"model.status\">\r\n          <mat-option value=\"-1\">请选择</mat-option>\r\n          <mat-option value=\"0\">正常</mat-option>\r\n          <mat-option value=\"1\">冻结</mat-option>\r\n        </mat-select>\r\n      </mat-form-field>\r\n      <mat-form-field class=\"el-col-8\">\r\n        <label>\r\n          <input matInput placeholder=\"上级权限模块\" name=\"parentAclModuleName\" [(ngModel)]=\"model.parentAclModuleName\" >\r\n        </label>\r\n      </mat-form-field>\r\n      <div class=\"clearfix\"></div>\r\n    </mat-card-content>\r\n    <mat-card-footer class=\"el-row\" type=\"flex\"  justify=\"center\">\r\n      <div el-col [span]=\"8\">&nbsp;</div>\r\n      <div el-col [span]=\"4\">\r\n        <button type=\"submit\" mat-raised-button color=\"accent\">查询</button>\r\n      </div>\r\n      <div el-col [span]=\"4\">\r\n        <button type=\"submit\" mat-raised-button color=\"accent\">重置</button>\r\n      </div>\r\n      <div class=\"clearfix\"></div>\r\n    </mat-card-footer>\r\n  </ng-form>\r\n</mat-card>\r\n<table mat-table [dataSource]=\"dataSource\" class=\"mat-elevation-z8\">\r\n\r\n  <!-- Position Column -->\r\n  <ng-container matColumnDef=\"position\">\r\n    <th mat-header-cell *matHeaderCellDef> No. </th>\r\n    <td mat-cell *matCellDef=\"let element\"> {{element.position}} </td>\r\n  </ng-container>\r\n\r\n  <!-- Name Column -->\r\n  <ng-container matColumnDef=\"name\">\r\n    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>\r\n    <td mat-cell *matCellDef=\"let element\"> {{element.name}} </td>\r\n  </ng-container>\r\n\r\n  <!-- Weight Column -->\r\n  <ng-container matColumnDef=\"weight\">\r\n    <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>\r\n    <td mat-cell *matCellDef=\"let element\"> {{element.weight}} </td>\r\n  </ng-container>\r\n\r\n  <!-- Symbol Column -->\r\n  <ng-container matColumnDef=\"symbol\">\r\n    <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>\r\n    <td mat-cell *matCellDef=\"let element\"> {{element.symbol}} </td>\r\n  </ng-container>\r\n\r\n  <tr mat-header-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n  <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n</table>\r\n");
 
 /***/ }),
 
@@ -413,7 +413,6 @@ __webpack_require__.r(__webpack_exports__);
 
 const routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
-    { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -843,15 +842,12 @@ let LoginComponent = class LoginComponent {
         this.password = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required]);
     }
     ngOnInit() {
-        this.user.check = false;
-        this.http.get("/pms/getMe").subscribe((res) => this.router.navigate(['/pms/dashboard']).then(r => r), () => {
-            this.notify.error("系统请求错误", "系统错误");
-        });
     }
     onLogin() {
         let headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]();
         headers = headers.set('content-type', 'application/json');
         this.http.post("/pms/login", JSON.stringify(this.user), { headers }).subscribe((res) => {
+            console.log("login success");
             this.router.navigate(['/pms/dashboard']).then(r => r);
         }, () => {
             this.notify.error("登陆失败,请重新登陆", "登陆提示");
@@ -980,36 +976,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/app/pms.guard.ts":
-/*!******************************!*\
-  !*** ./src/app/pms.guard.ts ***!
-  \******************************/
-/*! exports provided: PmsGuard */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PmsGuard", function() { return PmsGuard; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-
-
-let PmsGuard = class PmsGuard {
-    canActivate(next, state) {
-        console.log("canActivate........");
-        return true;
-    }
-};
-PmsGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], PmsGuard);
-
-
-
-/***/ }),
-
 /***/ "./src/app/pms/components/acl-module/acl-module.component.scss":
 /*!*********************************************************************!*\
   !*** ./src/app/pms/components/acl-module/acl-module.component.scss ***!
@@ -1019,7 +985,7 @@ PmsGuard = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Btcy9jb21wb25lbnRzL2FjbC1tb2R1bGUvYWNsLW1vZHVsZS5jb21wb25lbnQuc2NzcyJ9 */");
+/* harmony default export */ __webpack_exports__["default"] = ("mat-card-footer {\n  margin-bottom: 1rem;\n}\n\nmat-card {\n  border: 1px solid rgba(0, 0, 0, 0.03);\n  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.24), 0 0 2px rgba(0, 0, 0, 0.12);\n  margin-bottom: 1rem;\n}\n\n/* Structure */\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcG1zL2NvbXBvbmVudHMvYWNsLW1vZHVsZS9HOlxcaWRlYV93b3JrXFxwcm9qZWN0XFxhcHAtbWFuYWdlbWVudFxcYXBwLW1hbmFnZW1lbnQtd2ViL3NyY1xcYXBwXFxwbXNcXGNvbXBvbmVudHNcXGFjbC1tb2R1bGVcXGFjbC1tb2R1bGUuY29tcG9uZW50LnNjc3MiLCJzcmMvYXBwL3Btcy9jb21wb25lbnRzL2FjbC1tb2R1bGUvYWNsLW1vZHVsZS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLG1CQUFBO0FDQ0Y7O0FEQ0E7RUFDRSxxQ0FBQTtFQUNBLHNFQUFBO0VBQ0EsbUJBQUE7QUNFRjs7QURBQSxjQUFBIiwiZmlsZSI6InNyYy9hcHAvcG1zL2NvbXBvbmVudHMvYWNsLW1vZHVsZS9hY2wtbW9kdWxlLmNvbXBvbmVudC5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsibWF0LWNhcmQtZm9vdGVye1xyXG4gIG1hcmdpbi1ib3R0b206IDFyZW07XHJcbn1cclxubWF0LWNhcmQge1xyXG4gIGJvcmRlcjogMXB4IHNvbGlkIHJnYmEoMCwwLDAsLjAzKTtcclxuICBib3gtc2hhZG93OiAwIDJweCAycHggcmdiYSgwLDAsMCwuMjQpLCAwIDAgMnB4IHJnYmEoMCwwLDAsLjEyKTtcclxuICBtYXJnaW4tYm90dG9tOiAxcmVtO1xyXG59XHJcbi8qIFN0cnVjdHVyZSAqL1xyXG4iLCJtYXQtY2FyZC1mb290ZXIge1xuICBtYXJnaW4tYm90dG9tOiAxcmVtO1xufVxuXG5tYXQtY2FyZCB7XG4gIGJvcmRlcjogMXB4IHNvbGlkIHJnYmEoMCwgMCwgMCwgMC4wMyk7XG4gIGJveC1zaGFkb3c6IDAgMnB4IDJweCByZ2JhKDAsIDAsIDAsIDAuMjQpLCAwIDAgMnB4IHJnYmEoMCwgMCwgMCwgMC4xMik7XG4gIG1hcmdpbi1ib3R0b206IDFyZW07XG59XG5cbi8qIFN0cnVjdHVyZSAqLyJdfQ== */");
 
 /***/ }),
 
@@ -1035,14 +1001,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AclModuleComponent", function() { return AclModuleComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_material_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material/table */ "./node_modules/@angular/material/esm2015/table.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 
 
+
+
+const ELEMENT_DATA = [
+    { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
+    { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
+    { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
+    { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
+    { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
+    { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
+    { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
+    { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
+    { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
+    { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
+];
 let AclModuleComponent = class AclModuleComponent {
-    constructor() { }
+    constructor(http) {
+        this.http = http;
+        this.displayedColumns = ['position', 'name', 'weight', 'symbol'];
+        this.dataSource = new _angular_material_table__WEBPACK_IMPORTED_MODULE_2__["MatTableDataSource"](ELEMENT_DATA);
+    }
     ngOnInit() {
-        this.isDisabled = false;
     }
 };
+AclModuleComponent.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] }
+];
 AclModuleComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-acl-module',
@@ -1318,8 +1306,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components */ "./src/app/pms/components/index.ts");
-/* harmony import */ var _pms_guard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../pms.guard */ "./src/app/pms.guard.ts");
-
 
 
 
@@ -1344,8 +1330,7 @@ let PmsRoutingModule = class PmsRoutingModule {
 };
 PmsRoutingModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
-        providers: [_pms_guard__WEBPACK_IMPORTED_MODULE_4__["PmsGuard"]]
+        imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)]
     })
 ], PmsRoutingModule);
 
@@ -1625,6 +1610,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _utils_icon_utils__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../utils/icon.utils */ "./src/app/utils/icon.utils.ts");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm2015/material.js");
+/* harmony import */ var _angular_material_table__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/material/table */ "./node_modules/@angular/material/esm2015/table.js");
+
 
 
 
@@ -1664,9 +1651,11 @@ ShareModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatSlideToggleModule"],
             _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"],
             element_angular_release_element_angular_module__WEBPACK_IMPORTED_MODULE_5__["ElModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatSelectModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatListModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatToolbarModule"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatExpansionModule"]
+            _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatTableModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
         ],
         exports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
@@ -1674,6 +1663,7 @@ ShareModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatSidenavModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatExpansionModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatCardModule"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatSelectModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatButtonModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatFormFieldModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatInputModule"],
@@ -1687,6 +1677,8 @@ ShareModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _componentes__WEBPACK_IMPORTED_MODULE_7__["SidebarComponent"],
             _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatListModule"],
             _angular_material__WEBPACK_IMPORTED_MODULE_10__["MatToolbarModule"],
+            _angular_material_table__WEBPACK_IMPORTED_MODULE_11__["MatTableModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
         ],
         declarations: [_componentes__WEBPACK_IMPORTED_MODULE_7__["HeaderComponent"], _componentes__WEBPACK_IMPORTED_MODULE_7__["FooterComponent"], _componentes__WEBPACK_IMPORTED_MODULE_7__["SidebarComponent"]]
     }),

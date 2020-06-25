@@ -25,7 +25,7 @@ import java.util.List;
  * @Date 2019-11-17 09:35
  **/
 @RestController
-@RequestMapping("/dept")
+@RequestMapping("dept")
 public class AdminDeptController {
 
     private final AdminDeptService adminDeptService;
@@ -35,13 +35,13 @@ public class AdminDeptController {
     }
 
     @PostMapping
-    public ResultVo create(HttpServletRequest request, @RequestBody AdminDeptCreateRequest params){
+    public ResultVo<Void> create(HttpServletRequest request, @RequestBody AdminDeptCreateRequest params){
         adminDeptService.create(request, params);
         return ResultVo.createSuccessResult();
     }
 
     @PutMapping
-    public ResultVo update(HttpServletRequest request, @RequestBody AdminDeptUpdateRequest params){
+    public ResultVo<Void> update(HttpServletRequest request, @RequestBody AdminDeptUpdateRequest params){
         adminDeptService.update(request, params);
         return ResultVo.createSuccessResult();
     }

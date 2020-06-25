@@ -1,8 +1,68 @@
-<mat-expansion-panel [disabled]="isDisabled" >
-  <mat-expansion-panel-header>
-    <mat-panel-title>
-      基础管理 &gt; 权限模块管理
-    </mat-panel-title>
-  </mat-expansion-panel-header>
-</mat-expansion-panel>
-<mat-divider [inset]="true"></mat-divider>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      基础管理 &lt; 权限模块管理
+    </mat-card-title>
+  </mat-card-header>
+  <ng-form>
+    <mat-card-content  class="el-row">
+      <mat-form-field class="el-col-8">
+        <label>
+          <input matInput placeholder="权限模块名称" name="aclModuleName" [(ngModel)]="model.aclModuleName">
+        </label>
+      </mat-form-field>
+      <mat-form-field class="el-col-8">
+        <mat-select placeholder="模块状态选择" name="aclModuleStatus" [(ngModel)]="model.status">
+          <mat-option value="-1">请选择</mat-option>
+          <mat-option value="0">正常</mat-option>
+          <mat-option value="1">冻结</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="el-col-8">
+        <label>
+          <input matInput placeholder="上级权限模块" name="parentAclModuleName" [(ngModel)]="model.parentAclModuleName" >
+        </label>
+      </mat-form-field>
+      <div class="clearfix"></div>
+    </mat-card-content>
+    <mat-card-footer class="el-row" type="flex"  justify="center">
+      <div el-col [span]="8">&nbsp;</div>
+      <div el-col [span]="4">
+        <button type="submit" mat-raised-button color="accent">查询</button>
+      </div>
+      <div el-col [span]="4">
+        <button type="submit" mat-raised-button color="accent">重置</button>
+      </div>
+      <div class="clearfix"></div>
+    </mat-card-footer>
+  </ng-form>
+</mat-card>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
+    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
+    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

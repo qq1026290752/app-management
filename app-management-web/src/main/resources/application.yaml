@@ -2,9 +2,14 @@ spring:
   application:
     name: application-angular-web
   profiles:
-    active: pord
+    active: dev
   main:
     allow-bean-definition-overriding: true
+  redis:
+    host: 140.143.234.53
+    port: 6999
 oauth2:
   clientId: app
   clientSecret: 123456
+zuul:
+  serviceId: spring-cloud-getaway-config

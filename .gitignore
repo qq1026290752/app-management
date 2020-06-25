@@ -17,6 +17,7 @@
 *.ipr
 /logs/
 /target/
+*-k8s.yaml
 
 ### NetBeans ###
 /nbproject/private/

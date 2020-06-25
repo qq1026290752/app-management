@@ -26,18 +26,13 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit() {
-    this.user.check = false;
-    this.http.get("/pms/getMe").subscribe((res)=>
-      this.router.navigate(['/pms/dashboard']).then(r => r)
-      ,()=>{
-      this.notify.error("系统请求错误","系统错误")
-    })
   }
 
   onLogin() {
     let headers = new HttpHeaders();
     headers= headers.set('content-type', 'application/json')
     this.http.post("/pms/login",JSON.stringify(this.user), {headers}).subscribe((res)=>{
+        console.log("login success")
          this.router.navigate(['/pms/dashboard']).then(r => r);
     },()=>{
       this.notify.error("登陆失败,请重新登陆","登陆提示")
