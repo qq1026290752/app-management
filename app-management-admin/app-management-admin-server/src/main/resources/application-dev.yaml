@@ -2,7 +2,7 @@ server:
   port: 8001
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://140.143.234.53:3306/application_admin?useUnicode=true&characterEncoding=utf-8&useSSL=false&&allowPublicKeyRetrieval=true
     username: admin
     password: 19940509WYC@

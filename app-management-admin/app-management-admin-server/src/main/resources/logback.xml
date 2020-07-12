@@ -14,7 +14,7 @@
     <contextName>fanxlxs</contextName>
 
     <!--文件夹在当前项目磁盘根目录-->
-    <property name="LOG_PATH" value="/modellog" />
+    <property name="LOG_PATH" value="/logs" />
     <!--设置系统日志目录-->
     <property name="APPDIR" value="logs" />
 
