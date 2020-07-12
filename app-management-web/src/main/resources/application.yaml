@@ -1,5 +1,0 @@
-spring:
-  application:
-    name: application-angular-web
-  profiles:
-    active: dev
