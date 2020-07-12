@@ -1,0 +1,11 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: app-admin
+  profiles:
+    active: dev
+eureka:
+  instance:
+    prefer-ip-address: true
+HOST_WEBSITE: account.yulece.com

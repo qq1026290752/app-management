@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: app-management-eureka-server
+  profiles:
+    active: prod

@@ -1,0 +1,35 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yulece.app.management.pms.repository.AdminAclModuleRepository">
+
+    <resultMap id="adminAclModuleResult" type="com.yulece.app.management.pms.dto.acl.module.AdminAclModuleResponse">
+        <id  property="aclModuleId" column="acl_module_id"/>
+        <result property="aclModuleName" column="acl_module_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="parentAclModuleId" column="module_parent_id"/>
+        <result property="parentAclModuleName" column="parent_acl_module_name"/>
+        <result property="status" column="status"/>
+        <result property="moduleSeq" column="module_seq"/>
+        <result property="moduleRemark" column="module_remark"/>
+    </resultMap>
+
+    <select id="findAllByPageAndObject" resultMap="adminAclModuleResult">
+        select
+            a.*,
+            parent.module_name parent_acl_module_name,
+        as parent_acl_module_name
+        from admin_acl_module a left join admin_acl_module parent on a.module_parent_id = parent.module_id
+        <where>
+            <if test="model.aclModuleName!=null and model.aclModuleName!=''">
+                a.acl_module_name like CONCAT(CONCAT('%',#{model.aclModuleName},'%'))
+            </if>
+            <if test="model.parentAclModuleId!=null and model.parentAclModuleId!=-1">
+                a.module_parent_id = #{model.parentAclModuleId}
+            </if>
+            <if test="model.status!=null and model.status!=-1">
+                a.status = #{model.status}
+            </if>
+        </where>
+    </select>
+</mapper>

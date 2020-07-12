@@ -1,0 +1,12 @@
+server:
+  port: 80
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVICE_ENDPOINT}/eureka
+    register-with-eureka: true
+    fetch-registry: true
+  server:
+    enable-self-preservation: true
+  instance:
+    prefer-ip-address: true
