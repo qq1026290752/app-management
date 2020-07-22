@@ -1,7 +1,5 @@
 package com.yulece.app.management.zuul.mobile.vlidate;
 
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 

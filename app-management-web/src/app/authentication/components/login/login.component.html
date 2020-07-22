@@ -1,40 +1,33 @@
-<form role="form" (ngSubmit)="onLogin()">
-  <mat-form-field>
+<form [formGroup]="form" (ngSubmit)="onLogin(form,$event)">
+  <mat-form-field >
     <label for="user-name-label">
-      <input id="user-name-label" type="text" [(ngModel)]="user.userName"
-             [formControl]="userName"
-             name="userName" matInput placeholder="请输入登陆用户名">
-      <mat-error *ngIf="userName.invalid">{{getUserNameErrorMessage()}}</mat-error>
+      <input id="user-name-label" type="text"
+             formControlName="userName"
+             matInput placeholder="请输入登陆用户名">
     </label>
   </mat-form-field>
   <mat-form-field>
     <label for="password-label">
-      <input matInput type="password" id="password-label" [(ngModel)]="user.passWord"
-             [formControl]="password"
-             name="passWord" placeholder="请输入登陆密码">
-      <mat-error *ngIf="userName.invalid">{{getPasswordErrorMessage()}}</mat-error>
+      <input matInput type="password" id="password-label"
+             formControlName="password" placeholder="请输入登陆密码">
     </label>
   </mat-form-field>
   <div el-row gutter="20" style="margin-bottom: 15%">
-    <div el-col [span]="8">
+    <div el-col [span]="14">
       <section class="example-section">
           <mat-slide-toggle
-            [color]="color"
-            [checked]="user.check"
+            color="primary"
             [disabled]="disabled">
             7天内自动登录
-          </mat-slide-toggle
-            >
-
+          </mat-slide-toggle>
       </section>
     </div>
-    <div el-col [span]="6"><a routerLink="/pms/register" mat-button [color]="color" >找回密码</a></div>
-    <div el-col [span]="6"><button type="button" mat-button [color]="color">匿名登陆</button></div>
-    <div class="el-input__clear"></div>
+    <div el-col [span]="5"><a routerLink="/find" mat-button color="primary" >找回密码</a></div>
+    <div el-col [span]="5"><button type="button" mat-button color="accent">匿名登陆</button></div>
   </div>
   <div el-row gutter="20" >
     <div el-col [span]="8">&nbsp;</div>
-    <div el-col [span]="4"><button type="submit" [color]="color" mat-raised-button>登陆</button></div>
+    <div el-col [span]="8"><button type="submit" style="width: 100%;display: inline-block;margin-top: 2rem; " [disabled]="!form.valid"  color="primary" mat-raised-button>登陆</button></div>
     <div el-col [span]="8">&nbsp;</div>
   </div>
 </form>

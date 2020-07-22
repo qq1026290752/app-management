@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {BaseComponent, LoginComponent, RegisterComponent} from './components';
+import {BaseComponent, FindComponent, LoginComponent, PhoneComponent, RegisterComponent} from './components';
 const routes: Routes = [
   {
     path: '',
@@ -13,7 +13,16 @@ const routes: Routes = [
       {
         path: 'register',
         component: RegisterComponent
+      },
+      {
+        path: 'phone',
+        component:PhoneComponent
+      },
+      {
+        path: 'find',
+        component:FindComponent
       }
+
     ]
   },
 ];

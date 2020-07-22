@@ -20,3 +20,10 @@ html,body,app-root,.site,mat-sidenav-container{ width: 100%; height: 100%;margin
 a,a:hover{text-decoration: none}
 table {width: 100%;}
 .table_mat-form-field {font-size: 14px;width: 100%}
+form{
+  display: flex;
+  flex-direction: column;
+}
+mat-form-field{
+  width: 100%;
+}

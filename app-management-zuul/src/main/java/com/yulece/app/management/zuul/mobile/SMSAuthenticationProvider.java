@@ -22,7 +22,7 @@ public class SMSAuthenticationProvider implements AuthenticationProvider {
 		UserDetails user = userDetailsService.loadUserByUsername((String) authenticationToken.getPrincipal());
 		if(user == null) {
 			//认证失败
-			throw new InternalAuthenticationServiceException("無法讀取用户信息");
+			throw new InternalAuthenticationServiceException("无法从token中读取用户个人信息");
 		}
 		//认证成功
 		SMSAuthenticationToken authenticationTokenResult = new SMSAuthenticationToken(user, user.getAuthorities());

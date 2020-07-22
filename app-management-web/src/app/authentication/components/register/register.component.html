@@ -1,1 +1,25 @@
-<p>register works!</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit(form,$event);">
+  <div class="phone_input">
+    <mat-form-field>
+      <label for="user_phone">
+        <input id="user_phone" type="text" matInput placeholder="请输入注册手机号" formControlName="userPhone">
+      </label>
+    </mat-form-field>
+    <button mat-raised-button color="accent" style="line-height: 2rem;height: 2rem;margin-top: 0.5rem;">发送验证码</button>
+  </div>
+  <mat-form-field>
+    <label for="phoneCode">
+      <input id="phoneCode" type="text" matInput placeholder="请输入手机验证码" formControlName="phoneCode">
+    </label>
+  </mat-form-field>
+  <mat-form-field>
+    <label for="password">
+      <input id="password" type="password" matInput placeholder="请输入注册密码" formControlName="password">
+    </label>
+  </mat-form-field>
+  <mat-form-field >
+    <label for="passwordAffirm">
+      <input id="passwordAffirm" type="password" matInput placeholder="请确认登录密码" formControlName="passwordAffirm">
+    </label>
+  </mat-form-field>
+</form>
