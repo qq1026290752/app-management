@@ -18,8 +18,8 @@ public class AdminAclModuleResponse {
 
     private Integer aclModuleId;
     private String aclModuleName;
-    private String parentAclModuleId;
-    private Integer parentAclModuleName;
+    private Integer parentAclModuleId;
+    private String parentAclModuleName;
     private Integer status;
     private Date createTime;
     private Integer moduleSeq;

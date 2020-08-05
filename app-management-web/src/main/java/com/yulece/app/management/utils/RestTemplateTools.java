@@ -1,5 +1,6 @@
 package com.yulece.app.management.utils;
 
+import com.yulece.app.management.commons.utils.ResultVo;
 import com.yulece.app.management.commons.utils.enums.ExceptionEnum;
 import com.yulece.app.management.commons.utils.exception.AppException;
 import com.yulece.app.management.pms.response.TokenInfo;

@@ -10,7 +10,7 @@ import {
   SidebarComponent
 } from "./componentes";
 import {AppRoutingModule} from "../app-routing.module";
-import {loadIconResources} from "../utils/icon.utils";
+import {loadIconResources} from "../utils";
 import {
   MatListModule,
   MatButtonModule,
@@ -23,9 +23,9 @@ import {
   MatIconModule,
   MatIconRegistry,
   MatSelectModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatTableModule
 } from "@angular/material";
-import {MatTableModule} from "@angular/material/table";
 
 @NgModule({
   imports: [

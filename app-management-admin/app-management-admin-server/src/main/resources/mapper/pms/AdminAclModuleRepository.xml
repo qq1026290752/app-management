@@ -4,8 +4,8 @@
 <mapper namespace="com.yulece.app.management.pms.repository.AdminAclModuleRepository">
 
     <resultMap id="adminAclModuleResult" type="com.yulece.app.management.pms.dto.acl.module.AdminAclModuleResponse">
-        <id  property="aclModuleId" column="acl_module_id"/>
-        <result property="aclModuleName" column="acl_module_name"/>
+        <id  property="aclModuleId" column="module_id"/>
+        <result property="aclModuleName" column="module_name"/>
         <result property="createTime" column="create_time"/>
         <result property="parentAclModuleId" column="module_parent_id"/>
         <result property="parentAclModuleName" column="parent_acl_module_name"/>
@@ -17,9 +17,10 @@
     <select id="findAllByPageAndObject" resultMap="adminAclModuleResult">
         select
             a.*,
-            parent.module_name parent_acl_module_name,
-        as parent_acl_module_name
-        from admin_acl_module a left join admin_acl_module parent on a.module_parent_id = parent.module_id
+            parent.module_name parent_acl_module_name
+        from
+            admin_acl_module a
+        left join admin_acl_module parent on a.module_parent_id = parent.module_id
         <where>
             <if test="model.aclModuleName!=null and model.aclModuleName!=''">
                 a.acl_module_name like CONCAT(CONCAT('%',#{model.aclModuleName},'%'))
@@ -27,7 +28,7 @@
             <if test="model.parentAclModuleId!=null and model.parentAclModuleId!=-1">
                 a.module_parent_id = #{model.parentAclModuleId}
             </if>
-            <if test="model.status!=null and model.status!=-1">
+            <if test="model.status!=null and model.status>0">
                 a.status = #{model.status}
             </if>
         </where>

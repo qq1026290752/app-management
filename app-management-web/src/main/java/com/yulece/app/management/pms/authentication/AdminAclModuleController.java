@@ -33,6 +33,6 @@ public class AdminAclModuleController {
   @PostMapping("/list")
   public ResultVo list(@RequestBody AdminAclModuleQueryRequest aclModuleQueryRequest, HttpServletRequest request){
     String url = "/admin/aclModule/list";
-    return restTemplateTools.requestPostObject(aclModuleQueryRequest, url, true, request, HttpMethod.GET, MediaType.APPLICATION_JSON,ResultVo.class);
+    return restTemplateTools.requestPostObject(aclModuleQueryRequest, url, true, request, HttpMethod.POST, MediaType.APPLICATION_JSON,ResultVo.class);
   }
 }

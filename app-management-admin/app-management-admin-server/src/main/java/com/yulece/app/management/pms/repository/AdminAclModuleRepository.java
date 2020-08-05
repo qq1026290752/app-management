@@ -21,5 +21,5 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 public interface AdminAclModuleRepository extends BaseMapper<AdminAclModule> {
-    IPage<AdminAclModuleResponse> findAllByPageAndObject(Page<AdminAclModule> adminAclModulePage,@Param("model") AdminAclModuleQueryRequest param);
+    IPage<AdminAclModuleResponse> findAllByPageAndObject(Page<AdminAclModuleResponse> adminAclModulePage,@Param("model") AdminAclModuleQueryRequest param);
 }

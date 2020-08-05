@@ -1,13 +1,13 @@
- import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { RouterModule } from "@angular/router";
-import { HttpClientModule } from '@angular/common/http'
-import { AppRoutingModule} from './app-routing.module'
-import { ShareModule } from './share'
-import { AuthenticationModule } from "./authentication";
-import { ElModule } from "element-angular/release/element-angular.module";
-import { PmsModule } from "./pms";
+import { RouterModule } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppRoutingModule} from './app-routing.module';
+import { ShareModule } from './share';
+import { AuthenticationModule } from './authentication';
+import { ElModule } from 'element-angular/release/element-angular.module';
+import { PmsModule, HeaderInterceptor, NotifictionInterceptor } from './pms';
 
 
 @NgModule({
@@ -24,7 +24,18 @@ import { PmsModule } from "./pms";
     PmsModule,
     ElModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeaderInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NotifictionInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -117,7 +117,7 @@ public class AdminAclModuleServiceImpl implements AdminAclModuleService {
 
     @Override
     public IPage<AdminAclModuleResponse> page(AdminAclModuleQueryRequest param) {
-        return adminAclModuleRepository.findAllByPageAndObject(new Page<AdminAclModule>(param.getPageNo(),param.getPageSize()),param);
+        return adminAclModuleRepository.findAllByPageAndObject(new Page<AdminAclModuleResponse>(param.getPageNo(),param.getPageSize()),param);
     }
 
     @Override
